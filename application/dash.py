@@ -54,7 +54,7 @@ body = html.Div([
 # Cintillo 000
         dbc.Row(
            [
-               dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/SALUD.JPG?raw=true"),
+               dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/srelogo.png?raw=true"),
                         width=2, lg={'size': 3,  "offset": 1})]),
     dbc.Row(
         [    dbc.Col(html.H2("ARRIBO DE VACUNAS"),
