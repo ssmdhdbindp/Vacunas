@@ -54,21 +54,19 @@ body = html.Div([
 # Cintillo 000
         dbc.Row(
            [
-               dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/srelogo.png?raw=true"),
-                        width=2, lg={'size': 3,  "offset": 1})]),
-    dbc.Row(
-        [    dbc.Col(html.H2("ARRIBO DE VACUNAS"),
-                        lg={'offset' : 3 }),
-              dbc.Col(html.H3("DIRECCIÓN GENERAL DE COMUNICACIÓN SOCIAL"),
-                  width={'size' : 7,
-                         'offset' : 3, 
-                         'color' : 'danger'
-                        }), 
-                
+               dbc.Col(dbc.CardImg(src="https://github.com/Aeelen-Miranda/Vacunas/blob/main/SRE.JPG?raw=true"),
+                       lg={'size': 1.5,  "offset": 10}),
+               dbc.Col(
+                   html.H5("Subsecretaría de Asuntos Multilaterales"),
+                        lg={'size': 6,  'offset' : 1}),
+           ],justify="start"),    
+    
 
-            ],justify="start"),
-        
-# Top Banner
+        dbc.Row(
+           [
+               dbc.Col(html.H1("ARRIBO DE VACUNAS"),
+                        lg={'size': 6, 'offset' : 1 }),
+           ],justify="start"),
 
        html.Hr(),
     dbc.Row(
