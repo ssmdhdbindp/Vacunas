@@ -1,0 +1,41 @@
+Vuelo,Fecha,Arribo,Cantidad,Farmacéutica,tipo
+35,25/03/2021,Ciudad de Mexico,"1,000,000",Sinovac,Cantidad
+34,24/03/2021,Ciudad de Mexico,"170,625",Pfizer-BioNTech,Cantidad
+33,23/03/2021,Ciudad de Mexico,"487,500",Pfizer-BioNTech,Cantidad
+40,22/03/2021,Queretaro,"940,470",CanSinoBio,Dosis envasadas
+32,18/03/2021,Ciudad de Mexico,"1,000,000",Sinovac,Cantidad
+28,16/03/2021,Guadalajara,"121,875",Pfizer-BioNTech,Cantidad
+29,16/03/2021,Monterrey,"103,350",Pfizer-BioNTech,Cantidad
+30,16/03/2021,Ciudad de Mexico,"217,425",Pfizer-BioNTech,Cantidad
+31,16/03/2021,Queretaro,"225,225",Pfizer-BioNTech,Cantidad
+27,13/03/2021,Ciudad de Mexico ,"1,000,000",Sinovac,Cantidad
+39,11/03/2021,Ciudad de Mexico,"3,000,000",CanSinoBio,Dosis promedio a envasar
+26,10/03/2021,Ciudad de Mexico ,200,Sputnik V,Cantidad
+22,09/03/2021,Guadalajara ,"108,225",Pfizer-BioNTech,Cantidad
+23,09/03/2021,Monterrey ,"72,150",Pfizer-BioNTech,Cantidad
+24,09/03/2021,Ciudad de Mexico ,"275,925",Pfizer-BioNTech,Cantidad
+25,09/03/2021,Queretaro,"144,300",Pfizer-BioNTech,Cantidad
+18,02/03/2021,Guadalajara,"156,000",Pfizer-BioNTech,Cantidad
+19,02/03/2021,Monterrey,"106,275",Pfizer-BioNTech,Cantidad
+20,02/03/2021,Ciudad de Mexico,"381,225",Pfizer-BioNTech,Cantidad
+21,02/03/2021,Queretaro,"208,650",Pfizer-BioNTech,Cantidad
+17,27/02/2021,Ciudad de Mexico,"800,000",Sinovac,Cantidad
+15,23/02/2021,Monterrey,"125,775",Pfizer-BioNTech,Cantidad
+16,23/02/2021,Ciudad de Mexico,"386,100",Pfizer-BioNTech,Cantidad
+14,22/02/2021,Ciudad de Mexico,"200,000",Sputnik V,Cantidad
+13,20/02/2021,Ciudad de Mexico,"200,000",Sinovac,Cantidad
+11,16/02/2021,Monterrey,"4,875",Pfizer-BioNTech,Cantidad
+12,16/02/2021,Ciudad de Mexico,"486,525",Pfizer-BioNTech,Cantidad
+10,14/02/2021,Ciudad de Mexico,"870,000",AstraZeneca,Cantidad
+38,11/02/2021,Ciudad de Mexico,"2,000,000",CanSinoBio,Dosis promedio a envasar
+37,02/02/2021,Ciudad de Mexico,"6,000,000",AstraZeneca,Dosis promedio a envasar
+36,20/01/2021,Ciudad de Mexico,"1,000,000",AstraZeneca,Dosis promedio a envasar
+8,19/01/2021,Monterrey,"5,850",Pfizer-BioNTech,Cantidad
+9,19/01/2021,Ciudad de Mexico,"213,525",Pfizer-BioNTech,Cantidad
+7,12/01/2021,Ciudad de Mexico,"439,725",Pfizer-BioNTech,Cantidad
+5,05/01/2021,Ciudad de Mexico,"44,850",Pfizer-BioNTech,Cantidad
+6,05/01/2021,Monterrey,"8,775",Pfizer-BioNTech,Cantidad
+4,30/12/2020,Ciudad de Mexico,"7,800",Pfizer-BioNTech,Cantidad
+2,26/12/2020,Monterrey,"8,775",Pfizer-BioNTech,Cantidad
+3,26/12/2020,Ciudad de Mexico,"34,125",Pfizer-BioNTech,Cantidad
+1,23/12/2020,Ciudad de Mexico,"2,925",Pfizer-BioNTech,Cantidad
