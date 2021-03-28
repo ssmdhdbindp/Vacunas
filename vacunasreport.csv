@@ -2,7 +2,7 @@ Vuelo,dia,fecha,Arribo,Cantidad,Farmaceutica
 1,miercoles,23/12/2020,Ciudad de México,2925,Pfizer-BioNTech
 2,sabado,26/12/2020,Monterrey,8775,Pfizer-BioNTech
 3,sabado,26/12/2020,Ciudad de México,34125,Pfizer-BioNTech
-4,miercoles,30/12/2020,Ciudad de Mexico,7800,Pfizer-BioNTech
+4,miercoles,30/12/2020,Ciudad de México,7800,Pfizer-BioNTech
 5,martes,05/01/2021,Ciudad de México,44850,Pfizer-BioNTech
 6,martes,05/01/2021,Monterrey,8775,Pfizer-BioNTech
 7,martes,12/01/2021,Ciudad de México,439725,Pfizer-BioNTech
@@ -32,5 +32,5 @@ Vuelo,dia,fecha,Arribo,Cantidad,Farmaceutica
 31,martes,16/03/2021,Querétaro,225225,Pfizer-BioNTech
 32,jueves,18/03/2021,Ciudad de México,1000000,Sinovac
 33,martes,23/03/2021,Ciudad de México,487500,Pfizer-BioNTech
-34,miercoles,24/03/2021,Ciudad de Mexico,170625,Pfizer-BioNTech
+34,miercoles,24/03/2021,Ciudad de México,170625,Pfizer-BioNTech
 35,jueves,25/03/2021,Ciudad de México,1000000,Sinovac
