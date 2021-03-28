@@ -1,0 +1,36 @@
+Vuelo,Fecha,Arribo,Cantidad,Farmacéutica
+1,"miércoles, 23 de diciembre de 2020",Ciudad de México,"2,925",Pfizer-BioNTech
+2,"sábado, 26 de diciembre de 2020",Monterrey,"8,775",Pfizer-BioNTech
+3,"sábado, 26 de diciembre de 2020",Ciudad de México,"34,125",Pfizer-BioNTech
+4,"miércoles, 30 de diciembre de 2020",Ciudad de México,"7,800",Pfizer-BioNTech
+5,"martes, 5 de enero de 2021",Ciudad de México,"44,850",Pfizer-BioNTech
+6,"martes, 5 de enero de 2021",Monterrey,"8,775",Pfizer-BioNTech
+7,"martes, 12 de enero de 2021",Ciudad de México,"439,725",Pfizer-BioNTech
+8,"martes, 19 de enero de 2021",Monterrey,"5,850",Pfizer-BioNTech
+9,"martes, 19 de enero de 2021",Ciudad de México,"213,525",Pfizer-BioNTech
+10,"domingo, 14 de febrero de 2021",Ciudad de México,"870,000",AstraZeneca
+11,"martes, 16 de febrero de 2021",Monterrey,"4,875",Pfizer-BioNTech
+12,"martes, 16 de febrero de 2021",Ciudad de México,"486,525",Pfizer-BioNTech
+13,"sábado, 20 de febrero de 2021",Ciudad de México,"200,000",Sinovac
+14,"lunes, 22 de febrero de 2021",Ciudad de México,"200,000",Sputnik V
+15,"martes, 23 de febrero de 2021",Monterrey,"125,775",Pfizer-BioNTech
+16,"martes, 23 de febrero de 2021",Ciudad de México,"386,100",Pfizer-BioNTech
+17,"sábado, 27 de febrero de 2021",Ciudad de México,"800,000",Sinovac
+18,"martes, 2 de marzo de 2021",Guadalajara,"156,000",Pfizer-BioNTech
+19,"martes, 2 de marzo de 2021",Monterrey,"106,275",Pfizer-BioNTech
+20,"martes, 2 de marzo de 2021",Ciudad de México,"381,225",Pfizer-BioNTech
+21,"martes, 2 de marzo de 2021",Querétaro,"208,650",Pfizer-BioNTech
+22,"martes, 9 de marzo de 2021",Guadalajara ,"108,225",Pfizer-BioNTech
+23,"martes, 9 de marzo de 2021",Monterrey ,"72,150",Pfizer-BioNTech
+24,"martes, 9 de marzo de 2021",Ciudad de México ,"275,925",Pfizer-BioNTech
+25,"martes, 9 de marzo de 2021",Querétaro,"144,300",Pfizer-BioNTech
+26,"miércoles, 10 de marzo de 2021",Ciudad de México ,200,Sputnik V
+27,"sábado, 13 de marzo de 2021",Ciudad de México ,"1,000,000",Sinovac
+28,"martes, 16 de marzo de 2021",Guadalajara,"121,875",Pfizer-BioNTech
+29,"martes, 16 de marzo de 2021",Monterrey,"103,350",Pfizer-BioNTech
+30,"martes, 16 de marzo de 2021",Ciudad de México,"217,425",Pfizer-BioNTech
+31,"martes, 16 de marzo de 2021",Querétaro,"225,225",Pfizer-BioNTech
+32,"jueves, 18 de marzo de 2021",Ciudad de México,"1,000,000",Sinovac
+33,"martes, 23 de marzo de 2021",Ciudad de México,"487,500",Pfizer-BioNTech
+34,"miércoles, 24 de marzo de 2021",Ciudad de México,"170,625",Pfizer-BioNTech
+35,"jueves, 25 de marzo de 2021",Ciudad de México,"1,000,000",Sinovac
