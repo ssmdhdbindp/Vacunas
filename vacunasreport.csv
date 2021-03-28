@@ -1,4 +1,4 @@
-Vuelo,Fecha,Arribo,Cantidad,Farmacéutica,tipo
+Vuelo,Fecha,Arribo,Cantidad,FarmacÃ©utica,tipo
 35,25/03/2021,Ciudad de Mexico,"1,000,000",Sinovac,Cantidad
 34,24/03/2021,Ciudad de Mexico,"170,625",Pfizer-BioNTech,Cantidad
 33,23/03/2021,Ciudad de Mexico,"487,500",Pfizer-BioNTech,Cantidad
@@ -8,12 +8,12 @@ Vuelo,Fecha,Arribo,Cantidad,Farmacéutica,tipo
 29,16/03/2021,Monterrey,"103,350",Pfizer-BioNTech,Cantidad
 30,16/03/2021,Ciudad de Mexico,"217,425",Pfizer-BioNTech,Cantidad
 31,16/03/2021,Queretaro,"225,225",Pfizer-BioNTech,Cantidad
-27,13/03/2021,Ciudad de Mexico ,"1,000,000",Sinovac,Cantidad
+27,13/03/2021,Ciudad de Mexico,"1,000,000",Sinovac,Cantidad
 39,11/03/2021,Ciudad de Mexico,"3,000,000",CanSinoBio,Dosis promedio a envasar
-26,10/03/2021,Ciudad de Mexico ,200,Sputnik V,Cantidad
-22,09/03/2021,Guadalajara ,"108,225",Pfizer-BioNTech,Cantidad
-23,09/03/2021,Monterrey ,"72,150",Pfizer-BioNTech,Cantidad
-24,09/03/2021,Ciudad de Mexico ,"275,925",Pfizer-BioNTech,Cantidad
+26,10/03/2021,Ciudad de Mexico,"200",Sputnik V,Cantidad
+22,09/03/2021,Guadalajara,"108,225",Pfizer-BioNTech,Cantidad
+23,09/03/2021,Monterrey,"72,150",Pfizer-BioNTech,Cantidad
+24,09/03/2021,Ciudad de Mexico,"275,925",Pfizer-BioNTech,Cantidad
 25,09/03/2021,Queretaro,"144,300",Pfizer-BioNTech,Cantidad
 18,02/03/2021,Guadalajara,"156,000",Pfizer-BioNTech,Cantidad
 19,02/03/2021,Monterrey,"106,275",Pfizer-BioNTech,Cantidad
