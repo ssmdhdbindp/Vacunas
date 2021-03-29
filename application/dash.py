@@ -204,6 +204,7 @@ body = html.Div([
         [
             dbc.Col(dbc.Table(table_header69 + table_body69, 
                               bordered=False, 
+                              size="sm",
                               style={
             'margin-top': '9px',
             'margin-left': '525px',
