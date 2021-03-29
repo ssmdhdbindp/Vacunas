@@ -205,7 +205,7 @@ body = html.Div([
                               size="sm",
                               style={ #'size': 11,"offset":2,
            'margin-top': '0px',
-           'margin-left': '250px',
+           'margin-left': '200px',
            'width': '609px',
            'height': '36px',
            'backgroundColor': 'rgba(0,0,0,0)'
@@ -228,7 +228,7 @@ body = html.Div([
                               size="sm",
                               style={
             'margin-top': '9px',
-            'margin-left': '450px',
+            'margin-left': '200px',
             'width': '609px',
             'height': '36px',
             'backgroundColor': 'rgba(0,0,0,0)'
@@ -260,8 +260,8 @@ body = html.Div([
     
 app.layout = html.Div([body])
 
-#from application.dash import app
-#from settings import config
+from application.dash import app
+from settings import config
 
 if __name__ == "__main__":
     app.run_server()
