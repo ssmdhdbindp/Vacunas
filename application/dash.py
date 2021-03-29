@@ -212,7 +212,7 @@ body = html.Div([
             'backgroundColor': 'rgba(0,0,0,0)'
             }
                                      ))
-        ],justify="start"),
+        ]),
     
    
     html.Br(),
@@ -236,7 +236,7 @@ body = html.Div([
             'backgroundColor': 'rgba(0,0,0,0)'
             }
                                      ))
-        ],justify="start"),
+        ]),
      dbc.Row(
            [
                dbc.Col(html.H5(["Total",
