@@ -80,9 +80,7 @@ farmaceutica_4 = filtrado.iloc[1]['Farmaceutica']
 farmaceutica_5 = filtrado.iloc[0]['Farmaceutica']
 #-------------------------------------------------Tabla dias
 table_header69 = [
-    html.Thead(html.Tr([html.Th(fecha_1.strftime('%d-%B-%y')), html.Th(fecha_2.strftime('%d-%B-%y')),
-                        html.Th(fecha_3.strftime('%d-%B-%y')), html.Th(fecha_4.strftime('%d-%B-%y')),
-                        html.Th(fecha_5.strftime('%d-%B-%y'))]))
+    html.Thead(html.Tr(" "))
 ]
 
 row01 = html.Tr([html.Td([str(f"{cantidad_1:,d}")]), html.Td([str(f"{cantidad_2:,d}")]), 
@@ -193,13 +191,13 @@ body = html.Div([
     html.Br(),
 
     dbc.Row([
-        dbc.Col(html.H3([" ",dbc.Badge((dia_1), className="ml-1",color="light",),
-                             dbc.Badge((dia_2), className="ml-1",color="light",),
-                             dbc.Badge((dia_3), className="ml-1",color="light",),
-                             dbc.Badge((dia_4), className="ml-1",color="light",),
-                             dbc.Badge((dia_5), className="ml-1",color="light",),   
+        dbc.Col(html.H4([" ",dbc.Badge((fecha_1.strftime('%d-%B-%y')), className="ml-1",color="light",),
+                             dbc.Badge((fecha_2.strftime('%d-%B-%y')), className="ml-1",color="light",),
+                             dbc.Badge((fecha_3.strftime('%d-%B-%y')), className="ml-1",color="light",),
+                             dbc.Badge((fecha_4.strftime('%d-%B-%y')), className="ml-1",color="light",),
+                             dbc.Badge((fecha_5.strftime('%d-%B-%y')), className="ml-1",color="light",),   
                         ]),
-                width={'size': 11,  "offset":6 })]),
+                width={'size': 11,  "offset":4 })]),
     dbc.Row(
         [
             dbc.Col(dbc.Table(table_header69 + table_body69, 
@@ -210,9 +208,7 @@ body = html.Div([
             'margin-left': '525px',
             'width': '609px',
             'height': '36px',
-            'backgroundColor': 'rgba(0,0,0,0)'
-            }
-                                     ))
+            'backgroundColor': 'rgba(0,0,0,0)'}))
         ]),
     
    
@@ -237,7 +233,7 @@ body = html.Div([
             'backgroundColor': 'rgba(0,0,0,0)'
             }
                                      ))
-        ]),
+        ],justify="start"),
      dbc.Row(
            [
                dbc.Col(html.H5(["Total",
@@ -248,8 +244,8 @@ body = html.Div([
            ]),
       dbc.Row(
            [
-               dbc.Col(html.H4(["VACUNAS SEGÚN ", 
-                       dbc.Badge("LLEGADAS DIARIAS", color="success", className="mr-1")]), 
+               dbc.Col(html.H4(["ARRIBO DE VACUNAS ", 
+                       dbc.Badge("SEGÚN CIUDAD", color="success", className="mr-1")]), 
                                        width={'size': 11,  "offset":2 })
            
            ]),
