@@ -199,7 +199,7 @@ body = html.Div([
                              dbc.Badge((dia_4), className="ml-1",color="light",),
                              dbc.Badge((dia_5), className="ml-1",color="light",),   
                         ]),
-                width={'size': 11,  "offset":5 })]),
+                width={'size': 11,  "offset":6 })]),
     dbc.Row(
         [
             dbc.Col(dbc.Table(table_header69 + table_body69, 
