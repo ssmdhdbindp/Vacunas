@@ -193,13 +193,13 @@ body = html.Div([
     html.Br(),
 
     dbc.Row([
-        dbc.Col(html.H2([" ",dbc.Badge((dia_1), className="ml-1",color="light",),
+        dbc.Col(html.H3([" ",dbc.Badge((dia_1), className="ml-1",color="light",),
                              dbc.Badge((dia_2), className="ml-1",color="light",),
                              dbc.Badge((dia_3), className="ml-1",color="light",),
                              dbc.Badge((dia_4), className="ml-1",color="light",),
                              dbc.Badge((dia_5), className="ml-1",color="light",),   
                         ]),
-                width={'size': 11,  "offset":4 })]),
+                width={'size': 11,  "offset":5 })]),
     dbc.Row(
         [
             dbc.Col(dbc.Table(table_header69 + table_body69, 
