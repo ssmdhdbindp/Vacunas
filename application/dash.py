@@ -185,7 +185,7 @@ body = html.Div([
            [
                dbc.Col(html.H4(["VACUNAS DE LOS ", 
                        dbc.Badge("ÚLTIMOS CINCO DIAS", color="success", className="mr-1")]), 
-                                       width={'size': 11,  "offset":2 })
+                                       width={'size': 11,  "offset":1 })
            
            ]),
     html.Br(),
@@ -197,18 +197,19 @@ body = html.Div([
                              dbc.Badge((fecha_4.strftime('%d-%B-%y')), className="ml-1",color="light",),
                              dbc.Badge((fecha_5.strftime('%d-%B-%y')), className="ml-1",color="light",),   
                         ]),
-                width={'size': 11,  "offset":4 })]),
+                width={'size': 11,  "offset":2 })]),
     dbc.Row(
         [
             dbc.Col(dbc.Table(table_header69 + table_body69, 
                               bordered=False, 
                               size="sm",
-                              style={
-            'margin-top': '9px',
-            'margin-left': '525px',
-            'width': '609px',
-            'height': '36px',
-            'backgroundColor': 'rgba(0,0,0,0)'}))
+                              style={ #'size': 11,"offset":2,
+           'margin-top': '0px',
+           'margin-left': '250px',
+           'width': '609px',
+           'height': '36px',
+           'backgroundColor': 'rgba(0,0,0,0)'
+                                    }))
         ]),
     
    
@@ -217,7 +218,7 @@ body = html.Div([
            [
                dbc.Col(html.H4(["VACUNAS SEGÚN ", 
                        dbc.Badge("FARMACÉUTICA", color="success", className="mr-1")]), 
-                                       width={'size': 11,  "offset":2})
+                                       width={'size': 11,  "offset":1})
            
            ]),
     dbc.Row(
@@ -227,7 +228,7 @@ body = html.Div([
                               size="sm",
                               style={
             'margin-top': '9px',
-            'margin-left': '525px',
+            'margin-left': '450px',
             'width': '609px',
             'height': '36px',
             'backgroundColor': 'rgba(0,0,0,0)'
@@ -246,7 +247,7 @@ body = html.Div([
            [
                dbc.Col(html.H4(["ARRIBO DE VACUNAS ", 
                        dbc.Badge("SEGÚN CIUDAD", color="success", className="mr-1")]), 
-                                       width={'size': 11,  "offset":2 })
+                                       width={'size': 11,  "offset":1 })
            
            ]),
     html.Br(),
@@ -259,8 +260,8 @@ body = html.Div([
     
 app.layout = html.Div([body])
 
-from application.dash import app
-from settings import config
+#from application.dash import app
+#from settings import config
 
 if __name__ == "__main__":
     app.run_server()
