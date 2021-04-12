@@ -1,3 +1,4 @@
+
 import dash
 import matplotlib.pyplot as plt 
 import dash_bootstrap_components as dbc
@@ -27,7 +28,7 @@ d2 = today.strftime("Fecha de actualización : %d-%m-%Y")
 
 ###############################
 # DATABASES
-############################### Abre archivos
+############################### AHre archivos
 
 vacunas = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/vacunasreport.csv", encoding= "Latin-1")
 vacunas.rename(columns={'Farmac�utica': 'Farmaceutica' },inplace=True,
@@ -164,11 +165,39 @@ table_body = [html.Tbody([row1, row2, row3, row4])]
 #   #height=400
 #   )
 
-figvac = px.bar(vacunas, x="Fecha", y="Cantidad", 
-                 color="Arribo", )
+
+
+
+figvac = go.Figure()
+figvac.add_trace(go.Bar(x=vacunas['Fecha'],y=vacunas['Cantidad'],
+                marker_color= "chocolate",  # cambiar nuemeritos de rgb
+                ))
 figvac.update_layout(
     paper_bgcolor='rgba(0,0,0,0)',
-    plot_bgcolor='rgba(0,0,0,0)',)
+    plot_bgcolor='rgba(0,0,0,0)',
+    xaxis_tickangle=-45,
+    
+    template = 'simple_white',
+    title='',
+    xaxis_tickfont_size= 12,
+    yaxis=dict(
+        #title='Acumulados mensuales',
+        titlefont_size=14,
+        tickfont_size=12,
+        titlefont_family= "Monserrat"),
+    autosize=True,
+    width=1000,
+    height=400
+    )
+
+
+
+#figvac = go.Figure()
+#figvac = px.bar(vacunas, x="Fecha", y="Cantidad", 
+#                 color="Arribo", )
+#figvac.update_layout(
+#    paper_bgcolor='rgba(0,0,0,0)',
+#    plot_bgcolor='rgba(0,0,0,0)',)
 
 
 
@@ -178,7 +207,7 @@ tot_sem = filtrado.Cantidad.sum()
 
 
 server = flask.Flask(__name__)
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes. FLATLY], server=server)
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes. LUX], server=server)
 
 body = html.Div([ 
       
@@ -188,84 +217,80 @@ body = html.Div([
            
            dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
                         width={'size': 1,  "offset": 1 }),
-            dbc.Col(html.H5("Subsecretaría para Asuntos Multilaterales y "
+            dbc.Col(html.H5("Secretaría de Relaciones Exteriores, "
+                            "Subsecretaría para Asuntos Multilaterales y "
                             "Derechos Humanos"),
-                  width={'offset' : 9}), 
-        ]),
+                  width={'size': 3, 'offset' : 0}), 
+        ],justify="start"),
   
-    html.Br(),
+    html.Hr(),
     dbc.Row([
-        dbc.Col(html.H1('Distribución de Vacunas contra el COVID-19',
-                        className='card-title',style={'textAlign': 'left'} ),
-                style={"color": "#91210C", 'text-transform': "uppercase"},
+        dbc.Col(html.H1('¿Cuántas vacunas han llegado a México?',
+                        className='card-title',style={'textAlign': 'center'} ),
+                style={"color": "black", 'text-transform': "uppercase", 
+                       "font-weight": 'bolder', "font-stretch": "condensed",
+                      "font-size": "x-large" },
                 width={ "offset":2 },
                  ),
     ]),
-    html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
-        
-    
-    dbc.Row([
-        dbc.Col(html.H1('7 Entidades Federativas',
-                        className='card-title', style={'textAlign': 'left'} ),
-                style={"color": "#0C916E",},
-                width={ "offset":4 },
-                 ),
-    ]),
-    html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
-     dbc.Row(
+    #html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
+    dbc.Row(
            [dbc.Col(html.H6(d2),           #Fecha de actualización
                width={'size' : "auto",
                       'offset' : 5}), 
            ]),
-    html.Br(),
-    html.Br(),
+        
+    html.Hr(),
+    html.Hr(),
+    html.Hr(),
+    html.Hr(),
+    html.Hr(),
+    html.Hr(),
+    dbc.Row([
+        dbc.Col(html.H2('Dosis según farmacéutica',
+                        className='card-title',style={'textAlign': 'start'} ),
+                style={"color": "#91210C", },
+                width={ "offset":1 },),
+
+                
+                
+    ]),
+    #html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
        dbc.Row(
            [
-
-               dbc.Col(html.H3(["Al 09 de abril, México ha recibido o envasado  ", 
+               dbc.Col(html.H5(["Hasta el 9 de abril, nuestro país ha recibido o envasado  ", 
                                 str(f"{tot_vac:,d} dosis de vacunas contra COVID-19 listas para aplicarse: "),
-                                  
-                                
-                                #),
-                               # html.H3(
-                                   
                                ],style={'textAlign': 'left'}),
-                       width={'size': 11,  "offset":1 },
-                      )],justify="align"),
-
-    html.Br(),
-  
-        html.Br(),
- 
+                       width={'size': 6,  "offset":1 },
+                      )],justify="start"),
     dbc.Row(
         [
             dbc.Col(dbc.Table(table_header + table_body, 
-                              bordered=True, 
-                              dark=True,
+                              bordered=False, 
+                              dark=False,
                               hover=True,
                               #responsive=True,
-                              #striped=True,
+                              striped=True,
                               size="sm",
                               #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
                               style={
             'margin-top': '9px',
-            'margin-left': '400px',
-            'width': '609px',
-            'height': '36px',
+            'margin-left': '130px',
+            'width': '509px',
+            'height': '46px',
+             "font-size": "large"                      
             #'backgroundColor': 'rgba(0,0,0,0)',
-
-                                  
             }
                                      ))
         ],justify="center"),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-     html.Br(),
-    html.Br(),
-    html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
+    html.Hr(),
+    html.Hr(),
+    html.Hr(),
+     html.Hr(),
+    html.Hr(),
+    #html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
     dbc.Row([
-        dbc.Col(html.H2('Recientes arribos de vacunas a México',
+        dbc.Col(html.H2('Arribos recientes ',
                         className='card-title',style={'textAlign': 'left'} ),
                 style={"color": "#91210C", },
                 width={ "offset":1 },
@@ -275,15 +300,10 @@ body = html.Div([
       dbc.Row(
            [
 
-               dbc.Col(html.H3(["Entre el 01 y el 09 de abril, México recibió  ", 
-                                str(f"{tot_sem:,d} dosis de vacunas contra COVID-19 listas para aplicarse: "),
-                                  
-                                
-                                #),
-                               # html.H3(
-                                   
+               dbc.Col(html.H5(["Entre el 1 y el 9 de abril, nuestro país recibió  ", 
+                                str(f"{tot_sem:,d} dosis, listas para aplicarse: "),
                                ],style={'textAlign': 'left'}),
-                       width={'size': 11,  "offset":1 },
+                       width={'size': 6,  "offset":1 },
                       )],justify="align"),
    
 
@@ -308,12 +328,12 @@ body = html.Div([
            'backgroundColor': 'rgba(0,0,0,0)'
                                     }))
         ]),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-     html.Br(),
-    html.Br(),
-    html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
+    html.Hr(),
+    html.Hr(),
+    html.Hr(),
+     html.Hr(),
+    html.Hr(),
+    #html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
     
     dbc.Row([
           dbc.Col(html.H2('Un portafolio diverso',
@@ -325,11 +345,12 @@ body = html.Div([
 
       dbc.Row(
            [
-                         dbc.Col(html.H3('Hemos recibido vacunas o sustancia activa desde seis paises: Bélica, Argentina, China, India, Rusia y Estados Unidos',
-                                        ),
-                width={ "offset":1 },
-                 ),
-    ]),
+           dbc.Col(html.H5(['Hemos recibido vacunas o sustancia activa desde seis paises: Bélica, Argentina, China, India, Rusia y Estados Unidos'
+                               ],style={'textAlign': 'left'}),
+                       width={'size': 6,  "offset":1 },
+                      )],justify="align"),
+   
+   
     
      dbc.Row([                          #https://github.com/fdealbam/Vacunas/blob/main/application/static/mapa.JPG
                dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/application/static/mapa.JPG?raw=true"),
@@ -337,14 +358,14 @@ body = html.Div([
             
            ]),
     
-    html.Br(),
-    html.Br(),
+    html.Hr(),
+    html.Hr(),
 
     html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),      
 
        
     dbc.Row([
-          dbc.Col(html.H2('Arribo de vacunas según ciudad',
+          dbc.Col(html.H2('Ciudades de arribo de las dosis',
                         className='card-title',style={'textAlign': 'left'} ),
                 style={"color": "#91210C", },
                 width={ "offset":1 },
@@ -365,3 +386,4 @@ from settings import config
 
 if __name__ == "__main__":
     app.run_server()
+
