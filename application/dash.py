@@ -163,32 +163,51 @@ table_body = [html.Tbody([row1, row2, row3, row4])]
 #   #width=1000,
 #   #height=400
 #   )
+#para pie chart Contagios
+#contaedog = vacunas.stb.freq(['Arribo'],value='Cantidad', thresh=60, other_label="Resto del país")
+
+figvac = px.pie(vacunas, values='Cantidad', names='Arribo',
+             color_discrete_sequence=px.colors.sequential.Mint, hole=.5,
+              
+             #title='Distribución de contagios',
+             )
+figvac.update_layout(paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  uniformtext_minsize=10,
+                  uniformtext_mode='hide',
+                  autosize=True,
+                  width= 550,
+                  height=550,
+                  title_font_size = 12,
+                  font_color="gray",
+                  title_font_color="firebrick",
+                  )
 
 
 
 
-figvac = go.Figure()
-figvac.add_trace(go.Bar(x=vacunas['Fecha'],y=vacunas['Cantidad'],
-                marker_color= "chocolate",  # cambiar nuemeritos de rgb
-                ))
-figvac.update_layout(
-    paper_bgcolor='rgba(0,0,0,0)',
-    plot_bgcolor='rgba(0,0,0,0)',
-    xaxis_tickangle=-45,
-    
-    template = 'simple_white',
-    title='',
-    xaxis_tickfont_size= 12,
-    yaxis=dict(
-        #title='Acumulados mensuales',
-        titlefont_size=14,
-        tickfont_size=12,
-        titlefont_family= "Monserrat"),
-    autosize=True,
-    #width=1000,
-    #height=400
-    )
-
+#figvac = go.Figure()
+#figvac.add_trace(go.Bar(x=vacunas['Fecha'],y=vacunas['Cantidad'],
+#                marker_color= "chocolate",  # cambiar nuemeritos de rgb
+#                ))
+#figvac.update_layout(
+#    paper_bgcolor='rgba(0,0,0,0)',
+#    plot_bgcolor='rgba(0,0,0,0)',
+#    xaxis_tickangle=-45,
+#    
+#    template = 'simple_white',
+#    title='',
+#    xaxis_tickfont_size= 12,
+#    yaxis=dict(
+#        #title='Acumulados mensuales',
+#        titlefont_size=14,
+#        tickfont_size=12,
+#        titlefont_family= "Monserrat"),
+#    autosize=True,
+#    #width=1000,
+#    #height=400
+#    )
+#
 
 
 #figvac = go.Figure()
@@ -282,11 +301,11 @@ body = html.Div([
             }
                                      ))
         ],justify="center"),
-    html.Hr(),
-    html.Hr(),
-    html.Hr(),
-     html.Hr(),
-    html.Hr(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+     html.Br(),
+    html.Br(),
     #html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
     dbc.Row([
         dbc.Col(html.H2('Arribos recientes ',
@@ -327,11 +346,11 @@ body = html.Div([
            'backgroundColor': 'rgba(0,0,0,0)'
                                     }))
         ]),
-    html.Hr(),
-    html.Hr(),
-    html.Hr(),
-     html.Hr(),
-    html.Hr(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+     html.Br(),
+    html.Br(),
     #html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
     
     dbc.Row([
@@ -357,10 +376,10 @@ body = html.Div([
             
            ]),
     
-    html.Hr(),
-    html.Hr(),
+    html.Br(),
+    html.Br(),
 
-    html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),      
+    html.Br(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),      
 
        
     dbc.Row([
@@ -385,5 +404,3 @@ from settings import config
 
 if __name__ == "__main__":
     app.run_server()
-
-    
