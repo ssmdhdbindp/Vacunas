@@ -119,50 +119,59 @@ row3 = html.Tr([html.Td(farm_tot3), html.Td([str(f"{cant_tot3:,d}")])])
 row4 = html.Tr([html.Td(farm_tot4), html.Td([str(f"{cant_tot4:,d}")])])
 table_body = [html.Tbody([row1, row2, row3, row4])]
 #---------------------------------------------------------------------GRAFICA
-figvac = px.bar(vacunas, x= 'Fecha', y='Cantidad',
-                color='Arribo', 
-                 barmode="overlay",  
-                
-                color_continuous_scale=px.colors.sequential.Inferno
-               )
-
-figvac.update_layout( showlegend=True,
-    width= 1200,
-    height=700,
-   # xaxis_tickangle=-45,
-   # xaxis_tickfont_size= 18,
-    #legend=dict(orientation="h",
-     #          yanchor= "top",
-      #         y=0.99,
-               #xanchor="center",
-       #        x=0.01 ),
-    paper_bgcolor='rgba(0,0,0,0)',
-    plot_bgcolor='rgba(0,0,0,0)',
-
-                     
-)
-figvac.update_yaxes(automargin=False)
-#figvac = go.Figure()
-#figvac.add_trace(go.Bar(x=vacunas['Fecha'],y=vacunas['Cantidad'],
-#                marker_color='indianred'  # cambiar nuemeritos de rgb
-#                ))
-#figvac.update_layout(
+#figvac = px.bar(vacunas, x= 'Fecha', y='Cantidad',
+#                color='Arribo', 
+#                 barmode="overlay",  
+#                
+#                color_continuous_scale=px.colors.sequential.Inferno
+#               )
+#
+#figvac.update_layout( showlegend=True,
+#    width= 1200,
+#    height=700,
+#   # xaxis_tickangle=-45,
+#   # xaxis_tickfont_size= 18,
+#    #legend=dict(orientation="h",
+#     #          yanchor= "top",
+#      #         y=0.99,
+#               #xanchor="center",
+#       #        x=0.01 ),
 #    paper_bgcolor='rgba(0,0,0,0)',
 #    plot_bgcolor='rgba(0,0,0,0)',
-#    xaxis_tickangle=-45,
-#    template = 'simple_white',
-#    title='',
-#    xaxis_tickfont_size= 6,
-#    yaxis=dict(
-#        title='Llegadas  diarias',
-#        titlefont_size=14,
-#        tickfont_size=12,
-#        titlefont_family= "Monserrat"),
-#    #autosize=False,
-#    width=1000,
-#    height=600
-#    )
 #
+#                     
+#)
+#figvac.update_yaxes(automargin=False)
+  
+#igvac = go.Figure()
+#igvac.add_trace(go.Bar(x=vacunas['Fecha'],y=vacunas['Cantidad'],
+#               marker_color='indianred'  # cambiar nuemeritos de rgb
+#               ))
+#igvac.update_layout(
+#   paper_bgcolor='rgba(0,0,0,0)',
+#   plot_bgcolor='rgba(0,0,0,0)',
+#   xaxis_tickangle=-45,
+#   template = 'simple_white',
+#   title='',
+#   xaxis_tickfont_size= 12,
+#   yaxis=dict(
+#       title='Acumulados mensuales',
+#       titlefont_size=14,
+#       tickfont_size=12,
+#       titlefont_family= "Monserrat"),
+#   #autosize=False,
+#   #width=1000,
+#   #height=400
+#   )
+
+figvac = px.bar(vacunas, x="Fecha", y="Cantidad", 
+                 color="Arribo", )
+figvac.update_layout(
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)',)
+
+
+
 
 #Suma semana
 tot_sem = filtrado.Cantidad.sum()
@@ -254,6 +263,7 @@ body = html.Div([
     html.Br(),
      html.Br(),
     html.Br(),
+    html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
     dbc.Row([
         dbc.Col(html.H2('Recientes arribos de vacunas a México',
                         className='card-title',style={'textAlign': 'left'} ),
@@ -303,6 +313,7 @@ body = html.Div([
     html.Br(),
      html.Br(),
     html.Br(),
+    html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
     
     dbc.Row([
           dbc.Col(html.H2('Un portafolio diverso',
@@ -329,30 +340,20 @@ body = html.Div([
     html.Br(),
     html.Br(),
 
-            
+    html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),      
 
        
-                                  
-                                
-                     
+    dbc.Row([
+          dbc.Col(html.H2('Arribo de vacunas según ciudad',
+                        className='card-title',style={'textAlign': 'left'} ),
+                style={"color": "#91210C", },
+                width={ "offset":1 },
+                 ),
+    ]),
    
-
-    
-   
-
-#     
-#      dbc.Row(
-#           [
-#               dbc.Col(html.H4(["ARRIBO DE VACUNAS ", 
-#                       dbc.Badge("SEGÚN CIUDAD", color="success", className="mr-1")]), 
-#                                       width={'size': 11,  "offset":3 })
-#           
-#           ]),
-#    html.Br(),
-#     
-#       # Grafica     
-#       dbc.Row([dbc.Col(dcc.Graph(figure=figvac, config= "autosize", ))]),
-#
+     
+       # Grafica     
+       dbc.Row([dbc.Col(dcc.Graph(figure=figvac, config= "autosize", ))]),
 
 ])
     
