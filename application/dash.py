@@ -186,8 +186,8 @@ figvac.update_layout(
         tickfont_size=12,
         titlefont_family= "Monserrat"),
     autosize=True,
-    width=1000,
-    height=400
+    #width=1000,
+    #height=400
     )
 
 
