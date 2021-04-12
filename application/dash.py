@@ -30,7 +30,7 @@ d2 = today.strftime("Fecha de actualización : %d-%m-%Y")
 ############################### Abre archivos
 
 vacunas = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/vacunasreport.csv", encoding= "Latin-1")
-vacunas.rename(columns={'Farmaceutica ': 'Farmaceutica' },inplace=True,
+vacunas.rename(columns={'Farmac�utica': 'Farmaceutica' },inplace=True,
                                    errors='ignore')
 
 
@@ -38,34 +38,34 @@ vacunas.rename(columns={'Farmaceutica ': 'Farmaceutica' },inplace=True,
 vacunas['Cantidad']=vacunas['Cantidad'].astype(int)
 # convert the 'Date' column to datetime format
 format = '%d/%m/%Y'
-vacunas['fecha'] = pd.to_datetime(vacunas['fecha'], format=format)
+vacunas['Fecha'] = pd.to_datetime(vacunas['Fecha'], format=format)
 vacunas.info()
 
 
 #--------------------------------------------------------------------------------Dias
-vvacunas = vacunas.groupby(by=["fecha","dia","Farmaceutica"])["Cantidad"].sum()
+vvacunas = vacunas.groupby(by=["Fecha","Farmacéutica"])["Cantidad"].sum()
 other_b = pd.DataFrame(vvacunas)
 other_b.to_csv('0000procesodi.csv')
 vuelve_a_abrir = pd.read_csv('0000procesodi.csv')
 format = '%Y-%m-%d'
-vuelve_a_abrir['fecha'] = pd.to_datetime(vuelve_a_abrir['fecha'], format=format)
+vuelve_a_abrir['Fecha'] = pd.to_datetime(vuelve_a_abrir['Fecha'], format=format)
 
 
 #vacunas.info()
-filtrado = vuelve_a_abrir.sort_values('fecha',ascending=False).head(5)
-#filtrado.fecha = today.strftime("%d-%m-%Y")
+filtrado = vuelve_a_abrir.sort_values('Fecha',ascending=False).head(5)
+#filtrado.Fecha = today.strftime("%d-%m-%Y")
 #Identificadores dias
-dia_1 = filtrado.iloc[4]['dia']
-dia_2 = filtrado.iloc[3]['dia']
-dia_3 = filtrado.iloc[2]['dia']
-dia_4 = filtrado.iloc[1]['dia']
-dia_5 = filtrado.iloc[0]['dia']
-#Identificadores fechas
-fecha_1 = filtrado.iloc[4]['fecha']
-fecha_2 = filtrado.iloc[3]['fecha']
-fecha_3 = filtrado.iloc[2]['fecha']
-fecha_4 = filtrado.iloc[1]['fecha']
-fecha_5 = filtrado.iloc[0]['fecha']
+#dia_1 = filtrado.iloc[4]['dia']
+#dia_2 = filtrado.iloc[3]['dia']
+#dia_3 = filtrado.iloc[2]['dia']
+#dia_4 = filtrado.iloc[1]['dia']
+#dia_5 = filtrado.iloc[0]['dia']
+##Identificadores Fechas
+Fecha_1 = filtrado.iloc[4]['Fecha']
+Fecha_2 = filtrado.iloc[3]['Fecha']
+Fecha_3 = filtrado.iloc[2]['Fecha']
+Fecha_4 = filtrado.iloc[1]['Fecha']
+Fecha_5 = filtrado.iloc[0]['Fecha']
 #Identificadores Cantidad
 cantidad_1 = filtrado.iloc[4]['Cantidad']
 cantidad_2 = filtrado.iloc[3]['Cantidad']
@@ -73,11 +73,11 @@ cantidad_3 = filtrado.iloc[2]['Cantidad']
 cantidad_4 = filtrado.iloc[1]['Cantidad']
 cantidad_5 = filtrado.iloc[0]['Cantidad']
 #Identificadores Farmaceutica s
-farmaceutica_1 = filtrado.iloc[4]['Farmaceutica']
-farmaceutica_2 = filtrado.iloc[3]['Farmaceutica']
-farmaceutica_3 = filtrado.iloc[2]['Farmaceutica']
-farmaceutica_4 = filtrado.iloc[1]['Farmaceutica']
-farmaceutica_5 = filtrado.iloc[0]['Farmaceutica']
+farmaceutica_1 = filtrado.iloc[4]['Farmacéutica']
+farmaceutica_2 = filtrado.iloc[3]['Farmacéutica']
+farmaceutica_3 = filtrado.iloc[2]['Farmacéutica']
+farmaceutica_4 = filtrado.iloc[1]['Farmacéutica']
+farmaceutica_5 = filtrado.iloc[0]['Farmacéutica']
 #-------------------------------------------------Tabla dias
 table_header69 = [
     html.Thead(html.Tr(" "))
@@ -94,17 +94,17 @@ table_body69 = [html.Tbody([row01, row02, #row3, row4
 
 table = dbc.Table(table_header69 + table_body69, bordered=True)
 #-------------------------------------------------------------
-tabla2 = vacunas.groupby(by=["Farmaceutica"])["Cantidad"].sum()
+tabla2 = vacunas.groupby(by=["Farmacéutica"])["Cantidad"].sum()
 patabal2 = pd.DataFrame(tabla2)
 patabal2.to_csv('0000procesodi.csv')
 patabla2 = pd.read_csv('0000procesodi.csv')
 #Total Cantidad
 tot_vac = patabla2.Cantidad.sum()
 #Identificadores Farmaceuticas
-farm_tot1 = patabla2.iloc[0]['Farmaceutica']
-farm_tot2 = patabla2.iloc[1]['Farmaceutica']
-farm_tot3 = patabla2.iloc[2]['Farmaceutica']
-farm_tot4 = patabla2.iloc[3]['Farmaceutica']
+farm_tot1 = patabla2.iloc[0]['Farmacéutica']
+farm_tot2 = patabla2.iloc[1]['Farmacéutica']
+farm_tot3 = patabla2.iloc[2]['Farmacéutica']
+farm_tot4 = patabla2.iloc[3]['Farmacéutica']
 #Identificadores Cantidad
 cant_tot1 = patabla2.iloc[0]['Cantidad']
 cant_tot2 = patabla2.iloc[1]['Cantidad']
@@ -112,15 +112,16 @@ cant_tot3 = patabla2.iloc[2]['Cantidad']
 cant_tot4 = patabla2.iloc[3]['Cantidad']
 # tabla2
 table_header = [
-    html.Thead(html.Tr([html.Th(), html.Th()]))]
-row1 = html.Tr([html.Td(farm_tot1), html.Td(cant_tot1)])
-row2 = html.Tr([html.Td(farm_tot2), html.Td(cant_tot2)])
-row3 = html.Tr([html.Td(farm_tot3), html.Td(cant_tot3)])
-row4 = html.Tr([html.Td(farm_tot4), html.Td(cant_tot4)])
+    html.Thead(html.Tr([html.Th(), html.Th()]))] 
+row1 = html.Tr([html.Td(farm_tot1), html.Td([str(f"{cant_tot1:,d}")])])
+row2 = html.Tr([html.Td(farm_tot2), html.Td([str(f"{cant_tot2:,d}")])])
+row3 = html.Tr([html.Td(farm_tot3), html.Td([str(f"{cant_tot3:,d}")])])
+row4 = html.Tr([html.Td(farm_tot4), html.Td([str(f"{cant_tot4:,d}")])])
 table_body = [html.Tbody([row1, row2, row3, row4])]
 #---------------------------------------------------------------------GRAFICA
-figvac = px.bar(vacunas, x= 'fecha', y='Cantidad',
-                color='Arribo', # barmode="group",  
+figvac = px.bar(vacunas, x= 'Fecha', y='Cantidad',
+                color='Arribo', 
+                 barmode="overlay",  
                 
                 color_continuous_scale=px.colors.sequential.Inferno
                )
@@ -130,18 +131,38 @@ figvac.update_layout( showlegend=True,
     height=700,
    # xaxis_tickangle=-45,
    # xaxis_tickfont_size= 18,
-    legend=dict(orientation="h",
-               yanchor= "top",
-               y=0.99,
+    #legend=dict(orientation="h",
+     #          yanchor= "top",
+      #         y=0.99,
                #xanchor="center",
-               x=0.01 ),
+       #        x=0.01 ),
     paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)',
 
                      
 )
 figvac.update_yaxes(automargin=False)
-
+#figvac = go.Figure()
+#figvac.add_trace(go.Bar(x=vacunas['Fecha'],y=vacunas['Cantidad'],
+#                marker_color='indianred'  # cambiar nuemeritos de rgb
+#                ))
+#figvac.update_layout(
+#    paper_bgcolor='rgba(0,0,0,0)',
+#    plot_bgcolor='rgba(0,0,0,0)',
+#    xaxis_tickangle=-45,
+#    template = 'simple_white',
+#    title='',
+#    xaxis_tickfont_size= 6,
+#    yaxis=dict(
+#        title='Llegadas  diarias',
+#        titlefont_size=14,
+#        tickfont_size=12,
+#        titlefont_family= "Monserrat"),
+#    #autosize=False,
+#    width=1000,
+#    height=600
+#    )
+#
 
 #Suma semana
 tot_sem = filtrado.Cantidad.sum()
@@ -151,11 +172,7 @@ server = flask.Flask(__name__)
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes. FLATLY], server=server)
 
 body = html.Div([ 
-       dbc.Row(
-           [dbc.Col(html.H6(d2),           #Fecha de actualización
-               width={'size' : "auto",
-                      'offset' : 9}), 
-           ]),
+      
     
         dbc.Row(
             [
@@ -168,36 +185,106 @@ body = html.Div([
         ]),
   
     html.Br(),
-      dbc.Row(
-           [
-               dbc.Col(html.H1(["Esta semana llegaron a México ", 
-                       dbc.Badge([str(f"{tot_sem:,d}")],
-                                 color="info", className="mr-1"),
-                                html.H1(" dosis de vacunas contra COVID-19 "),
-                               ],style={'textAlign': 'center'}),
-                       width={'size': 11,  "offset":1 },
-                      )],justify="start"),
-    html.Br(),
-    html.Br(),
-    html.Br(),
+    dbc.Row([
+        dbc.Col(html.H1('Distribución de Vacunas contra el COVID-19',
+                        className='card-title',style={'textAlign': 'left'} ),
+                style={"color": "#91210C", 'text-transform': "uppercase"},
+                width={ "offset":2 },
+                 ),
+    ]),
+    html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
+        
     
-      dbc.Row(
-           [
-               dbc.Col(html.H4(["VACUNAS DE LOS ", 
-                       dbc.Badge("ÚLTIMOS CINCO DIAS", color="success", className="mr-1")]), 
-                                       width={'size': 11,  "offset":1 })
-           
+    dbc.Row([
+        dbc.Col(html.H1('7 Entidades Federativas',
+                        className='card-title', style={'textAlign': 'left'} ),
+                style={"color": "#0C916E",},
+                width={ "offset":4 },
+                 ),
+    ]),
+    html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
+     dbc.Row(
+           [dbc.Col(html.H6(d2),           #Fecha de actualización
+               width={'size' : "auto",
+                      'offset' : 5}), 
            ]),
     html.Br(),
+    html.Br(),
+       dbc.Row(
+           [
 
+               dbc.Col(html.H3(["Al 09 de abril, México ha recibido o envasado  ", 
+                                str(f"{tot_vac:,d} dosis de vacunas contra COVID-19 listas para aplicarse: "),
+                                  
+                                
+                                #),
+                               # html.H3(
+                                   
+                               ],style={'textAlign': 'left'}),
+                       width={'size': 11,  "offset":1 },
+                      )],justify="align"),
+
+    html.Br(),
+  
+        html.Br(),
+ 
+    dbc.Row(
+        [
+            dbc.Col(dbc.Table(table_header + table_body, 
+                              bordered=True, 
+                              dark=True,
+                              hover=True,
+                              #responsive=True,
+                              #striped=True,
+                              size="sm",
+                              #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
+                              style={
+            'margin-top': '9px',
+            'margin-left': '400px',
+            'width': '609px',
+            'height': '36px',
+            #'backgroundColor': 'rgba(0,0,0,0)',
+
+                                  
+            }
+                                     ))
+        ],justify="center"),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+     html.Br(),
+    html.Br(),
     dbc.Row([
-        dbc.Col(html.H4([" ",dbc.Badge((fecha_1.strftime('%d-%B-%y')), className="ml-1",color="light",),
-                             dbc.Badge((fecha_2.strftime('%d-%B-%y')), className="ml-1",color="light",),
-                             dbc.Badge((fecha_3.strftime('%d-%B-%y')), className="ml-1",color="light",),
-                             dbc.Badge((fecha_4.strftime('%d-%B-%y')), className="ml-1",color="light",),
-                             dbc.Badge((fecha_5.strftime('%d-%B-%y')), className="ml-1",color="light",),   
+        dbc.Col(html.H2('Recientes arribos de vacunas a México',
+                        className='card-title',style={'textAlign': 'left'} ),
+                style={"color": "#91210C", },
+                width={ "offset":1 },
+                 ),
+    ]),
+
+      dbc.Row(
+           [
+
+               dbc.Col(html.H3(["Entre el 01 y el 09 de abril, México recibió  ", 
+                                str(f"{tot_sem:,d} dosis de vacunas contra COVID-19 listas para aplicarse: "),
+                                  
+                                
+                                #),
+                               # html.H3(
+                                   
+                               ],style={'textAlign': 'left'}),
+                       width={'size': 11,  "offset":1 },
+                      )],justify="align"),
+   
+
+   dbc.Row([
+        dbc.Col(html.H4([" ",dbc.Badge((Fecha_1.strftime('%d-%B-%y')), className="ml-1",color="light",),
+                             dbc.Badge((Fecha_2.strftime('%d-%B-%y')), className="ml-1",color="light",),
+                             dbc.Badge((Fecha_3.strftime('%d-%B-%y')), className="ml-1",color="light",),
+                             dbc.Badge((Fecha_4.strftime('%d-%B-%y')), className="ml-1",color="light",),
+                             dbc.Badge((Fecha_5.strftime('%d-%B-%y')), className="ml-1",color="light",),   
                         ]),
-                width={'size': 11,  "offset":2 })]),
+                width={'size': 11,  "offset":3 })]),
     dbc.Row(
         [
             dbc.Col(dbc.Table(table_header69 + table_body69, 
@@ -205,56 +292,68 @@ body = html.Div([
                               size="sm",
                               style={ #'size': 11,"offset":2,
            'margin-top': '0px',
-           'margin-left': '200px',
+           'margin-left': '400px',
            'width': '609px',
            'height': '36px',
            'backgroundColor': 'rgba(0,0,0,0)'
                                     }))
         ]),
-    
-   
     html.Br(),
-     dbc.Row(
-           [
-               dbc.Col(html.H4(["VACUNAS SEGÚN ", 
-                       dbc.Badge("FARMACÉUTICA", color="success", className="mr-1")]), 
-                                       width={'size': 11,  "offset":1})
-           
-           ]),
-    dbc.Row(
-        [
-            dbc.Col(dbc.Table(table_header + table_body, 
-                              bordered=False, 
-                              size="sm",
-                              style={
-            'margin-top': '9px',
-            'margin-left': '200px',
-            'width': '609px',
-            'height': '36px',
-            'backgroundColor': 'rgba(0,0,0,0)'
-            }
-                                     ))
-        ],justify="start"),
-     dbc.Row(
-           [
-               dbc.Col(html.H5(["Total",
-                                
-                       dbc.Badge([str(f"{tot_vac:,d}")], color="warning", className="mr-1")]), 
-                                       width={'size': 11,  "offset":7 })
-           
-           ]),
+    html.Br(),
+    html.Br(),
+     html.Br(),
+    html.Br(),
+    
+    dbc.Row([
+          dbc.Col(html.H2('Un portafolio diverso',
+                        className='card-title',style={'textAlign': 'left'} ),
+                style={"color": "#91210C", },
+                width={ "offset":1 },
+                 ),
+    ]),
+
       dbc.Row(
            [
-               dbc.Col(html.H4(["ARRIBO DE VACUNAS ", 
-                       dbc.Badge("SEGÚN CIUDAD", color="success", className="mr-1")]), 
-                                       width={'size': 11,  "offset":1 })
-           
+                         dbc.Col(html.H3('Hemos recibido vacunas o sustancia activa desde seis paises: Bélica, Argentina, China, India, Rusia y Estados Unidos',
+                                        ),
+                width={ "offset":1 },
+                 ),
+    ]),
+    
+     dbc.Row([                          #https://github.com/fdealbam/Vacunas/blob/main/application/static/mapa.JPG
+               dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/application/static/mapa.JPG?raw=true"),
+                      lg={'size': 6,  "offset": 3, }),
+            
            ]),
+    
     html.Br(),
-    dbc.Row(
-        [dbc.Col(dcc.Graph(figure=figvac, config= "autosize"),
-         width={'size': 5,  "offset":1 })],
-    ),
+    html.Br(),
+
+            
+
+       
+                                  
+                                
+                     
+   
+
+    
+   
+
+#     
+#      dbc.Row(
+#           [
+#               dbc.Col(html.H4(["ARRIBO DE VACUNAS ", 
+#                       dbc.Badge("SEGÚN CIUDAD", color="success", className="mr-1")]), 
+#                                       width={'size': 11,  "offset":3 })
+#           
+#           ]),
+#    html.Br(),
+#     
+#       # Grafica     
+#       dbc.Row([dbc.Col(dcc.Graph(figure=figvac, config= "autosize", ))]),
+#
+
 ])
     
     
