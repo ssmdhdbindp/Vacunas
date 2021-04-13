@@ -1,51 +1,45 @@
-Fecha,Arribo,Cantidad,Farmacéutica
-23/12/2020,Ciudad de México,2925,Pfizer-BioNTech
+Fecha,Arribo,Cantidad,FarmacÃ©utica
+23/12/2020,Ciudad de MÃ©xico,2925,Pfizer-BioNTech
 26/12/2020,Monterrey,8775,Pfizer-BioNTech
-26/12/2020,Ciudad de México,34125,Pfizer-BioNTech
-30/12/2020,Ciudad de México,7800,Pfizer-BioNTech
-05/01/2021,Ciudad de México,44850,Pfizer-BioNTech
+26/12/2020,Ciudad de MÃ©xico,34125,Pfizer-BioNTech
+30/12/2020,Ciudad de MÃ©xico,7800,Pfizer-BioNTech
+05/01/2021,Ciudad de MÃ©xico,44850,Pfizer-BioNTech
 05/01/2021,Monterrey,8775,Pfizer-BioNTech
-12/01/2021,Ciudad de México,439725,Pfizer-BioNTech
+12/01/2021,Ciudad de MÃ©xico,439725,Pfizer-BioNTech
 19/01/2021,Monterrey,5850,Pfizer-BioNTech
-19/01/2021,Ciudad de México,213525,Pfizer-BioNTech
-14/02/2021,Ciudad de México,870000,AstraZeneca
+19/01/2021,Ciudad de MÃ©xico,213525,Pfizer-BioNTech
+14/02/2021,Ciudad de MÃ©xico,870000,AstraZeneca
 16/02/2021,Monterrey,4875,Pfizer-BioNTech
-16/02/2021,Ciudad de México,486525,Pfizer-BioNTech
-20/02/2021,Ciudad de México,200000,Sinovac
-22/02/2021,Ciudad de México,200000,Sputnik V
+16/02/2021,Ciudad de MÃ©xico,486525,Pfizer-BioNTech
+20/02/2021,Ciudad de MÃ©xico,200000,Sinovac
+22/02/2021,Ciudad de MÃ©xico,200000,Sputnik V
 23/02/2021,Monterrey,125775,Pfizer-BioNTech
-23/02/2021,Ciudad de México,386100,Pfizer-BioNTech
-27/02/2021,Ciudad de México,800000,Sinovac
+23/02/2021,Ciudad de MÃ©xico,386100,Pfizer-BioNTech
+27/02/2021,Ciudad de MÃ©xico,800000,Sinovac
 02/03/2021,Guadalajara,156000,Pfizer-BioNTech
 02/03/2021,Monterrey,106275,Pfizer-BioNTech
-02/03/2021,Ciudad de México,381225,Pfizer-BioNTech
-02/03/2021,Querétaro,208650,Pfizer-BioNTech
+02/03/2021,Ciudad de MÃ©xico,381225,Pfizer-BioNTech
+02/03/2021,QuerÃ©taro,208650,Pfizer-BioNTech
 09/03/2021,Guadalajara,108225,Pfizer-BioNTech
 09/03/2021,Monterrey,72150,Pfizer-BioNTech
-09/03/2021,Ciudad de México,275925,Pfizer-BioNTech
-09/03/2021,Querétaro,144300,Pfizer-BioNTech
-10/03/2021,Ciudad de México,200,Sputnik V
-13/03/2021,Ciudad de México,1000000,Sinovac
+09/03/2021,Ciudad de MÃ©xico,275925,Pfizer-BioNTech
+09/03/2021,QuerÃ©taro,144300,Pfizer-BioNTech
+10/03/2021,Ciudad de MÃ©xico,200,Sputnik V
+13/03/2021,Ciudad de MÃ©xico,1000000,Sinovac
 16/03/2021,Guadalajara,121875,Pfizer-BioNTech
 16/03/2021,Monterrey,103350,Pfizer-BioNTech
-16/03/2021,Ciudad de México,217425,Pfizer-BioNTech
-16/03/2021,Querétaro,225225,Pfizer-BioNTech
-18/03/2021,Ciudad de México,1000000,Sinovac
-23/03/2021,Ciudad de México,487500,Pfizer-BioNTech
-24/03/2021,Ciudad de México,170625,Pfizer-BioNTech
-25/03/2021,Ciudad de México,1000000,Sinovac
-27/03/2021,Ciudad de México,65000,CanSino Biologics
-28/03/2021,Ciudad de México,1510600,AstraZeneca
-30/03/2021,Ciudad de México,487500,Pfizer-BioNTech
-31/03/2021,Ciudad de México,500000,Sputnik V
-31/03/2021,Ciudad de México,145275,Pfizer-BioNTech
-01/04/2021,Ciudad de México,1208700,AstraZeneca
-05/04/2021,Ciudad de México,487500,Pfizer-BioNTech
-08/04/2021,Ciudad de México,487500,Pfizer-BioNTech
-09/04/2021,Ciudad de México,327600,Pfizer-BioNTech
-20/01/2021,Ciudad de México,1000000,AstraZeneca
-02/02/2021,Ciudad de México,6000000,AstraZeneca
-11/02/2021,Ciudad de México,2000000,CanSinoBio
-11/03/2021,Ciudad de México,3000000,CanSinoBio
-22/03/2021,Querétaro,940470,CanSinoBio
-07/04/2021,Querétaro,434830,CanSinoBio
+16/03/2021,Ciudad de MÃ©xico,217425,Pfizer-BioNTech
+16/03/2021,QuerÃ©taro,225225,Pfizer-BioNTech
+18/03/2021,Ciudad de MÃ©xico,1000000,Sinovac
+23/03/2021,Ciudad de MÃ©xico,487500,Pfizer-BioNTech
+24/03/2021,Ciudad de MÃ©xico,170625,Pfizer-BioNTech
+25/03/2021,Ciudad de MÃ©xico,1000000,Sinovac
+27/03/2021,Ciudad de MÃ©xico,65000,CanSino Biologics
+28/03/2021,Ciudad de MÃ©xico,1510600,AstraZeneca
+30/03/2021,Ciudad de MÃ©xico,487500,Pfizer-BioNTech
+31/03/2021,Ciudad de MÃ©xico,500000,Sputnik V
+31/03/2021,Ciudad de MÃ©xico,145275,Pfizer-BioNTech
+01/04/2021,Ciudad de MÃ©xico,1208700,AstraZeneca
+05/04/2021,Ciudad de MÃ©xico,487500,Pfizer-BioNTech
+08/04/2021,Ciudad de MÃ©xico,487500,Pfizer-BioNTech
+09/04/2021,Ciudad de MÃ©xico,327600,Pfizer-BioNTech
