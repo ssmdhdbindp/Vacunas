@@ -25,8 +25,7 @@ yea = datetime.strftime(yesterday, '%Y%m%d')
 today = date.today()
 d2 = today.strftime("Fecha de actualización : %d-%m-%Y")
 
-#Suma semana
-tot_sem = filtrado.Cantidad.sum()
+
 ###############################
 # DATABASES
 ############################### AHre archivos
@@ -55,6 +54,8 @@ vuelve_a_abrir['Fecha'] = pd.to_datetime(vuelve_a_abrir['Fecha'], format=format)
 
 #vacunas.info()
 filtrado = vuelve_a_abrir.sort_values('Fecha',ascending=False).head(5)
+#Suma semana
+tot_sem = filtrado.Cantidad.sum()
 #filtrado.Fecha = today.strftime("%d-%m-%Y")
 #Identificadores dias
 #dia_1 = filtrado.iloc[4]['dia']
