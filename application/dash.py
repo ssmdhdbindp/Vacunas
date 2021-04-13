@@ -25,6 +25,8 @@ yea = datetime.strftime(yesterday, '%Y%m%d')
 today = date.today()
 d2 = today.strftime("Fecha de actualización : %d-%m-%Y")
 
+#Suma semana
+tot_sem = filtrado.Cantidad.sum()
 ###############################
 # DATABASES
 ############################### AHre archivos
@@ -162,8 +164,7 @@ figvac.update_layout(paper_bgcolor='rgba(0,0,0,0)',
 #########################################################
 
 
-#Suma semana
-tot_sem = filtrado.Cantidad.sum()
+
 
 
 server = flask.Flask(__name__)
