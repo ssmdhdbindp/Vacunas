@@ -31,7 +31,7 @@ d2 = today.strftime("Fecha de actualización : %d-%m-%Y")
 ############################### AHre archivos
 
 vacunas = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/vacunasreport.csv", encoding= "Latin-1")
-vacunas.rename(columns={'Farmac�utica': 'Farmacéutica' },inplace=True,
+vacunas.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
                                    errors='ignore')
 
 
@@ -113,7 +113,7 @@ farm_tot2 = patabla2.iloc[1]['Farmacéutica']
 farm_tot3 = patabla2.iloc[2]['Farmacéutica']
 farm_tot4 = patabla2.iloc[3]['Farmacéutica']
 farm_tot5 = patabla2.iloc[4]['Farmacéutica']
-farm_tot6 = patabla2.iloc[5]['Farmacéutica']
+#farm_tot6 = patabla2.iloc[5]['Farmacéutica']
 
 #Identificadores Cantidad
 cant_tot1 = patabla2.iloc[0]['Cantidad']
@@ -121,7 +121,7 @@ cant_tot2 = patabla2.iloc[1]['Cantidad']
 cant_tot3 = patabla2.iloc[2]['Cantidad']
 cant_tot4 = patabla2.iloc[3]['Cantidad']
 cant_tot5 = patabla2.iloc[4]['Cantidad']
-cant_tot6 = patabla2.iloc[5]['Cantidad']
+#cant_tot6 = patabla2.iloc[5]['Cantidad']
 # tabla2
 
 table_header = [
@@ -131,9 +131,10 @@ row2 = html.Tr([html.Td(farm_tot2), html.Td([str(f"{cant_tot2:,d}")])])
 row3 = html.Tr([html.Td(farm_tot3), html.Td([str(f"{cant_tot3:,d}")])])
 row4 = html.Tr([html.Td(farm_tot4), html.Td([str(f"{cant_tot4:,d}")])])
 row5 = html.Tr([html.Td(farm_tot5), html.Td([str(f"{cant_tot5:,d}")])])
-row6 = html.Tr([html.Td(farm_tot6), html.Td([str(f"{cant_tot6:,d}")])])
+#row6 = html.Tr([html.Td(farm_tot6), html.Td([str(f"{cant_tot6:,d}")])])
 row7 = html.Tr([html.Td("Total"), html.Td([str(f"{tot_vac:,d}")])])
-table_body = [html.Tbody([row1, row2, row3, row4, row5, row6,row7])]
+table_body = [html.Tbody([row1, row2, row3, row4, row5,# row6,
+                          row7])]
 #---------------------------------------------------------------------GRAFICA
 
 figvac = px.pie(vacunas, values='Cantidad', names='Arribo',
