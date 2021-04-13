@@ -35,6 +35,13 @@ vacunas.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
                                    errors='ignore')
 
 
+dosis = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Dosis%20envasadas.csv", encoding= "Latin-1")
+dosis.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
+                                   errors='ignore')
+
+dosis_a = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Dosis%20promedio%20a%20envasar.csv", encoding= "Latin-1")
+dosis_a.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
+                                   errors='ignore')
 # Dtypes 
 vacunas['Cantidad']=vacunas['Cantidad'].astype(int)
 # convert the 'Date' column to datetime format
@@ -136,7 +143,23 @@ row7 = html.Tr([html.Td("Total"), html.Td([str(f"{tot_vac:,d}")])])
 table_body = [html.Tbody([row1, row2, row3, row4, row5,# row6,
                           row7])]
 #---------------------------------------------------------------------GRAFICA
+figvac0 = px.pie(patabla2, values='Cantidad', names='Farmacéutica',
+             color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
 
+figvac0.update_layout(paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  uniformtext_minsize=16,
+                  uniformtext_mode='hide',
+                  autosize=False,
+                  width= 650,
+                  height=650,
+                  title_font_size = 16,
+                  font_color="gray",
+                  title_font_color="firebrick",
+                  margin = dict(autoexpand= True,
+                      t=0.1, l=0, r=0, b=0.1)   
+                  )
+######################################################################
 figvac = px.pie(vacunas, values='Cantidad', names='Arribo',
              color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
 
@@ -153,6 +176,7 @@ figvac.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   margin = dict(autoexpand= True,
                       t=0.1, l=0, r=0, b=0.1)   
                   )
+
 
 
 
@@ -242,8 +266,11 @@ body = html.Div([
              "font-size": "large"                      
             #'backgroundColor': 'rgba(0,0,0,0)',
             }
-                                     ))
-        ],justify="start"),
+                                     )),
+            dbc.Col(dcc.Graph(figure=figvac0),
+                    width={"size":1, "offset":2}
+            )
+        ]),
        dbc.Row(
            [
                dbc.Col(html.H6(["Hasta el 9 de abril, nuestro país ha recibido o envasado  ", 
@@ -338,11 +365,15 @@ body = html.Div([
                                ],style={'textAlign': 'left'}),
                        width={'size': 6,  "offset":1 },
                       )],justify="align"),
+   # # dbc.Row([dbc.Col(dcc.Graph(figure=aa), 
+   #                   style={'width': '100%', 'display': 'inline-block',
+   #                         'align': 'center'}),
+   #            ]),#,justify="center"),
    
    
     
      dbc.Row([                          #https://github.com/fdealbam/Vacunas/blob/main/application/static/mapa.JPG
-               dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/application/static/Mapgeo.jpeg?raw=true"),
+               dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/application/static/mapa.JPG?raw=true"),
                       lg={'size': 6,  "offset": 3, }),
             
            ]),
