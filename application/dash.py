@@ -342,7 +342,7 @@ body = html.Div([
    
     
      dbc.Row([                          #https://github.com/fdealbam/Vacunas/blob/main/application/static/mapa.JPG
-               dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/application/static/Mapgeo.JPG?raw=true"),
+               dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/application/static/Mapgeo.jpeg?raw=true"),
                       lg={'size': 6,  "offset": 3, }),
             
            ]),
