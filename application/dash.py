@@ -31,7 +31,7 @@ d2 = today.strftime("Fecha de actualización : %d-%m-%Y")
 ############################### AHre archivos
 
 vacunas = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/vacunasreport.csv", encoding= "Latin-1")
-vacunas.rename(columns={'Farmac�utica': 'Farmaceutica' },inplace=True,
+vacunas.rename(columns={'Farmac�utica': 'Farmacéutica' },inplace=True,
                                    errors='ignore')
 
 
