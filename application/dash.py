@@ -84,11 +84,11 @@ table_header69 = [
 ]
 row00 = html.Tr([html.Td(Fecha_1.strftime('%d-%B-%y')), html.Td(Fecha_2.strftime('%d-%B-%y')), 
                  html.Td(Fecha_3.strftime('%d-%B-%y')), html.Td(Fecha_4.strftime('%d-%B-%y')), 
-                 html.Td(Fecha_5.strftime('%d-%B-%y'))])
+                 html.Td(Fecha_5.strftime('%d-%B-%y')),html.Td("Total")])
 
 row01 = html.Tr([html.Td([str(f"{cantidad_1:,d}")]), html.Td([str(f"{cantidad_2:,d}")]), 
                  html.Td([str(f"{cantidad_3:,d}")]), html.Td([str(f"{cantidad_4:,d}")]), 
-                 html.Td([str(f"{cantidad_5:,d}")])])
+                 html.Td([str(f"{cantidad_5:,d}")]),  html.Td(tot_sem)])
 row02 = html.Tr([html.Td(farmaceutica_1), html.Td(farmaceutica_2), html.Td(farmaceutica_3), 
                 html.Td(farmaceutica_4), html.Td(farmaceutica_5)])
 
