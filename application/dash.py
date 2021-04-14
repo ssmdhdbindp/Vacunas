@@ -142,7 +142,7 @@ row5 = html.Tr([html.Td(farm_tot5), html.Td([str(f"{cant_tot5:,d}")])])
 row7 = html.Tr([html.Td("Total"), html.Td([str(f"{tot_vac:,d}")])])
 table_body = [html.Tbody([row1, row2, row3, row4, row5,# row6,
                           row7])]
-#---------------------------------------------------------------------GRAFICA PIE VACUNAS
+#---------------------------------------------------------------------GRAFICA
 figvac0 = px.pie(patabla2, values='Cantidad', names='Farmacéutica',
              color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
 
@@ -151,15 +151,14 @@ figvac0.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   uniformtext_minsize=16,
                   uniformtext_mode='hide',
                   autosize=False,
-                  width= 350,
-                  height=350,
+                  width= 650,
+                  height=650,
                   title_font_size = 16,
                   font_color="gray",
                   title_font_color="firebrick",
                   margin = dict(autoexpand= True,
                       t=0.1, l=0, r=0, b=0.1)   
                   )
-
 ######################################################################
 figvac = px.pie(vacunas, values='Cantidad', names='Arribo',
              color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
@@ -169,8 +168,8 @@ figvac.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   uniformtext_minsize=16,
                   uniformtext_mode='hide',
                   autosize=False,
-                  width= 350,
-                  height=350,
+                  width= 650,
+                  height=650,
                   title_font_size = 16,
                   font_color="gray",
                   title_font_color="firebrick",
@@ -178,107 +177,44 @@ figvac.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                       t=0.1, l=0, r=0, b=0.1)   
                   )
 
-#------------------------------------------------------------------------DOSIS ENVASADAS
-format = '%d/%m/%Y'
-dosis['Fecha de entrega de envasado'] = pd.to_datetime(dosis['Fecha de entrega de envasado'], format=format)
-dosis_ = dosis.sort_values('Fecha de entrega de envasado',ascending=False).head(5)
-#Suma semana
-dosis_tot = dosis_["Dosis envasadas"].sum()
-#
-fech_1 = dosis_.iloc[0]['Fecha de entrega de envasado']
-fech_2 = dosis_.iloc[1]['Fecha de entrega de envasado']
-#
-lug_1 = dosis_.iloc[0]['Lugar de envasado']
-lug_2 = dosis_.iloc[1]['Lugar de envasado']
-#
-denv_1 = dosis_.iloc[0]['Dosis envasadas']
-denv_2 = dosis_.iloc[1]['Dosis envasadas']
-#
-farm_1 = dosis_.iloc[0]['Farmacéutica']
-farm_2 = dosis_.iloc[1]['Farmacéutica']
 
-table_headerDOSIS = [
+###################################################################### TABLA CIUDADES
+
+vacunas_citys=vacunas.groupby('Arribo')['Cantidad'].sum()
+pd.DataFrame(vacunas_citys).to_csv('0000proceso.csv')
+vacunas_citys=pd.read_csv('0000proceso.csv').sort_values('Cantidad', ascending=False)
+vacunas_citys.Arribo.replace('Ciudad de MÃ©xico','Ciudad de México', inplace=True)
+vacunas_citys.Arribo.replace('QuerÃ©taro','Querétaro', inplace=True)
+
+#Total by city
+tot_vac_citys=vacunas_citys.Cantidad.sum()
+
+# Ciudad
+city1=vacunas_citys.iloc[0]['Arribo']
+city2=vacunas_citys.iloc[1]['Arribo']
+city3=vacunas_citys.iloc[2]['Arribo']
+city4=vacunas_citys.iloc[3]['Arribo']
+# Valores
+city1_v=vacunas_citys.iloc[0]['Cantidad']
+city2_v=vacunas_citys.iloc[1]['Cantidad']
+city3_v=vacunas_citys.iloc[2]['Cantidad']
+city4_v=vacunas_citys.iloc[3]['Cantidad']
+
+# Tabla
+table_headerciti = [
     html.Thead(html.Tr([html.Th(), html.Th()]))] 
-row1d = html.Tr([html.Td(fech_1.strftime('%d-%B-%y')), html.Td(lug_1), html.Td(denv_1), html.Td(farm_1)])
-row2d = html.Tr([html.Td(fech_2.strftime('%d-%B-%y')), html.Td(lug_2), html.Td(denv_2), html.Td(farm_2)])
-row3d = html.Tr([html.Td(""), html.Td("Total"), html.Td(dosis_tot), html.Td(" ")])
+row1 = html.Tr([html.Td(city1), html.Td([str(f"{city1_v:,d}")])])
+row2 = html.Tr([html.Td(city2), html.Td([str(f"{city2_v:,d}")])])
+row3 = html.Tr([html.Td(city3), html.Td([str(f"{city3_v:,d}")])])
+row4 = html.Tr([html.Td(city4), html.Td([str(f"{city4_v:,d}")])])
+row7 = html.Tr([html.Td("Total"), html.Td([str(f"{tot_vac_citys:,d}")])])
+table_bodyciti = [html.Tbody([row1, row2, row3, row4, 
+                          row7])]
+#---------------------------------
 
-table_bodyDOSIS = [html.Tbody([row1d, row2d, row3d])]
 
-#---------------------------------------------------------------------GRAFICA PIE DOSIS ENVASADAS
-figvac00 = px.pie(dosis, values='Dosis envasadas', names='Fecha de entrega de envasado',
-             color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
-
-figvac00.update_layout(paper_bgcolor='rgba(0,0,0,0)',
-                  plot_bgcolor='rgba(0,0,0,0)',
-                  uniformtext_minsize=16,
-                  uniformtext_mode='hide',
-                  autosize=False,
-                  width= 350,
-                  height=350,
-                  title_font_size = 16,
-                  font_color="gray",
-                  title_font_color="firebrick",
-                  margin = dict(autoexpand= True,
-                      t=0.1, l=0, r=0, b=0.1)   
-                  )
 #########################################################
-#------------------------------------------------------------------------DOSIS A ENVASAR
 
-format = '%d/%m/%Y'
-dosis_a['Fecha'] = pd.to_datetime(dosis_a['Fecha'], format=format)
-
-dosis_a_ = dosis_a.sort_values('Fecha',ascending=False).head(5)
-#Suma semana
-dosis_tot_a = dosis_a_["Dosis promedio a envasar"].sum()
-#
-fech_1_d = dosis_a_.iloc[0]['Fecha']
-fech_2_d = dosis_a_.iloc[1]['Fecha']
-fech_3_d = dosis_a_.iloc[2]['Fecha']
-fech_4_d = dosis_a_.iloc[3]['Fecha']
-#
-lug_1_d = dosis_a_.iloc[0]['Arribo']
-lug_2_d = dosis_a_.iloc[1]['Arribo']
-lug_3_d = dosis_a_.iloc[2]['Arribo']
-lug_4_d = dosis_a_.iloc[3]['Arribo']
-#
-denv_1_d = dosis_a_.iloc[0]['Dosis promedio a envasar']
-denv_2_d = dosis_a_.iloc[1]['Dosis promedio a envasar']
-denv_3_d = dosis_a_.iloc[2]['Dosis promedio a envasar']
-denv_4_d = dosis_a_.iloc[3]['Dosis promedio a envasar']
-#
-farm_1_d = dosis_a_.iloc[0]['Farmacéutica']
-farm_2_d = dosis_a_.iloc[1]['Farmacéutica']
-farm_3_d = dosis_a_.iloc[2]['Farmacéutica']
-farm_4_d = dosis_a_.iloc[3]['Farmacéutica']
-
-table_headerDOSISe = [
-    html.Thead(html.Tr([html.Th(), html.Th()]))] 
-row1de = html.Tr([html.Td(fech_1_d.strftime('%d-%B-%y')), html.Td(lug_1_d), html.Td(denv_1_d), html.Td(farm_1_d)])
-row2de = html.Tr([html.Td(fech_2_d.strftime('%d-%B-%y')), html.Td(lug_2_d), html.Td(denv_2_d), html.Td(farm_2_d)])
-row3de = html.Tr([html.Td(fech_3_d.strftime('%d-%B-%y')), html.Td(lug_3_d), html.Td(denv_3_d), html.Td(farm_3_d)])
-row4de = html.Tr([html.Td(fech_4_d.strftime('%d-%B-%y')), html.Td(lug_4_d), html.Td(denv_4_d), html.Td(farm_4_d)])
-row5de = html.Tr([html.Td(""), html.Td("Total"), html.Td(dosis_tot_a), html.Td(" ")])
-
-table_bodyDOSISe = [html.Tbody([row1de, row2de, row3de, row4de,row5de])]
-
-#---------------------------------------------------------------------GRAFICA PIE DOSIS ENVASADAS
-figvac00 = px.pie(dosis_a, values='Dosis promedio a envasar', names='Farmacéutica',
-             color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
-
-figvac00.update_layout(paper_bgcolor='rgba(0,0,0,0)',
-                  plot_bgcolor='rgba(0,0,0,0)',
-                  uniformtext_minsize=16,
-                  uniformtext_mode='hide',
-                  autosize=False,
-                  width= 350,
-                  height=350,
-                  title_font_size = 16,
-                  font_color="gray",
-                  title_font_color="firebrick",
-                  margin = dict(autoexpand= True,
-                      t=0.1, l=0, r=0, b=0.1)   
-                  )
 # A P P
 
 #########################################################
@@ -365,101 +301,19 @@ body = html.Div([
                     width={"size":1, "offset":2}
             )
         ]),
-     dbc.Row(
+       dbc.Row(
            [
                dbc.Col(html.H6(["Hasta el 9 de abril, nuestro país ha recibido o envasado  ", 
                                 str(f"{tot_vac:,d} dosis de vacunas contra COVID-19 listas para aplicarse "),
                                ],style={'textAlign': 'left'}),
                        width={'size': 5,  "offset":1 },
                       )],justify="start"),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    
-     dbc.Row([
-        dbc.Col(html.H3('Dosis envasadas',
-                        className='card-title',style={'textAlign': 'start'} ),
-                style={"color": "#91210C", },
-                width={ "offset":1 },),
-
-                
-                
-    ]),
-     dbc.Row(
-        [
-            dbc.Col(dbc.Table(table_headerDOSIS + table_bodyDOSIS, 
-                              bordered=False, 
-                              dark=False,
-                              hover=True,
-                              #responsive=True,
-                              striped=True,
-                              #size="sm",
-                              #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
-                              style={
-            'margin-top': '9px',
-            'margin-left': '130px',
-            'width': '509px',
-            'height': '46px',
-             "font-size": "large"                      
-            #'backgroundColor': 'rgba(0,0,0,0)',
-            }
-                                     )),
-            dbc.Col(dcc.Graph(figure=figvac00),
-                    width={"size":1, "offset":2}
-            )
-        ]),
-      
     
     html.Br(),
     html.Br(),
     html.Br(),
     html.Br(),
     html.Br(),
-    
-     html.Br(),
-    html.Br(),
-    html.Br(),
-    
-     dbc.Row([
-        dbc.Col(html.H3('Dosis a envasar',
-                        className='card-title',style={'textAlign': 'start'} ),
-                style={"color": "#91210C", },
-                width={ "offset":1 },),
-
-                
-                
-    ]),
-     dbc.Row(
-        [
-            dbc.Col(dbc.Table(table_headerDOSISe + table_bodyDOSISe, 
-                              bordered=False, 
-                              dark=False,
-                              hover=True,
-                              #responsive=True,
-                              striped=True,
-                              #size="sm",
-                              #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
-                              style={
-            'margin-top': '9px',
-            'margin-left': '130px',
-            'width': '509px',
-            'height': '46px',
-             "font-size": "large"                      
-            #'backgroundColor': 'rgba(0,0,0,0)',
-            }
-                                     )),
-            dbc.Col(dcc.Graph(figure=figvac00),
-                    width={"size":1, "offset":2}
-            )
-        ]),
-      
-    
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    
     
 
          
@@ -472,30 +326,8 @@ body = html.Div([
     ]),
 
        # Grafica     
-       dbc.Row([dbc.Col(dcc.Graph(figure=figvac), #config= "autosize"), 
-                              width={'size': 6,  "offset":1 }   )
-               ]),#,justify="center"),
-
-  
-    
-    
-    
-    #html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
-     dbc.Row([
-        dbc.Col(html.H3('Arribos Recientes',
-                        className='card-title',style={'textAlign': 'start'} ),
-                style={"color": "#91210C", },
-                width={ "offset":1 },),
-
-                
-                
-    ]),
-
-     
-
-    dbc.Row(
-        [
-            dbc.Col(dbc.Table(table_header69 + table_body69, 
+       dbc.Row([
+           dbc.Col(dbc.Table(table_headerciti + table_bodyciti, 
                               bordered=False, 
                               dark=False,
                               hover=True,
@@ -510,22 +342,58 @@ body = html.Div([
             'height': '46px',
              "font-size": "large"                      
             #'backgroundColor': 'rgba(0,0,0,0)',
-            }
-                                     ))
-        ],justify="start"),
-      dbc.Row(
-           [
-               dbc.Col(html.H6(["Entre el 1 y el 9 de abril, nuestro país recibió  ", 
-                                str(f"{tot_sem:,d} dosis, listas para aplicarse "),
-                               ],style={'textAlign': 'left'}),
-                       width={'size': 5,  "offset":1 },
-                      )],justify="start"),
+            })),
+           
+           
+           dbc.Col(dcc.Graph(figure=figvac), #config= "autosize"), 
+                              width={'size': 6,  "offset":1 }   )
+               ]),#,justify="center"),
+
+    
+    
+    
+#    #html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
+#     dbc.Row([
+#        dbc.Col(html.H3('Arribos Recientes',
+#                        className='card-title',style={'textAlign': 'start'} ),
+#                style={"color": "#91210C", },
+#                width={ "offset":1 },),
+#
+#                
+#                
+#    ]),
+#
+#     
+#
+#    dbc.Row(
+#        [
+#            dbc.Col(dbc.Table(table_header69 + table_body69, 
+#                              bordered=False, 
+#                              dark=False,
+#                              hover=True,
+#                              #responsive=True,
+#                              striped=True,
+#                              #size="sm",
+#                              #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
+#                              style={
+#            'margin-top': '9px',
+#            'margin-left': '130px',
+#            'width': '509px',
+#            'height': '46px',
+#             "font-size": "large"                      
+#            #'backgroundColor': 'rgba(0,0,0,0)',
+#            }
+#                                     ))
+#        ],justify="start"),
+#    
+#      dbc.Row(
+#           [
+#               dbc.Col(html.H6(["Entre el 1 y el 9 de abril, nuestro país recibió  ", 
+#                                str(f"{tot_sem:,d} dosis, listas para aplicarse "),
+#                               ],style={'textAlign': 'left'}),
+#                       width={'size': 5,  "offset":1 },
+#                      )],justify="start"),
     html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-     html.Br(),
     html.Br(),
     html.Br(),
     html.Br(),
