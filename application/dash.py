@@ -26,6 +26,7 @@ today = date.today()
 d2 = today.strftime("Fecha de actualización : %d-%m-%Y")
 
 
+
 ###############################
 # DATABASES
 ############################### AHre archivos
@@ -50,6 +51,13 @@ vacunas['Fecha'] = pd.to_datetime(vacunas['Fecha'], format=format)
 #vacunas.info()
 
 
+
+
+###############################
+# TRATAMIENTO
+############################### 
+
+
 #--------------------------------------------------------------------------------Dias
 vvacunas = vacunas.groupby(by=["Fecha","Farmacéutica"])["Cantidad"].sum()
 other_b = pd.DataFrame(vvacunas)
@@ -64,56 +72,70 @@ filtrado = vuelve_a_abrir.sort_values('Fecha',ascending=False).head(5)
 #Suma semana
 tot_sem = filtrado.Cantidad.sum()
 #filtrado.Fecha = today.strftime("%d-%m-%Y")
+
 #Identificadores dias
 #dia_1 = filtrado.iloc[4]['dia']
 #dia_2 = filtrado.iloc[3]['dia']
 #dia_3 = filtrado.iloc[2]['dia']
 #dia_4 = filtrado.iloc[1]['dia']
 #dia_5 = filtrado.iloc[0]['dia']
+
 ##Identificadores Fechas
 Fecha_1 = filtrado.iloc[4]['Fecha']
 Fecha_2 = filtrado.iloc[3]['Fecha']
 Fecha_3 = filtrado.iloc[2]['Fecha']
 Fecha_4 = filtrado.iloc[1]['Fecha']
 Fecha_5 = filtrado.iloc[0]['Fecha']
+
 #Identificadores Cantidad
 cantidad_1 = filtrado.iloc[4]['Cantidad']
 cantidad_2 = filtrado.iloc[3]['Cantidad']
 cantidad_3 = filtrado.iloc[2]['Cantidad']
 cantidad_4 = filtrado.iloc[1]['Cantidad']
 cantidad_5 = filtrado.iloc[0]['Cantidad']
+
 #Identificadores Farmaceutica s
 farmaceutica_1 = filtrado.iloc[4]['Farmacéutica']
 farmaceutica_2 = filtrado.iloc[3]['Farmacéutica']
 farmaceutica_3 = filtrado.iloc[2]['Farmacéutica']
 farmaceutica_4 = filtrado.iloc[1]['Farmacéutica']
 farmaceutica_5 = filtrado.iloc[0]['Farmacéutica']
-#-------------------------------------------------Tabla dias
-table_header69 = [
-    html.Thead(html.Tr(" "))
-]
-row00 = html.Tr([html.Td(Fecha_1.strftime('%d-%B-%y')), html.Td(Fecha_2.strftime('%d-%B-%y')), 
-                 html.Td(Fecha_3.strftime('%d-%B-%y')), html.Td(Fecha_4.strftime('%d-%B-%y')), 
-                 html.Td(Fecha_5.strftime('%d-%B-%y')),html.Td("Total")])
 
-row01 = html.Tr([html.Td([str(f"{cantidad_1:,d}")]), html.Td([str(f"{cantidad_2:,d}")]), 
-                 html.Td([str(f"{cantidad_3:,d}")]), html.Td([str(f"{cantidad_4:,d}")]), 
-                 html.Td([str(f"{cantidad_5:,d}")]), html.Td([str(f"{tot_sem:,d}")])])
-row02 = html.Tr([html.Td(farmaceutica_1), html.Td(farmaceutica_2), html.Td(farmaceutica_3), 
-                html.Td(farmaceutica_4), html.Td(farmaceutica_5)])
 
-table_body69 = [html.Tbody([row00, row01, row02,
-                         ])]
+########################################################################### Para la APP 
+##-------------------------------------------------Tabla dias
+#table_header69 = [
+#    html.Thead(html.Tr(" "))
+#]
+#row00 = html.Tr([html.Td(Fecha_1.strftime('%d-%B-%y')), html.Td(Fecha_2.strftime('%d-%B-%y')), 
+#                 html.Td(Fecha_3.strftime('%d-%B-%y')), html.Td(Fecha_4.strftime('%d-%B-%y')), 
+#                 html.Td(Fecha_5.strftime('%d-%B-%y')),html.Td("Total")])
 
-#table = dbc.Table(table_header69 + table_body69, bordered=True)
-#-------------------------------------------------------------
+#row01 = html.Tr([html.Td([str(f"{cantidad_1:,d}")]), html.Td([str(f"{cantidad_2:,d}")]), 
+#                 html.Td([str(f"{cantidad_3:,d}")]), html.Td([str(f"{cantidad_4:,d}")]), 
+#                 html.Td([str(f"{cantidad_5:,d}")]), html.Td([str(f"{tot_sem:,d}")])])
+#row02 = html.Tr([html.Td(farmaceutica_1), html.Td(farmaceutica_2), html.Td(farmaceutica_3), 
+#                html.Td(farmaceutica_4), html.Td(farmaceutica_5)])
+
+#table_body69 = [html.Tbody([row00, row01, row02,
+#                         ])]
+
+##table = dbc.Table(table_header69 + table_body69, bordered=True)
+
+
+
+###################################################################### 
+#-------------------------------------Tratamiento de tabla Farmacéutica TABLA1
+
 tabla2 = vacunas.groupby(by=["Farmacéutica"])["Cantidad"].sum()
 patabal2 = pd.DataFrame(tabla2)
 patabal2.to_csv('0000procesodi.csv')
 patabla1 = pd.read_csv('0000procesodi.csv')
 patabla2 = patabla1.sort_values(by='Cantidad', ascending=False)
+
 #Total Cantidad
 tot_vac = patabla2.Cantidad.sum()
+
 #Identificadores Farmaceuticas
 farm_tot1 = patabla2.iloc[0]['Farmacéutica']
 farm_tot2 = patabla2.iloc[1]['Farmacéutica']
@@ -129,20 +151,53 @@ cant_tot3 = patabla2.iloc[2]['Cantidad']
 cant_tot4 = patabla2.iloc[3]['Cantidad']
 cant_tot5 = patabla2.iloc[4]['Cantidad']
 #cant_tot6 = patabla2.iloc[5]['Cantidad']
-# tabla2
 
-table_header = [
-    html.Thead(html.Tr([html.Th(), html.Th()]))] 
-row1 = html.Tr([html.Td(farm_tot1), html.Td([str(f"{cant_tot1:,d}")])])
-row2 = html.Tr([html.Td(farm_tot2), html.Td([str(f"{cant_tot2:,d}")])])
-row3 = html.Tr([html.Td(farm_tot3), html.Td([str(f"{cant_tot3:,d}")])])
-row4 = html.Tr([html.Td(farm_tot4), html.Td([str(f"{cant_tot4:,d}")])])
-row5 = html.Tr([html.Td(farm_tot5), html.Td([str(f"{cant_tot5:,d}")])])
-#row6 = html.Tr([html.Td(farm_tot6), html.Td([str(f"{cant_tot6:,d}")])])
-row7 = html.Tr([html.Td("Total"), html.Td([str(f"{tot_vac:,d}")])])
-table_body = [html.Tbody([row1, row2, row3, row4, row5,# row6,
-                          row7])]
-#---------------------------------------------------------------------GRAFICA
+
+
+############################################### Tratamiento TABLA meses 
+vac_meses=vacunas
+
+vac_meses['Year'] = vac_meses['Fecha'].dt.year
+#vac_meses=vac_meses[vac_meses.Year!='nan']
+vac_meses.dropna(inplace=True)
+vac_meses['Year']=vac_meses['Year'].astype(int)
+vac_meses['Year']=vac_meses['Year'].astype(str)
+
+vac_meses['Mes'] = vac_meses['Fecha'].dt.month
+vac_meses['Mes'].replace(1.0,'Enero',inplace=True)
+vac_meses['Mes'].replace(2.0,'Febrero',inplace=True)
+vac_meses['Mes'].replace(3.0,'Marzo',inplace=True)
+vac_meses['Mes'].replace(4.0,'Abril',inplace=True)
+vac_meses['Mes'].replace(5.0,'Mayo',inplace=True)
+vac_meses['Mes'].replace(6.0,'Junio',inplace=True)
+vac_meses['Mes'].replace(7.0,'Julio',inplace=True)
+vac_meses['Mes'].replace(8.0,'Agosto',inplace=True)
+vac_meses['Mes'].replace(9.0,'Septiembre',inplace=True)
+vac_meses['Mes'].replace(10.0,'Octubre',inplace=True)
+vac_meses['Mes'].replace(12.0,'Noviembre',inplace=True)
+vac_meses['Mes'].replace(13.0,'Diciembre',inplace=True)
+
+vac_meses['Mes']=vac_meses['Mes'].astype(str)
+
+vac_meses['Mes_y']=vac_meses['Mes']+vac_meses['Year']
+vac_meses_g=vac_meses.groupby('Mes_y')['Cantidad'].sum()
+pd.DataFrame(vac_meses_g).to_csv('0000proceso.csv')
+vac_meses_g=pd.read_csv('0000proceso.csv')
+
+#Identificadores Cantidad
+sumdic_v = vac_meses_g.iloc[0]['Cantidad']
+sumene_v = vac_meses_g.iloc[1]['Cantidad']
+sumfeb_v = vac_meses_g.iloc[2]['Cantidad']
+summar_v = vac_meses_g.iloc[3]['Cantidad']
+sumabr_v = vac_meses_g.iloc[4]['Cantidad']
+
+
+
+
+
+########################################################################## Para la APP 
+#-------------------------------------GRAFICA1 DE FARMACEUTICA para TABLA1
+
 figvac0 = px.pie(patabla2, values='Cantidad', names='Farmacéutica',
              color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
 
@@ -150,35 +205,19 @@ figvac0.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   plot_bgcolor='rgba(0,0,0,0)',
                   uniformtext_minsize=16,
                   uniformtext_mode='hide',
-                  autosize=False,
-                  width= 650,
-                  height=650,
+                  autosize=True,
+                  #width= 650,
+                  #height=650,
                   title_font_size = 16,
                   font_color="gray",
                   title_font_color="firebrick",
                   margin = dict(autoexpand= True,
-                      t=0.1, l=0, r=0, b=0.1)   
-                  )
-######################################################################
-figvac = px.pie(vacunas, values='Cantidad', names='Arribo',
-             color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
-
-figvac.update_layout(paper_bgcolor='rgba(0,0,0,0)',
-                  plot_bgcolor='rgba(0,0,0,0)',
-                  uniformtext_minsize=16,
-                  uniformtext_mode='hide',
-                  autosize=False,
-                  width= 650,
-                  height=650,
-                  title_font_size = 16,
-                  font_color="gray",
-                  title_font_color="firebrick",
-                  margin = dict(autoexpand= True,
-                      t=0.1, l=0, r=0, b=0.1)   
+                      t=0, l=0, r=0, b=0)   
                   )
 
 
-###################################################################### TABLA CIUDADES
+###################################################################### 
+#-------------------------------------Tratamiento de tabla CIUDADES TABLA2
 
 vacunas_citys=vacunas.groupby('Arribo')['Cantidad'].sum()
 pd.DataFrame(vacunas_citys).to_csv('0000proceso.csv')
@@ -200,7 +239,62 @@ city2_v=vacunas_citys.iloc[1]['Cantidad']
 city3_v=vacunas_citys.iloc[2]['Cantidad']
 city4_v=vacunas_citys.iloc[3]['Cantidad']
 
-# Tabla
+
+
+########################################################################## Para la APP 
+#-------------------------------------GRAFICA DE CIUDADES para TABLA2
+
+figvac = px.pie(vacunas, values='Cantidad', names='Arribo',
+             color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
+
+figvac.update_layout(paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  uniformtext_minsize=16,
+                  uniformtext_mode='hide',
+                  autosize=True,
+                  #width= 650,
+                  #height=650,
+                  title_font_size = 16,
+                  font_color="gray",
+                  title_font_color="firebrick",
+                  margin = dict(autoexpand= True,
+                      t=0, l=0, r=0, b=0)   
+                  )
+
+
+###################### suma de meses para tabla 3
+
+
+
+
+
+#########################################################
+# A P P
+#########################################################
+
+
+######################################################### Para la APP 
+#-------------------------------------Tratamiento de tabla farmaceutica TABLA1
+
+table_header = [
+    html.Thead(html.Tr([html.Th(), html.Th()]))] 
+
+row1 = html.Tr([html.Td(farm_tot1), html.Td([str(f"{cant_tot1:,d}")])])
+row2 = html.Tr([html.Td(farm_tot2), html.Td([str(f"{cant_tot2:,d}")])])
+row3 = html.Tr([html.Td(farm_tot3), html.Td([str(f"{cant_tot3:,d}")])])
+row4 = html.Tr([html.Td(farm_tot4), html.Td([str(f"{cant_tot4:,d}")])])
+row5 = html.Tr([html.Td(farm_tot5), html.Td([str(f"{cant_tot5:,d}")])])
+#row6 = html.Tr([html.Td(farm_tot6), html.Td([str(f"{cant_tot6:,d}")])])
+row7 = html.Tr([html.Td("Total"), html.Td([str(f"{tot_vac:,d}")])])
+
+
+table_body = [html.Tbody([row1, row2, row3, row4, row5,# row6,
+                          row7])]
+
+
+######################################################### Para la APP 
+#-------------------------------------TABLA CIUDADES TABLA2
+
 table_headerciti = [
     html.Thead(html.Tr([html.Th(), html.Th()]))] 
 row1 = html.Tr([html.Td(city1), html.Td([str(f"{city1_v:,d}")])])
@@ -210,18 +304,26 @@ row4 = html.Tr([html.Td(city4), html.Td([str(f"{city4_v:,d}")])])
 row7 = html.Tr([html.Td("Total"), html.Td([str(f"{tot_vac_citys:,d}")])])
 table_bodyciti = [html.Tbody([row1, row2, row3, row4, 
                           row7])]
-#---------------------------------
 
 
-#########################################################
+#-------------------------------------TABLAS MESES TABLA2
+table_sumameses = [
+    html.Thead(html.Tr([html.Th(), html.Th(), html.Th(), html.Th(), html.Th()]))] 
+row1 = html.Tr([html.Td("Diciembre"),html.Td("Enero"), 
+                html.Td("Febrero"),  html.Td("Marzo"), html.Td("Abril")])
 
-# A P P
+row2 = html.Tr([html.Td([str(f"{sumdic_v:,d}")]), html.Td([str(f"{sumene_v:,d}")]),
+                html.Td([str(f"{sumfeb_v:,d}")]), html.Td([str(f"{summar_v:,d}")]),
+                html.Td([str(f"{sumabr_v:,d}")])
+               ])   
+table_bodymeses = [html.Tbody([row1, row2])]
 
-#########################################################
 
 
 
 
+
+######################################################### Codigo del dashboard
 
 server = flask.Flask(__name__)
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes. LUX], server=server)
@@ -260,7 +362,41 @@ body = html.Div([
                 width={ "offset":2 },
                  ),
     ]),
-   
+    
+    dbc.Row(
+           [dbc.Col(html.H1([dbc.Badge(f"{int(tot_vac):,}", color="info", className="mr-1")]),           #Fecha de actualización
+               width={'size' : "auto",
+                      'offset' : 12}), 
+           ],justify="center"),
+
+    
+# ###################### SECCION . MESES
+
+     dbc.Row(
+           [
+               dbc.Col(html.H5("Diciembre")),
+                      #width={ "offset":1}),
+               dbc.Col(html.H5("Enero")),
+                      #width={"offset":1}),
+               dbc.Col(html.H5("Febrero")),
+                      #width={"offset":1}),
+               dbc.Col(html.H5("Marzo")),
+                      #width={"offset":1}),
+               dbc.Col(html.H5("Abril")),
+           ], justify= "end"),
+    
+#Cintillo 1
+    dbc.Row(
+           [
+               dbc.Col(html.H1(str(f'{sumdic_v:,d}'))),
+               dbc.Col(html.H1(str(f'{sumene_v:,d}'))),
+               dbc.Col(html.H1(str(f'{sumfeb_v:,d}'))),
+               dbc.Col(html.H1(str(f'{summar_v:,d}'))),
+               dbc.Col(html.H1(str(f'{sumabr_v:,d}'))),
+            ],justify= "start"),
+    
+    
+    
         
     html.Br(),
     html.Br(),
@@ -268,16 +404,20 @@ body = html.Div([
     html.Br(),
     html.Br(),
     html.Br(),
+    
+    
+# ###################### SECCION 1. FARMACEUTICAS
+        
     dbc.Row([
         dbc.Col(html.H3('¿De qué farmacéutica provienen?',
                         className='card-title',style={'textAlign': 'start'} ),
                 style={"color": "#91210C", },
                 width={ "offset":1 },),
 
-                
-                
-    ]),
-    #html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
+            ]),
+    
+    
+####################### TABLA 1
     dbc.Row(
         [
             dbc.Col(dbc.Table(table_header + table_body, 
@@ -291,16 +431,21 @@ body = html.Div([
                               style={
             'margin-top': '9px',
             'margin-left': '130px',
+            'margin-right': '0px',
+
             'width': '509px',
             'height': '46px',
              "font-size": "large"                      
-            #'backgroundColor': 'rgba(0,0,0,0)',
             }
                                      )),
+
+            
+####################### GRAFICA 1
             dbc.Col(dcc.Graph(figure=figvac0),
-                    width={"size":1, "offset":2}
-            )
+                    width={'size' : "auto", "offset":0}
+            ),
         ]),
+    
        dbc.Row(
            [
                dbc.Col(html.H6(["Hasta el 9 de abril, nuestro país ha recibido o envasado  ", 
@@ -309,14 +454,15 @@ body = html.Div([
                        width={'size': 5,  "offset":1 },
                       )],justify="start"),
     
+        
     html.Br(),
     html.Br(),
     html.Br(),
     html.Br(),
     html.Br(),
     
-
-         
+# ###################### SECCION 2. CIUDADES
+        
     dbc.Row([
           dbc.Col(html.H3('¿A qué ciudad arriban las vacunas?',
                         className='card-title',style={'textAlign': 'left'} ),
@@ -325,7 +471,7 @@ body = html.Div([
                  ),
     ]),
 
-       # Grafica     
+####################### TABLA 2
        dbc.Row([
            dbc.Col(dbc.Table(table_headerciti + table_bodyciti, 
                               bordered=False, 
@@ -345,9 +491,15 @@ body = html.Div([
             })),
            
            
+####################### GRAFICA 2
            dbc.Col(dcc.Graph(figure=figvac), #config= "autosize"), 
-                              width={'size': 6,  "offset":1 }   )
+                    width={'size' : "auto", "offset":0}),
                ]),#,justify="center"),
+
+    
+# ###################### SECCION 3. MAPA
+    
+    
 
     
     
@@ -422,8 +574,9 @@ body = html.Div([
    
     
      dbc.Row([                          #https://github.com/fdealbam/Vacunas/blob/main/application/static/mapa.JPG
-               dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/application/static/mapa.JPG?raw=true"),
-                      lg={'size': 6,  "offset": 3, }),
+               dbc.Col(dbc.CardImg(src=" https://github.com/fdealbam/Vacunas/blob/main/imagenmundi.jpg?raw=true"),
+                       #https://github.com/fdealbam/Vacunas/blob/main/imagenmundi.jpg
+                      lg={'size': "autosize",  "offset": 1, }),
             
            ]),
     
@@ -441,8 +594,9 @@ body = html.Div([
     html.Br(),
     html.Br(),
     
-])
+    ])
     
+
     
 app.layout = html.Div([body])
 
