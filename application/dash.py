@@ -1,4 +1,5 @@
-import dash
+
+# import dash
 import matplotlib.pyplot as plt 
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -102,27 +103,6 @@ farmaceutica_4 = filtrado.iloc[1]['Farmacéutica']
 farmaceutica_5 = filtrado.iloc[0]['Farmacéutica']
 
 
-########################################################################### Para la APP 
-##-------------------------------------------------Tabla dias
-#table_header69 = [
-#    html.Thead(html.Tr(" "))
-#]
-#row00 = html.Tr([html.Td(Fecha_1.strftime('%d-%B-%y')), html.Td(Fecha_2.strftime('%d-%B-%y')), 
-#                 html.Td(Fecha_3.strftime('%d-%B-%y')), html.Td(Fecha_4.strftime('%d-%B-%y')), 
-#                 html.Td(Fecha_5.strftime('%d-%B-%y')),html.Td("Total")])
-
-#row01 = html.Tr([html.Td([str(f"{cantidad_1:,d}")]), html.Td([str(f"{cantidad_2:,d}")]), 
-#                 html.Td([str(f"{cantidad_3:,d}")]), html.Td([str(f"{cantidad_4:,d}")]), 
-#                 html.Td([str(f"{cantidad_5:,d}")]), html.Td([str(f"{tot_sem:,d}")])])
-#row02 = html.Tr([html.Td(farmaceutica_1), html.Td(farmaceutica_2), html.Td(farmaceutica_3), 
-#                html.Td(farmaceutica_4), html.Td(farmaceutica_5)])
-
-#table_body69 = [html.Tbody([row00, row01, row02,
-#                         ])]
-
-##table = dbc.Table(table_header69 + table_body69, bordered=True)
-
-
 
 ###################################################################### 
 #-------------------------------------Tratamiento de tabla Farmacéutica TABLA1
@@ -132,6 +112,7 @@ patabal2 = pd.DataFrame(tabla2)
 patabal2.to_csv('0000procesodi.csv')
 patabla1 = pd.read_csv('0000procesodi.csv')
 patabla2 = patabla1.sort_values(by='Cantidad', ascending=False)
+
 
 #Total Cantidad
 tot_vac = patabla2.Cantidad.sum()
@@ -214,8 +195,8 @@ figvac0.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   margin = dict(autoexpand= True,
                       t=0, l=0, r=0, b=0)   
                   )
-
-
+figvac0.update_traces(pull=[0.05, 0.05, 0.05, 0.05, 0.1],
+                    rotation=90)
 ###################################################################### 
 #-------------------------------------Tratamiento de tabla CIUDADES TABLA2
 
@@ -244,23 +225,24 @@ city4_v=vacunas_citys.iloc[3]['Cantidad']
 ########################################################################## Para la APP 
 #-------------------------------------GRAFICA DE CIUDADES para TABLA2
 
-figvac = px.pie(vacunas, values='Cantidad', names='Arribo',
+figvac = px.pie(vacunas_citys, values='Cantidad', names='Arribo',
              color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
 
 figvac.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   plot_bgcolor='rgba(0,0,0,0)',
-                  uniformtext_minsize=16,
+                  uniformtext_minsize=22,
                   uniformtext_mode='hide',
                   autosize=True,
                   #width= 650,
                   #height=650,
-                  title_font_size = 16,
+                  title_font_size = 22,
                   font_color="gray",
                   title_font_color="firebrick",
                   margin = dict(autoexpand= True,
                       t=0, l=0, r=0, b=0)   
                   )
-
+figvac.update_traces(pull=[0.05, 0.05, 0.05, 0.05, 0.1],
+                    rotation=300)
 
 ###################### suma de meses para tabla 3
 
@@ -354,8 +336,8 @@ body = html.Div([
     html.Br(),
 
     dbc.Row([
-        dbc.Col(html.H1('¿Cuántas vacunas han llegado a México?',
-                        className='card-title',style={'textAlign': 'center'} ),
+        dbc.Col(html.H1(['¿Cuántas vacunas han llegado a México?      ', 
+                         dbc.Badge(f"{int(tot_vac):,}", color="danger", className="mr-1")]),
                 style={"color": "red", 'text-transform': "uppercase", 
                        "font-weight": 'bolder', "font-stretch": "condensed",
                       "font-size": "x-large" },
@@ -363,36 +345,39 @@ body = html.Div([
                  ),
     ]),
     
-    dbc.Row(
-           [dbc.Col(html.H1([dbc.Badge(f"{int(tot_vac):,}", color="info", className="mr-1")]),           #Fecha de actualización
-               width={'size' : "auto",
-                      'offset' : 12}), 
-           ],justify="center"),
-
+    html.Br(),
+    html.Br(),
     
 # ###################### SECCION . MESES
 
      dbc.Row(
            [
-               dbc.Col(html.H5("Diciembre")),
-                      #width={ "offset":1}),
-               dbc.Col(html.H5("Enero")),
-                      #width={"offset":1}),
-               dbc.Col(html.H5("Febrero")),
-                      #width={"offset":1}),
-               dbc.Col(html.H5("Marzo")),
-                      #width={"offset":1}),
-               dbc.Col(html.H5("Abril")),
-           ], justify= "end"),
+               dbc.Col(html.H5("Diciembre"),
+                      width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H5("Enero"),
+                      width={'size' : "auto","offset":1}),
+               dbc.Col(html.H5("Febrero"),
+                      width={'size' : "auto","offset":1}),
+               dbc.Col(html.H5("Marzo"),
+                      width={'size' : "auto","offset":1}),
+               dbc.Col(html.H5("Abril"),
+                      width={'size' : "auto", "offset":1}),
+
+           ], justify="around"),
     
 #Cintillo 1
     dbc.Row(
            [
-               dbc.Col(html.H1(str(f'{sumdic_v:,d}'))),
-               dbc.Col(html.H1(str(f'{sumene_v:,d}'))),
-               dbc.Col(html.H1(str(f'{sumfeb_v:,d}'))),
-               dbc.Col(html.H1(str(f'{summar_v:,d}'))),
-               dbc.Col(html.H1(str(f'{sumabr_v:,d}'))),
+               dbc.Col(html.H1(str(f'{sumdic_v:,d}')),
+                       width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H1(str(f'{sumene_v:,d}')),
+                       width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H1(str(f'{sumfeb_v:,d}')),
+                       width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H1(str(f'{summar_v:,d}')),
+                      width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H1(str(f'{sumabr_v:,d}')),
+                      width={'size' : "auto", "offset":1}),
             ],justify= "start"),
     
     
@@ -564,7 +549,7 @@ body = html.Div([
            [
            dbc.Col(html.H5(['Hemos recibido vacunas o sustancia activa desde seis paises: Bélica, Argentina, China, India, Rusia y Estados Unidos'
                                ],style={'textAlign': 'left'}),
-                       width={'size': 6,  "offset":1 },
+                       width={'size': 10,  "offset":1 },
                       )],justify="align"),
    # # dbc.Row([dbc.Col(dcc.Graph(figure=aa), 
    #                   style={'width': '100%', 'display': 'inline-block',
@@ -605,5 +590,3 @@ from settings import config
 
 if __name__ == "__main__":
     app.run_server()
-
-    
