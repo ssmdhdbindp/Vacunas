@@ -1,4 +1,3 @@
-
 import dash
 import matplotlib.pyplot as plt 
 import dash_bootstrap_components as dbc
@@ -37,15 +36,17 @@ vacunas.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
                                    errors='ignore')
 
 
-dosis = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Dosis%20envasadas.csv", encoding= "Latin-1")
-dosis.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
-                                   errors='ignore')
+#dosis = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Dosis%20envasadas.csv", encoding= "Latin-1")
+#dosis.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
+#                                   errors='ignore')
 
-dosis_a = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Dosis%20promedio%20a%20envasar.csv", encoding= "Latin-1")
-dosis_a.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
-                                   errors='ignore')
+#dosis_a = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Dosis%20promedio%20a%20envasar.csv", encoding= "Latin-1")
+#dosis_a.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
+#                                   errors='ignore')
 # Dtypes 
 vacunas['Cantidad']=vacunas['Cantidad'].astype(int)
+#Total Cantidad
+tot_vac = vacunas.Cantidad.sum()
 # convert the 'Date' column to datetime format
 format = '%d/%m/%Y'
 vacunas['Fecha'] = pd.to_datetime(vacunas['Fecha'], format=format)
@@ -114,8 +115,7 @@ patabla1 = pd.read_csv('0000procesodi.csv')
 patabla2 = patabla1.sort_values(by='Cantidad', ascending=False)
 
 
-#Total Cantidad
-tot_vac = patabla2.Cantidad.sum()
+
 
 #Identificadores Farmaceuticas
 farm_tot1 = patabla2.iloc[0]['Farmacéutica']
@@ -180,7 +180,7 @@ sumabr_v = vac_meses_g.iloc[4]['Cantidad']
 #-------------------------------------GRAFICA1 DE FARMACEUTICA para TABLA1
 
 figvac0 = px.pie(patabla2, values='Cantidad', names='Farmacéutica',
-             color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
+                color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
 
 figvac0.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   plot_bgcolor='rgba(0,0,0,0)',
@@ -192,9 +192,9 @@ figvac0.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title_font_size = 16,
                   font_color="gray",
                   title_font_color="firebrick",
-                  margin = dict(autoexpand= True,
-                      t=0, l=0, r=0, b=0)   
-                  )
+                  margin = dict(autoexpand= True)),
+                      #t=0, l=0, r=0, b=0)   
+                  
 figvac0.update_traces(pull=[0.05, 0.05, 0.05, 0.05, 0.1],
                     rotation=90)
 ###################################################################### 
@@ -238,9 +238,9 @@ figvac.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title_font_size = 22,
                   font_color="gray",
                   title_font_color="firebrick",
-                  margin = dict(autoexpand= True,
-                      t=0, l=0, r=0, b=0)   
-                  )
+                  margin = dict(autoexpand= True)),
+                      #t=0, l=0, r=0, b=0)   
+                  #)
 figvac.update_traces(pull=[0.05, 0.05, 0.05, 0.05, 0.1],
                     rotation=300)
 
@@ -291,13 +291,10 @@ table_bodyciti = [html.Tbody([row1, row2, row3, row4,
 #-------------------------------------TABLAS MESES TABLA2
 table_sumameses = [
     html.Thead(html.Tr([html.Th(), html.Th(), html.Th(), html.Th(), html.Th()]))] 
-row1 = html.Tr([html.Td("Diciembre"),html.Td("Enero"), 
-                html.Td("Febrero"),  html.Td("Marzo"), html.Td("Abril")])
+row1 = html.Tr([html.Td("Diciembre"),html.Td("Enero"), html.Td("Febrero"),  html.Td("Marzo"), html.Td("Abril")])
 
-row2 = html.Tr([html.Td([str(f"{sumdic_v:,d}")]), html.Td([str(f"{sumene_v:,d}")]),
-                html.Td([str(f"{sumfeb_v:,d}")]), html.Td([str(f"{summar_v:,d}")]),
-                html.Td([str(f"{sumabr_v:,d}")])
-               ])   
+row2 = html.Tr([html.Td([str(f"{sumdic_v:,d}")]), html.Td([str(f"{sumene_v:,d}")]), html.Td([str(f"{sumfeb_v:,d}")]), html.Td([str(f"{summar_v:,d}")]), html.Td([str(f"{sumabr_v:,d}")])])
+
 table_bodymeses = [html.Tbody([row1, row2])]
 
 
@@ -315,35 +312,33 @@ body = html.Div([
     html.Br(),
     
         dbc.Row(
-            [
-           
-           dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
+            [dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
                         width={'size': 1,  "offset": 1 }),
-            dbc.Col(html.H5("Secretaría de Relaciones Exteriores, "
+             dbc.Col(html.H5("Secretaría de Relaciones Exteriores, "
                             "Subsecretaría para Asuntos Multilaterales y "
                             "Derechos Humanos"),
-                  width={'size': 6, 'offset' : 0}), 
+                        width={'size': 6, 'offset' : 0}), 
         ],justify="start"),
+    
     dbc.Row(
            [dbc.Col(html.H6(d2),           #Fecha de actualización
-               width={'size' : "auto",
-                      'offset' : 2}), 
-           ]),
+               width={'size' : "auto", 'offset' : 2})]),
   
     html.Br(),
     html.Br(),
     html.Br(),
     html.Br(),
 
-    dbc.Row([
-        dbc.Col(html.H1(['¿Cuántas vacunas han llegado a México?      ', 
+    dbc.Row(
+        [dbc.Col(html.H1(['¿Cuántas vacunas han llegado a México?', 
                          dbc.Badge(f"{int(tot_vac):,}", color="danger", className="mr-1")]),
                 style={"color": "red", 'text-transform': "uppercase", 
                        "font-weight": 'bolder', "font-stretch": "condensed",
                       "font-size": "x-large" },
-                width={ "offset":2 },
-                 ),
+                width={ "offset":2 }),
     ]),
+    
+        #dbc.Alert("", color="warning"),
     
     html.Br(),
     html.Br(),
@@ -351,34 +346,33 @@ body = html.Div([
 # ###################### SECCION . MESES
 
      dbc.Row(
-           [
-               dbc.Col(html.H5("Diciembre"),
-                      width={'size' : "auto", "offset":1}),
-               dbc.Col(html.H5("Enero"),
-                      width={'size' : "auto","offset":1}),
-               dbc.Col(html.H5("Febrero"),
-                      width={'size' : "auto","offset":1}),
-               dbc.Col(html.H5("Marzo"),
-                      width={'size' : "auto","offset":1}),
-               dbc.Col(html.H5("Abril"),
-                      width={'size' : "auto", "offset":1}),
+           [dbc.Col(html.H5("Diciembre")),
+                  # width={'size' : "auto", "offset":1}),
+            dbc.Col(html.H5("Enero")),
+                  # width={'size' : "auto","offset":1}),
+            dbc.Col(html.H5("Febrero")),
+                  # width={'size' : "auto","offset":1}),
+            dbc.Col(html.H5("Marzo")),
+                  # width={'size' : "auto","offset":1}),
+            dbc.Col(html.H5("Abril")),
+                  # width={'size' : "auto", "offset":1}),
 
            ], justify="around"),
     
 #Cintillo 1
     dbc.Row(
            [
-               dbc.Col(html.H1(str(f'{sumdic_v:,d}')),
-                       width={'size' : "auto", "offset":1}),
-               dbc.Col(html.H1(str(f'{sumene_v:,d}')),
-                       width={'size' : "auto", "offset":1}),
-               dbc.Col(html.H1(str(f'{sumfeb_v:,d}')),
-                       width={'size' : "auto", "offset":1}),
-               dbc.Col(html.H1(str(f'{summar_v:,d}')),
-                      width={'size' : "auto", "offset":1}),
-               dbc.Col(html.H1(str(f'{sumabr_v:,d}')),
-                      width={'size' : "auto", "offset":1}),
-            ],justify= "start"),
+               dbc.Col(html.H1(str(f'{sumdic_v:,d}'))),
+                    #   width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H1(str(f'{sumene_v:,d}'))),
+                     #  width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H1(str(f'{sumfeb_v:,d}'))),
+                      # width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H1(str(f'{summar_v:,d}'))),
+                      #width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H1(str(f'{sumabr_v:,d}'))),
+                      #width={'size' : "auto", "offset":1}),
+            ],justify= "around"),
     
     
     
@@ -393,19 +387,17 @@ body = html.Div([
     
 # ###################### SECCION 1. FARMACEUTICAS
         
-    dbc.Row([
-        dbc.Col(html.H3('¿De qué farmacéutica provienen?',
-                        className='card-title',style={'textAlign': 'start'} ),
-                style={"color": "#91210C", },
-                width={ "offset":1 },),
+    dbc.Row(
+        [dbc.Col(html.H3('¿De qué farmacéutica provienen?',className='card-title',
+                         style={'textAlign': 'start', "color": "#91210C",}),
+                 width={ "offset":1 }),
 
             ]),
     
     
 ####################### TABLA 1
     dbc.Row(
-        [
-            dbc.Col(dbc.Table(table_header + table_body, 
+        [dbc.Col(dbc.Table(table_header + table_body, 
                               bordered=False, 
                               dark=False,
                               hover=True,
@@ -417,23 +409,18 @@ body = html.Div([
             'margin-top': '9px',
             'margin-left': '130px',
             'margin-right': '0px',
-
             'width': '509px',
             'height': '46px',
-             "font-size": "large"                      
-            }
+            "font-size": "large" }
                                      )),
 
             
 ####################### GRAFICA 1
             dbc.Col(dcc.Graph(figure=figvac0),
-                    width={'size' : "auto", "offset":0}
-            ),
-        ]),
+                    width={'size' : "auto", "offset":0}), ]),
     
        dbc.Row(
-           [
-               dbc.Col(html.H6(["Hasta el 9 de abril, nuestro país ha recibido o envasado  ", 
+           [dbc.Col(html.H6(["Hasta el 9 de abril, nuestro país ha recibido o envasado  ", 
                                 str(f"{tot_vac:,d} dosis de vacunas contra COVID-19 listas para aplicarse "),
                                ],style={'textAlign': 'left'}),
                        width={'size': 5,  "offset":1 },
@@ -448,12 +435,10 @@ body = html.Div([
     
 # ###################### SECCION 2. CIUDADES
         
-    dbc.Row([
-          dbc.Col(html.H3('¿A qué ciudad arriban las vacunas?',
-                        className='card-title',style={'textAlign': 'left'} ),
-                style={"color": "#91210C", },
-                width={ "offset":1 },
-                 ),
+    dbc.Row(
+        [dbc.Col(html.H3('¿A qué ciudad arriban las vacunas?',
+                        className='card-title',style={'textAlign': 'left',"color": "#91210C"}),
+                 width={ "offset":1 }),
     ]),
 
 ####################### TABLA 2
@@ -539,10 +524,9 @@ body = html.Div([
     
     dbc.Row([
           dbc.Col(html.H2('Un portafolio diverso',
-                        className='card-title',style={'textAlign': 'left'} ),
-                style={"color": "#91210C", },
-                width={ "offset":1 },
-                 ),
+                        className='card-title',style={'textAlign': 'left',"color": "#91210C"}),
+               
+                width={ "offset":1 }),
     ]),
 
       dbc.Row(
@@ -579,9 +563,8 @@ body = html.Div([
     html.Br(),
     html.Br(),
     
-    ])
+])
     
-
     
 app.layout = html.Div([body])
 
