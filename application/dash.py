@@ -772,7 +772,7 @@ body = html.Div([
            [
                dbc.Col(html.H3(days_passed)),
                     #   width={'size' : "auto", "offset":1}),
-               dbc.Col(html.H3([vac_max_dia, " (", vac_max_valor, ")"])),
+               dbc.Col(html.H3([vac_max_dia.strftime('%d-%m-%Y'), " (", vac_max_valor, ")"])),
                      #  width={'size' : "auto", "offset":1}),
                dbc.Col(html.H3(lab1)),
                       # width={'size' : "auto", "offset":1}),
