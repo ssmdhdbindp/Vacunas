@@ -145,6 +145,7 @@ vac_meses['Year']=vac_meses['Year'].astype(int)
 vac_meses['Year']=vac_meses['Year'].astype(str)
 
 vac_meses['Mes'] = vac_meses['Fecha'].dt.month
+
 vac_meses['Mes'].replace(1.0,'Enero',inplace=True)
 vac_meses['Mes'].replace(2.0,'Febrero',inplace=True)
 vac_meses['Mes'].replace(3.0,'Marzo',inplace=True)
@@ -166,11 +167,11 @@ pd.DataFrame(vac_meses_g).to_csv('0000proceso.csv')
 vac_meses_g=pd.read_csv('0000proceso.csv')
 
 #Identificadores Cantidad
-sumdic_v = vac_meses_g.iloc[0]['Cantidad']
+sumdic_v = vac_meses_g.iloc[4]['Cantidad']
 sumene_v = vac_meses_g.iloc[1]['Cantidad']
 sumfeb_v = vac_meses_g.iloc[2]['Cantidad']
 summar_v = vac_meses_g.iloc[3]['Cantidad']
-sumabr_v = vac_meses_g.iloc[4]['Cantidad']
+sumabr_v = vac_meses_g.iloc[0]['Cantidad']
 
 
 
@@ -268,6 +269,7 @@ row4 = html.Tr([html.Td(farm_tot4), html.Td([str(f"{cant_tot4:,d}")])])
 row5 = html.Tr([html.Td(farm_tot5), html.Td([str(f"{cant_tot5:,d}")])])
 #row6 = html.Tr([html.Td(farm_tot6), html.Td([str(f"{cant_tot6:,d}")])])
 row7 = html.Tr([html.Td("Total"), html.Td([str(f"{tot_vac:,d}")])])
+                    
 
 
 table_body = [html.Tbody([row1, row2, row3, row4, row5,# row6,
@@ -284,9 +286,11 @@ row2 = html.Tr([html.Td(city2), html.Td([str(f"{city2_v:,d}")])])
 row3 = html.Tr([html.Td(city3), html.Td([str(f"{city3_v:,d}")])])
 row4 = html.Tr([html.Td(city4), html.Td([str(f"{city4_v:,d}")])])
 row7 = html.Tr([html.Td("Total"), html.Td([str(f"{tot_vac_citys:,d}")])])
+#row7 = html.Tr([html.Th("Total"), html.Td([str(f"{tot_vac_citys:,d}")]),
+
+
 table_bodyciti = [html.Tbody([row1, row2, row3, row4, 
                           row7])]
-
 
 #-------------------------------------TABLAS MESES TABLA2
 table_sumameses = [
@@ -330,7 +334,7 @@ body = html.Div([
     html.Br(),
 
     dbc.Row(
-        [dbc.Col(html.H1(['¿Cuántas vacunas han llegado a México?', 
+        [dbc.Col(html.H1(['¿Cuántas vacunas han llegado a México?    ', 
                          dbc.Badge(f"{int(tot_vac):,}", color="danger", className="mr-1")]),
                 style={"color": "red", 'text-transform': "uppercase", 
                        "font-weight": 'bolder', "font-stretch": "condensed",
@@ -388,7 +392,7 @@ body = html.Div([
 # ###################### SECCION 1. FARMACEUTICAS
         
     dbc.Row(
-        [dbc.Col(html.H3('¿De qué farmacéutica provienen?',className='card-title',
+        [dbc.Col(html.H2('¿De qué farmacéutica provienen?',className='card-title',
                          style={'textAlign': 'start', "color": "#91210C",}),
                  width={ "offset":1 }),
 
@@ -436,11 +440,14 @@ body = html.Div([
 # ###################### SECCION 2. CIUDADES
         
     dbc.Row(
-        [dbc.Col(html.H3('¿A qué ciudad arriban las vacunas?',
+        [dbc.Col(html.H2('¿A qué ciudad arriban las vacunas?',
                         className='card-title',style={'textAlign': 'left',"color": "#91210C"}),
                  width={ "offset":1 }),
     ]),
 
+
+
+    
 ####################### TABLA 2
        dbc.Row([
            dbc.Col(dbc.Table(table_headerciti + table_bodyciti, 
@@ -573,3 +580,4 @@ from settings import config
 
 if __name__ == "__main__":
     app.run_server()
+
