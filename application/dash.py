@@ -459,7 +459,7 @@ body = html.Div([
 # ###################### SECCION . DIAS TRANSCURRIDOS
   
   dbc.Row(
-           [dbc.Col(html.H6(["Desde el día de importación del primer lote de vacunas contra el COVID-19 han trascurrido ",days_pass," días"]
+           [dbc.Col(html.H6(["Desde el día de importación del primer lote de vacunas contra el COVID-19 han trascurrido ",days_passed," días"]
                             ,style={'textAlign': 'left'}),
                        width={'size': 10,  "offset":1 },
                       )],justify="center"),
