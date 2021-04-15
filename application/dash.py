@@ -756,14 +756,15 @@ body = html.Div([
      dbc.Row(
            [dbc.Col(html.H5("Días transcurridos")),
                   # width={'size' : "auto", "offset":1}),
+            dbc.Col(html.H5("Promedio diario de dosis")),
+                  # width={'size' : "auto", "offset":1}),
             dbc.Col(html.H5("Día con mayor arribo ")),
-                  # width={'size' : "auto","offset":1}),
+           #       # width={'size' : "auto","offset":1}),
             dbc.Col(html.H5("Laboratorio con mayor envíos")),
                   # width={'size' : "auto","offset":1}),
             dbc.Col(html.H5("Ciudad con más arribos")),
                   # width={'size' : "auto","offset":1}),
-            dbc.Col(html.H5("Promedio diario de dosis")),
-                  # width={'size' : "auto", "offset":1}),
+          
 
            ], justify="around"),
     
@@ -772,14 +773,15 @@ body = html.Div([
            [
                dbc.Col(html.H3(days_passed)),
                     #   width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H3(vacunas_prom_day)),
+                      #width={'size' : "auto", "offset":1}),
                dbc.Col(html.H3([vac_max_dia.strftime('%d-%m-%Y'), " (", vac_max_valor, ")"])),
                      #  width={'size' : "auto", "offset":1}),
                dbc.Col(html.H3(lab1)),
                       # width={'size' : "auto", "offset":1}),
                dbc.Col(html.H3(city1)),
                       #width={'size' : "auto", "offset":1}),
-               dbc.Col(html.H3(vacunas_prom_day)),
-                      #width={'size' : "auto", "offset":1}),
+               
             ],justify= "around"),
     
     
