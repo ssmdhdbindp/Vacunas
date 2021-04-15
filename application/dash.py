@@ -754,7 +754,7 @@ body = html.Div([
     # ###################### Cintillo estadística básica
 # Row 1
      dbc.Row(
-           [dbc.Col(html.H5("Días transcurridos desde el primer importe de vacunas")),
+           [dbc.Col(html.H5("Días transcurridos")),
                   # width={'size' : "auto", "offset":1}),
             dbc.Col(html.H5("Día con mayor arribo ")),
                   # width={'size' : "auto","offset":1}),
