@@ -406,17 +406,32 @@ table_headerDOSISe = [
 
 #d2 = today.strftime("Fecha de actualización : %d-%m-%Y")
 
-row1de = html.Tr([html.Td(fech_1_d.strftime('%d-%m-%Y')), html.Td(fech_2_d.strftime('%d-%m-%Y')), html.Td(fech_3_d.strftime('%d-%m-%Y')), html.Td(fech_4_d.strftime('%d-%m-%Y'))])
+row1de = html.Tr([html.Td(fech_1_d.strftime('%d-%m-%Y')), 
+                  html.Td(fech_2_d.strftime('%d-%m-%Y')), 
+                  html.Td(fech_3_d.strftime('%d-%m-%Y')), 
+                  html.Td(fech_4_d.strftime('%d-%m-%Y')),
+                  html.Td(" Total ", style={"offset": 3, "color": "black",
+                                                 'fontWeight': 'bold',
+                                                 'fontSize':20,})])
 row2de = html.Tr([html.Td(f"{int(denv_1_d):,}"), 
                   html.Td(f"{int(denv_2_d):,}"), 
                   html.Td(f"{int(denv_3_d):,}"), 
-                  html.Td(f"{int(denv_4_d):,}")])
-row3de = html.Tr([html.Td(farm_1_d), html.Td(farm_2_d), html.Td(farm_3_d), html.Td(farm_4_d)])
+                  html.Td(f"{int(denv_4_d):,}"),
+                  html.Td([str(f"{dosis_tot_a:,d}")], 
+                                          style={"color": "red",
+                                                 'fontWeight': 'bold',
+                                                 'fontSize':20,})])
+row3de = html.Tr([html.Td(farm_1_d), 
+                  html.Td(farm_2_d), 
+                  html.Td(farm_3_d), 
+                  html.Td(farm_4_d),
+                  html.Td(" ")])
 #row4de = html.Tr([html.Td(lug_3_d), html.Td(lug_4_d), html.Td(denv_4_d), html.Td(farm_4_d)])
 #row5de = html.Tr([html.Td(lug_4_d), html.Td("Total"), html.Td(dosis_tot_a), html.Td(" ")])
 
 table_bodyDOSISe = [html.Tbody([row1de, row2de, row3de, #row4de,row5de
                                ])]
+
 
 #---------------------------------------------------------------------GRAFICA PIE DOSIS a ENVASAR
 figvacdosis = px.pie(dosis_a, values='Dosis promedio a envasar', names='Farmacéutica',
