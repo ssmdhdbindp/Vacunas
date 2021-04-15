@@ -1,3 +1,4 @@
+
 import dash
 import matplotlib.pyplot as plt 
 import dash_bootstrap_components as dbc
@@ -723,9 +724,9 @@ body = html.Div([
                               style={
             'margin-top': '9px',
             'margin-left': '40px',
-            'width': '309px',
-            'height': '46px',
-             "font-size": "large"                      
+            'width': '509px',
+            'height': '36px',
+             "font-size": "medium"                      
             #'backgroundColor': 'rgba(0,0,0,0)',
             }
                                      )),
@@ -831,3 +832,4 @@ from settings import config
 if __name__ == "__main__":
     app.run_server()
     
+
