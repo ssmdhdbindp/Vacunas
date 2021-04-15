@@ -302,6 +302,11 @@ row2 = html.Tr([html.Td([str(f"{sumdic_v:,d}")]), html.Td([str(f"{sumene_v:,d}")
 table_bodymeses = [html.Tbody([row1, row2])]
 
 
+######################################################### Dias transcurridos
+
+day_min = vacunas.Fecha.min()
+day_max = vacunas.Fecha.max()
+days_pass= (day_max-day_min).days
 
 
 
@@ -344,9 +349,20 @@ body = html.Div([
     
         #dbc.Alert("", color="warning"),
     
+#    html.Br(),
+    html.Br(),
+  
+# ###################### SECCION . DIAS TRANSCURRIDOS
+  
+  dbc.Row(
+           [dbc.Col(html.H6(["Desde el día de importación del primer lote de vacunas contra el COVID-19 han trascurrido ", days_pass," días"),
+                               ],style={'textAlign': 'left'}),
+                       width={'size': 5,  "offset":1 },
+                      )],justify="center"),
+  
     html.Br(),
     html.Br(),
-    
+  
 # ###################### SECCION . MESES
 
      dbc.Row(
