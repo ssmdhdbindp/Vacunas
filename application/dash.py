@@ -1,4 +1,3 @@
-
 import dash
 import matplotlib.pyplot as plt 
 import dash_bootstrap_components as dbc
@@ -261,13 +260,7 @@ days_rest=(((126000000-tot_vac)*days_passed)/tot_vac).round()
 month_rest=(days_rest/30).round()
 year_rest=month_rest/12
 
-print("Para cubrir 126M de vacunas se requieren: ",int(days_rest)," Dias ")
-print("Para cubrir 126M de vacunas se requieren: ",int(month_rest)," Meses ")
-print("Para cubrir 126M de vacunas se requieren: ",year_rest," Años ")
-#
-print()
-#
-from datetime import timedelta, date
+
 date_126M = date.today() + timedelta(days=int(days_rest))
 query= date_126M.strftime("Se estima que tendríamos 126 millones de dosis el día %d de %B de %Y")
 
@@ -348,6 +341,32 @@ pd.DataFrame(vacunas_prom_day).to_csv('0000proceso.csv')
 vacunas_prom = pd.read_csv('0000proceso.csv')
 vacunas_prom_day = f"{int(((vacunas_prom.Cantidad.mean()).round(0))):,}"
 
+######################################################### Dia max recivido
+
+vacmax=vacunas.sort_values('Cantidad', ascending=False, ignore_index=True).head(1)
+vac_max_valor=f"{(vacmax.iloc[0]['Cantidad']):,}"
+vac_max_dia=vacmax.iloc[0]['Fecha']
+vac_max_lab=vacmax.iloc[0]['Farmacéutica']
+vac_max_city=vacmax.iloc[0]['Arribo']
+
+######################################################### Laboratorio mas envios
+
+farmc=vacunas.groupby('Farmacéutica')['Cantidad'].sum()
+pd.DataFrame(farmc).to_csv('0000proceso.csv')
+farmc_mas=pd.read_csv('0000proceso.csv').sort_values('Cantidad', ascending=False, ignore_index=True).head(1)
+
+lab1=farmc_mas.iloc[0]['Farmacéutica']
+lab1_v=farmc_mas.iloc[0]['Cantidad']
+
+######################################################### Ciudad mas arribos
+
+city_arrb=vacunas.groupby('Arribo')['Cantidad'].sum()
+pd.DataFrame(city_arrb).to_csv('0000proceso.csv')
+city_uno=pd.read_csv('0000proceso.csv').sort_values('Cantidad', ascending=False, ignore_index=True).head(1)
+city_uno.Arribo.replace('Ciudad de MÃ©xico','Ciudad de México', inplace=True)
+
+city1=city_uno.iloc[0]['Arribo']
+#city1_v=city_uno.iloc[0]['Cantidad']
 
 #########################################################
 #------------------------------------------------------------------------DOSIS A ENVASAR
@@ -419,7 +438,11 @@ figvacdosis.update_layout(paper_bgcolor='rgba(0,0,0,0)',
 figvacdosis.update_traces(pull=[0.05, 0.05, 0.05, 0.05, 0.1],
                     rotation=75)
 
-######################################################### Codigo del dashboard
+
+
+######################################################################################################################
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Codigo del dashboard <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<#
+###################################################################################################################### 
 
 server = flask.Flask(__name__)
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes. LUX], server=server)
@@ -461,14 +484,14 @@ body = html.Div([
     html.Br(),
   
 # ###################### SECCION . DIAS TRANSCURRIDOS
-  
-  dbc.Row(
-           [dbc.Col(html.H6(["Desde el día de importación del primer lote de vacunas contra el COVID-19 han trascurrido ",days_passed," días"]
-                            ,style={'textAlign': 'left'}),
-                       width={'size': 10,  "offset":1 },
-                      )],justify="center"),
-    
-    html.Br(),
+#  
+#  dbc.Row(
+#           [dbc.Col(html.H6(["Desde el día de importación del primer lote de vacunas contra el COVID-19 han trascurrido ",days_passed," días"]
+#                            ,style={'textAlign': 'left'}),
+#                       width={'size': 10,  "offset":1 },
+#                      )],justify="center"),
+#    
+#    html.Br(),
     html.Br(),
   
 # ###################### SECCION . MESES
@@ -695,17 +718,75 @@ body = html.Div([
             ]),
 
     
+#    dbc.Row(
+#           [
+#           dbc.Col(html.H3("Promedio diario de dosis "), 
+#                             style={'textAlign': 'left'},
+#                       width={'size': 4,  "offset":1 }),
+#                    
+#           dbc.Col(html.H3(str(vacunas_prom_day),  className='card-title'),
+#                             style={'textAlign': 'left'},
+#                       width={'size': 2,  "offset":0 }),
+#           
+#           ],justify="start"),
+    
+    #  dbc.Row(
+#           [dbc.Col(html.H6(["Desde el día de importación del primer lote de vacunas contra el COVID-19 han trascurrido ",days_passed," días"]
+#                            ,style={'textAlign': 'left'}),
+#                       width={'size': 10,  "offset":1 },
+#                      )],justify="center"),
+    
+    html.Br(),
+    html.Br(),
+    
+#    dbc.Row(
+#           [
+#           dbc.Col(html.H3("Desde el día de importación del primer lote de vacunas contra el COVID-19 han trascurrido "), 
+#                             style={'textAlign': 'left'},
+#                       width={'size': 4,  "offset":1 }),
+#                    
+#           dbc.Col(html.H3([days_passed," días"],  className='card-title'),
+#                             style={'textAlign': 'left'},
+#                       width={'size': 2,  "offset":0 }),
+#           
+#           ],justify="start"),
+    
+    # ###################### Cintillo estadística básica
+# Row 1
+     dbc.Row(
+           [dbc.Col(html.H5("Días transcurridos desde el primer importe de vacunas")),
+                  # width={'size' : "auto", "offset":1}),
+            dbc.Col(html.H5("Día con mayor arribo ")),
+                  # width={'size' : "auto","offset":1}),
+            dbc.Col(html.H5("Laboratorio con mayor envíos")),
+                  # width={'size' : "auto","offset":1}),
+            dbc.Col(html.H5("Ciudad con más arribos")),
+                  # width={'size' : "auto","offset":1}),
+            dbc.Col(html.H5("Promedio diario de dosis")),
+                  # width={'size' : "auto", "offset":1}),
+
+           ], justify="around"),
+    
+#Row 2
     dbc.Row(
            [
-           dbc.Col(html.H3("Promedio diario de dosis "), 
-                             style={'textAlign': 'left'},
-                       width={'size': 4,  "offset":1 }),
-                    
-           dbc.Col(html.H3(str(vacunas_prom_day),  className='card-title'),
-                             style={'textAlign': 'left'},
-                       width={'size': 2,  "offset":0 }),
-           
-           ],justify="start"),
+               dbc.Col(html.H3(days_passed)),
+                    #   width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H3([vac_max_dia, " (", vac_max_valor, ")"])),
+                     #  width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H3(lab1)),
+                      # width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H3(city1)),
+                      #width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H3(vacunas_prom_day)),
+                      #width={'size' : "auto", "offset":1}),
+            ],justify= "around"),
+    
+    
+    
+        
+    html.Br(),
+    html.Br(),
             
             
 
@@ -718,9 +799,7 @@ body = html.Div([
 #                      )],justify="start"),                
 #    ]),
 #
-    html.Br(),
-    html.Br(),
-    html.Br(),
+
     html.Br(),
     html.Br(),
     html.Br(),
