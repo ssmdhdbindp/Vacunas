@@ -248,6 +248,13 @@ figvac.update_traces(pull=[0.05, 0.05, 0.05, 0.05, 0.1],
 ########################################################################## Para la APP 
 #-------------------------------------Calculo para completar 126millions
 
+day_min = vacunas.Fecha.min()
+day_max = vacunas.Fecha.max()
+days_passed= (day_max-day_min).days
+
+
+days_passed= (day_max-day_min).days
+
 # Días, Meses y Años restantes para cubrir 126M vacunas
 days_rest=(((126000000-tot_vac)*days_passed)/tot_vac).round()
 month_rest=(days_rest/30).round()
@@ -335,9 +342,7 @@ table_bodymeses = [html.Tbody([row1, row2])]
 
 ######################################################### Dias transcurridos
 
-day_min = vacunas.Fecha.min()
-day_max = vacunas.Fecha.max()
-days_pass= (day_max-day_min).days
+
 
 
 #########################################################
