@@ -35,14 +35,11 @@ vacunas = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/v
 vacunas.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
                                    errors='ignore')
 
+   
 
-#dosis = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Dosis%20envasadas.csv", encoding= "Latin-1")
-#dosis.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
-#                                   errors='ignore')
-
-#dosis_a = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Dosis%20promedio%20a%20envasar.csv", encoding= "Latin-1")
-#dosis_a.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
-#                                   errors='ignore')
+dosis_a = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Dosis%20promedio%20a%20envasar.csv", encoding= "Latin-1")
+dosis_a.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
+                                   errors='ignore')
 # Dtypes 
 vacunas['Cantidad']=vacunas['Cantidad'].astype(int)
 #Total Cantidad
@@ -308,8 +305,69 @@ day_min = vacunas.Fecha.min()
 day_max = vacunas.Fecha.max()
 days_pass= (day_max-day_min).days
 
+#########################################################
+#------------------------------------------------------------------------DOSIS A ENVASAR
 
+format = '%d/%m/%Y'
+dosis_a['Fecha'] = pd.to_datetime(dosis_a['Fecha'], format=format)
 
+dosis_a_ = dosis_a.sort_values('Fecha',ascending=False).head(5)
+#Suma semana
+dosis_tot_a = dosis_a_["Dosis promedio a envasar"].sum()
+#
+fech_1_d = dosis_a_.iloc[0]['Fecha']
+fech_2_d = dosis_a_.iloc[1]['Fecha']
+fech_3_d = dosis_a_.iloc[2]['Fecha']
+fech_4_d = dosis_a_.iloc[3]['Fecha']
+#
+lug_1_d = dosis_a_.iloc[0]['Arribo']
+lug_2_d = dosis_a_.iloc[1]['Arribo']
+lug_3_d = dosis_a_.iloc[2]['Arribo']
+lug_4_d = dosis_a_.iloc[3]['Arribo']
+#
+denv_1_d = dosis_a_.iloc[0]['Dosis promedio a envasar']
+denv_2_d = dosis_a_.iloc[1]['Dosis promedio a envasar']
+denv_3_d = dosis_a_.iloc[2]['Dosis promedio a envasar']
+denv_4_d = dosis_a_.iloc[3]['Dosis promedio a envasar']
+#
+farm_1_d = dosis_a_.iloc[0]['Farmacéutica']
+farm_2_d = dosis_a_.iloc[1]['Farmacéutica']
+farm_3_d = dosis_a_.iloc[2]['Farmacéutica']
+farm_4_d = dosis_a_.iloc[3]['Farmacéutica']
+
+table_headerDOSISe = [
+    html.Thead(html.Tr([html.Td(lug_1_d), html.Td(lug_2_d), 
+                        html.Td(lug_3_d), html.Td(lug_4_d)],
+                      # style={merge_duplicate_headers=True}
+                      ))] 
+row1de = html.Tr([html.Td(fech_1_d.strftime('%d-%B-%y')), html.Td(fech_2_d.strftime('%d-%B-%y')), html.Td(fech_3_d.strftime('%d-%B-%y')), html.Td(fech_4_d.strftime('%d-%B-%y'))])
+row2de = html.Tr([html.Td(denv_1_d), html.Td(denv_2_d), html.Td(denv_3_d), html.Td(denv_4_d)])
+row3de = html.Tr([html.Td(farm_1_d), html.Td(farm_2_d), html.Td(farm_3_d), html.Td(farm_4_d)])
+#row4de = html.Tr([html.Td(lug_3_d), html.Td(lug_4_d), html.Td(denv_4_d), html.Td(farm_4_d)])
+#row5de = html.Tr([html.Td(lug_4_d), html.Td("Total"), html.Td(dosis_tot_a), html.Td(" ")])
+
+table_bodyDOSISe = [html.Tbody([row1de, row2de, row3de, #row4de,row5de
+                               ])]
+
+#---------------------------------------------------------------------GRAFICA PIE DOSIS a ENVASAR
+figvacdosis = px.pie(dosis_a, values='Dosis promedio a envasar', names='Farmacéutica',
+             color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
+
+figvacdosis.update_layout(paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  uniformtext_minsize=22,
+                  uniformtext_mode='hide',
+                  autosize=True,
+                  #width= 650,
+                  #height=650,
+                  title_font_size = 22,
+                  font_color="gray",
+                  title_font_color="firebrick",
+                  margin = dict(autoexpand= True)),
+                      #t=0, l=0, r=0, b=0)   
+                  #)
+figvacdosis.update_traces(pull=[0.05, 0.05, 0.05, 0.05, 0.1],
+                    rotation=300)
 
 ######################################################### Codigo del dashboard
 
@@ -355,11 +413,11 @@ body = html.Div([
 # ###################### SECCION . DIAS TRANSCURRIDOS
   
   dbc.Row(
-           [dbc.Col(html.H6(["Desde el día de importación del primer lote de vacunas contra el COVID-19 han trascurrido ", days_pass," días"),
-                               ],style={'textAlign': 'left'}),
-                       width={'size': 5,  "offset":1 },
+           [dbc.Col(html.H6(["Desde el día de importación del primer lote de vacunas contra el COVID-19 han trascurrido ",days_pass," días"]
+                            ,style={'textAlign': 'left'}),
+                       width={'size': 10,  "offset":1 },
                       )],justify="center"),
-  
+    
     html.Br(),
     html.Br(),
   
@@ -443,8 +501,8 @@ body = html.Div([
            [dbc.Col(html.H6(["Hasta el 9 de abril, nuestro país ha recibido o envasado  ", 
                                 str(f"{tot_vac:,d} dosis de vacunas contra COVID-19 listas para aplicarse "),
                                ],style={'textAlign': 'left'}),
-                       width={'size': 5,  "offset":1 },
-                      )],justify="start"),
+                       width={'size': 10,  "offset":1 },
+                      )],justify="align"),
     
         
     html.Br(),
@@ -572,8 +630,50 @@ body = html.Div([
             
            ]),
     
-    html.Hr(),
-    html.Hr(),
+    
+  html.Br(),
+    html.Br(),
+    html.Br(),
+    
+     dbc.Row([
+        dbc.Col(html.H3('Dosis a envasar',
+                        className='card-title',style={'textAlign': 'start'} ),
+                style={"color": "#91210C", },
+                width={ "offset":1 },),
+
+                
+                
+    ]),
+     dbc.Row(
+        [
+            dbc.Col(dbc.Table(table_headerDOSISe + table_bodyDOSISe, 
+                              bordered=False, 
+                              dark=False,
+                              hover=True,
+                              #responsive=True,
+                              striped=True,
+                              #size="sm",
+                              #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
+                              style={
+            'margin-top': '9px',
+            'margin-left': '130px',
+            'width': '509px',
+            'height': '46px',
+             "font-size": "large"                      
+            #'backgroundColor': 'rgba(0,0,0,0)',
+            }
+                                     )),
+            dbc.Col(dcc.Graph(figure=figvacdosis),
+                     width={'size' : "auto", "offset":0}),
+            
+        ]),
+      
+    
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
 
     #html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),      
 
@@ -596,4 +696,3 @@ from settings import config
 
 if __name__ == "__main__":
     app.run_server()
-
