@@ -758,7 +758,7 @@ body = html.Div([
                   # width={'size' : "auto", "offset":1}),
             dbc.Col(html.H5("Promedio diario de dosis")),
                   # width={'size' : "auto", "offset":1}),
-            dbc.Col(html.H5("Día con más arribo ")),
+            dbc.Col(html.H5("Día con más arribos ")),
            #       # width={'size' : "auto","offset":1}),
             dbc.Col(html.H5("Laboratorio con más envíos")),
                   # width={'size' : "auto","offset":1}),
