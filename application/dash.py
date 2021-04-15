@@ -284,7 +284,13 @@ row5 = html.Tr([html.Td(farm_tot5), html.Td([str(f"{cant_tot5:,d}")])])
 #row6 = html.Tr([html.Td(farm_tot6), html.Td([str(f"{cant_tot6:,d}")])])
 row7 = html.Tr([html.Td("Total"), html.Td([str(f"{tot_vac:,d}")])])
                     
-
+row7 = html.Tr([html.Th("Total", style={"offset": 3, "color": "black",
+                                                 'fontWeight': 'bold',
+                                                 'fontSize':20,}),
+                html.Th([str(f"{tot_vac:,d}")], 
+                                          style={"color": "red",
+                                                 'fontWeight': 'bold',
+                                                 'fontSize':20,})])
 
 table_body = [html.Tbody([row1, row2, row3, row4, row5,# row6,
                           row7])]
@@ -301,6 +307,17 @@ row3 = html.Tr([html.Td(city3), html.Td([str(f"{city3_v:,d}")])])
 row4 = html.Tr([html.Td(city4), html.Td([str(f"{city4_v:,d}")])])
 row7 = html.Tr([html.Td("Total"), html.Td([str(f"{tot_vac_citys:,d}")])])
 #row7 = html.Tr([html.Th("Total"), html.Td([str(f"{tot_vac_citys:,d}")]),
+
+
+row7 = html.Tr([html.Th("Total", style={"offset": 3, "color": "black",
+                                                 'fontWeight': 'bold',
+                                                 'fontSize':20,}),
+                html.Th([str(f"{tot_vac_citys:,d}")], 
+                                          style={"color": "red",
+                                                 'fontWeight': 'bold',
+                                                 'fontSize':20,})])
+
+
 
 
 table_bodyciti = [html.Tbody([row1, row2, row3, row4, 
