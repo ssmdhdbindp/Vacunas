@@ -429,7 +429,7 @@ row3de = html.Tr([html.Td(farm_1_d),
 #row4de = html.Tr([html.Td(lug_3_d), html.Td(lug_4_d), html.Td(denv_4_d), html.Td(farm_4_d)])
 #row5de = html.Tr([html.Td(lug_4_d), html.Td("Total"), html.Td(dosis_tot_a), html.Td(" ")])
 
-table_bodyDOSISe = [html.Tbody([row1de, row2de, row3de, #row4de,row5de
+table_bodyDOSISe = [html.Tbody([row1de, row3de, row2de, #row4de,row5de
                                ])]
 
 
