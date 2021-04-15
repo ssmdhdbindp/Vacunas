@@ -242,9 +242,26 @@ figvac.update_layout(paper_bgcolor='rgba(0,0,0,0)',
 figvac.update_traces(pull=[0.05, 0.05, 0.05, 0.05, 0.1],
                     rotation=300)
 
-###################### suma de meses para tabla 3
 
 
+
+########################################################################## Para la APP 
+#-------------------------------------Calculo para completar 126millions
+
+# Días, Meses y Años restantes para cubrir 126M vacunas
+days_rest=(((126000000-tot_vac)*days_passed)/tot_vac).round()
+month_rest=(days_rest/30).round()
+year_rest=month_rest/12
+
+print("Para cubrir 126M de vacunas se requieren: ",int(days_rest)," Dias ")
+print("Para cubrir 126M de vacunas se requieren: ",int(month_rest)," Meses ")
+print("Para cubrir 126M de vacunas se requieren: ",year_rest," Años ")
+#
+print()
+#
+from datetime import timedelta, date
+date_126M = date.today() + timedelta(days=int(days_rest))
+query= date_126M.strftime("Se estima que tendríamos 126 millones de dosis el día %d de %B de %Y")
 
 
 
@@ -305,13 +322,14 @@ day_min = vacunas.Fecha.min()
 day_max = vacunas.Fecha.max()
 days_pass= (day_max-day_min).days
 
+
 #########################################################
 #------------------------------------------------------------------------DOSIS A ENVASAR
 
 format = '%d/%m/%Y'
 dosis_a['Fecha'] = pd.to_datetime(dosis_a['Fecha'], format=format)
 
-dosis_a_ = dosis_a.sort_values('Fecha',ascending=False).head(5)
+dosis_a_ = dosis_a.sort_values('Fecha',ascending=True).head(5)
 #Suma semana
 dosis_tot_a = dosis_a_["Dosis promedio a envasar"].sum()
 #
@@ -336,12 +354,18 @@ farm_3_d = dosis_a_.iloc[2]['Farmacéutica']
 farm_4_d = dosis_a_.iloc[3]['Farmacéutica']
 
 table_headerDOSISe = [
-    html.Thead(html.Tr([html.Td(lug_1_d), html.Td(lug_2_d), 
-                        html.Td(lug_3_d), html.Td(lug_4_d)],
+    html.Thead(html.Tr([html.Td(), html.Td(), 
+                        html.Td(), html.Td()],
                       # style={merge_duplicate_headers=True}
                       ))] 
-row1de = html.Tr([html.Td(fech_1_d.strftime('%d-%B-%y')), html.Td(fech_2_d.strftime('%d-%B-%y')), html.Td(fech_3_d.strftime('%d-%B-%y')), html.Td(fech_4_d.strftime('%d-%B-%y'))])
-row2de = html.Tr([html.Td(denv_1_d), html.Td(denv_2_d), html.Td(denv_3_d), html.Td(denv_4_d)])
+
+#d2 = today.strftime("Fecha de actualización : %d-%m-%Y")
+
+row1de = html.Tr([html.Td(fech_1_d.strftime('%d-%m-%Y')), html.Td(fech_2_d.strftime('%d-%m-%Y')), html.Td(fech_3_d.strftime('%d-%m-%Y')), html.Td(fech_4_d.strftime('%d-%m-%Y'))])
+row2de = html.Tr([html.Td(f"{int(denv_1_d):,}"), 
+                  html.Td(f"{int(denv_2_d):,}"), 
+                  html.Td(f"{int(denv_3_d):,}"), 
+                  html.Td(f"{int(denv_4_d):,}")])
 row3de = html.Tr([html.Td(farm_1_d), html.Td(farm_2_d), html.Td(farm_3_d), html.Td(farm_4_d)])
 #row4de = html.Tr([html.Td(lug_3_d), html.Td(lug_4_d), html.Td(denv_4_d), html.Td(farm_4_d)])
 #row5de = html.Tr([html.Td(lug_4_d), html.Td("Total"), html.Td(dosis_tot_a), html.Td(" ")])
@@ -367,7 +391,7 @@ figvacdosis.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                       #t=0, l=0, r=0, b=0)   
                   #)
 figvacdosis.update_traces(pull=[0.05, 0.05, 0.05, 0.05, 0.1],
-                    rotation=300)
+                    rotation=75)
 
 ######################################################### Codigo del dashboard
 
@@ -498,7 +522,7 @@ body = html.Div([
                     width={'size' : "auto", "offset":0}), ]),
     
        dbc.Row(
-           [dbc.Col(html.H6(["Hasta el 9 de abril, nuestro país ha recibido o envasado  ", 
+           [dbc.Col(html.H6(["Hasta el 15 de abril, nuestro país ha recibido o envasado  ", 
                                 str(f"{tot_vac:,d} dosis de vacunas contra COVID-19 listas para aplicarse "),
                                ],style={'textAlign': 'left'}),
                        width={'size': 10,  "offset":1 },
@@ -546,63 +570,15 @@ body = html.Div([
            dbc.Col(dcc.Graph(figure=figvac), #config= "autosize"), 
                     width={'size' : "auto", "offset":0}),
                ]),#,justify="center"),
-
+    
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
     
 # ###################### SECCION 3. MAPA
-    
-    
 
-    
-    
-    
-#    #html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
-#     dbc.Row([
-#        dbc.Col(html.H3('Arribos Recientes',
-#                        className='card-title',style={'textAlign': 'start'} ),
-#                style={"color": "#91210C", },
-#                width={ "offset":1 },),
-#
-#                
-#                
-#    ]),
-#
-#     
-#
-#    dbc.Row(
-#        [
-#            dbc.Col(dbc.Table(table_header69 + table_body69, 
-#                              bordered=False, 
-#                              dark=False,
-#                              hover=True,
-#                              #responsive=True,
-#                              striped=True,
-#                              #size="sm",
-#                              #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
-#                              style={
-#            'margin-top': '9px',
-#            'margin-left': '130px',
-#            'width': '509px',
-#            'height': '46px',
-#             "font-size": "large"                      
-#            #'backgroundColor': 'rgba(0,0,0,0)',
-#            }
-#                                     ))
-#        ],justify="start"),
-#    
-#      dbc.Row(
-#           [
-#               dbc.Col(html.H6(["Entre el 1 y el 9 de abril, nuestro país recibió  ", 
-#                                str(f"{tot_sem:,d} dosis, listas para aplicarse "),
-#                               ],style={'textAlign': 'left'}),
-#                       width={'size': 5,  "offset":1 },
-#                      )],justify="start"),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    #html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),
-    
     dbc.Row([
           dbc.Col(html.H2('Un portafolio diverso',
                         className='card-title',style={'textAlign': 'left',"color": "#91210C"}),
@@ -656,8 +632,8 @@ body = html.Div([
                               #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
                               style={
             'margin-top': '9px',
-            'margin-left': '130px',
-            'width': '509px',
+            'margin-left': '60px',
+            'width': '409px',
             'height': '46px',
              "font-size": "large"                      
             #'backgroundColor': 'rgba(0,0,0,0)',
@@ -675,8 +651,30 @@ body = html.Div([
     html.Br(),
     html.Br(),
 
-    #html.Hr(style={'borderWidth': "0.3vh", "width": "25%", "color": "#1B5244"}),      
-
+    dbc.Row([
+        dbc.Col(html.H3('¿Cuando se habrán recibido las dosis necesarias?',
+                        className='card-title',style={'textAlign': 'start'} ),
+                style={"color": "#91210C", },
+                width={ "offset":1 },),
+            ]),
+    
+    html.Br(),
+    html.Br(),
+        
+    dbc.Row([
+        dbc.Col(html.H4("En 100 días se han recibido 30 millones (dosis y sustancia activa) aproximadamente. Así, si se aplica un crecimiento de 20% en ese monto, el día 200 tendríamos 63 millones de dosis, el día 300 tendríamos 98.6 millones, el día 400 tendríamos 133 millones", 
+                        className='card-title',style={'textAlign': 'start'} ),
+                style={"color": "#91210C", },
+                width={ "offset":1 },),
+            ]),
+        
+#    dbc.Row(
+#           [dbc.Col(html.H4([query
+#                            ],style={'textAlign': 'left'}),
+#                       width={'size': 11,  "offset":1 },
+#                      )],justify="start"),                
+#    ]),
+#
     html.Br(),
     html.Br(),
     html.Br(),
@@ -696,3 +694,4 @@ from settings import config
 
 if __name__ == "__main__":
     app.run_server()
+
