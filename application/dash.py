@@ -413,7 +413,7 @@ row1de = html.Tr([html.Td(fech_1_d.strftime('%d-%m-%Y')),
                   html.Td(fech_4_d.strftime('%d-%m-%Y')),
                   html.Td(" Total ", style={"offset": 3, "color": "black",
                                                  'fontWeight': 'bold',
-                                                 'fontSize':20,})])
+                                                 'fontSize':16,})])
 row2de = html.Tr([html.Td(f"{int(denv_1_d):,}"), 
                   html.Td(f"{int(denv_2_d):,}"), 
                   html.Td(f"{int(denv_3_d):,}"), 
@@ -421,7 +421,7 @@ row2de = html.Tr([html.Td(f"{int(denv_1_d):,}"),
                   html.Td([str(f"{dosis_tot_a:,d}")], 
                                           style={"color": "red",
                                                  'fontWeight': 'bold',
-                                                 'fontSize':20,})])
+                                                 'fontSize':16,})])
 row3de = html.Tr([html.Td(farm_1_d), 
                   html.Td(farm_2_d), 
                   html.Td(farm_3_d), 
@@ -724,6 +724,7 @@ body = html.Div([
                               style={
             'margin-top': '9px',
             'margin-left': '40px',
+            'margin-right': '0px',
             'width': '109px',
             'height': '36px',
              "font-size": "small"                      
