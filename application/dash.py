@@ -429,7 +429,7 @@ row3de = html.Tr([html.Td(farm_1_d),
 #row4de = html.Tr([html.Td(lug_3_d), html.Td(lug_4_d), html.Td(denv_4_d), html.Td(farm_4_d)])
 #row5de = html.Tr([html.Td(lug_4_d), html.Td("Total"), html.Td(dosis_tot_a), html.Td(" ")])
 
-table_bodyDOSISe = [html.Tbody([row1de, row3de, row2de, #row4de,row5de
+table_bodyDOSISe = [html.Tbody([row1de, row2de, row3de, #row4de,row5de
                                ])]
 
 
@@ -451,7 +451,7 @@ figvacdosis.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                       #t=0, l=0, r=0, b=0)   
                   #)
 figvacdosis.update_traces(pull=[0.05, 0.05, 0.05, 0.05, 0.1],
-                    rotation=75)
+                    rotation=255)
 
 
 
@@ -493,7 +493,22 @@ body = html.Div([
                 width={ "offset":2 }),
     ]),
     
-        #dbc.Alert("", color="warning"),
+    
+    
+    
+  
+# ###################### SECCION . MESES
+    
+#    dbc.Row(
+#        [dbc.Col(html.H2('¿Cuántas vacunas han llegado por mes?',className='card-title',
+#                         style={'textAlign': 'start', "color": "#91210C",}),
+#                 width={ "offset":1 }),
+#
+#            ]),
+    
+    html.Br(),
+    
+    
     
 #    html.Br(),
     html.Br(),
@@ -585,13 +600,13 @@ body = html.Div([
             dbc.Col(dcc.Graph(figure=figvac0),
                     width={'size' : "auto", "offset":0}), ]),
     
-       dbc.Row(
-           [dbc.Col(html.H6(["Hasta el 15 de abril, nuestro país ha recibido o envasado  ", 
-                                str(f"{tot_vac:,d} dosis de vacunas contra COVID-19 listas para aplicarse "),
-                               ],style={'textAlign': 'left'}),
-                       width={'size': 10,  "offset":1 },
-                      )],justify="align"),
-    
+#       dbc.Row(
+#           [dbc.Col(html.H6(["Hasta el 15 de abril, nuestro país ha recibido o envasado  ", 
+#                                str(f"{tot_vac:,d} dosis de vacunas contra COVID-19 listas para aplicarse "),
+#                               ],style={'textAlign': 'left'}),
+#                       width={'size': 10,  "offset":1 },
+#                      )],justify="align"),
+#    
         
     html.Br(),
     html.Br(),
@@ -640,11 +655,13 @@ body = html.Div([
     html.Br(),
     html.Br(),
     html.Br(),
+    html.Br(),
+    html.Br(),
     
 # ###################### SECCION 3. MAPA
 
     dbc.Row([
-          dbc.Col(html.H2('Un portafolio diverso',
+          dbc.Col(html.H2('¿De qué paises provienen las dosis?',
                         className='card-title',style={'textAlign': 'left',"color": "#91210C"}),
                
                 width={ "offset":1 }),
@@ -652,7 +669,7 @@ body = html.Div([
 
       dbc.Row(
            [
-           dbc.Col(html.H5(['Hemos recibido vacunas o sustancia activa desde seis paises: Bélica, Argentina, China, India, Rusia y Estados Unidos'
+           dbc.Col(html.H5(['Hemos recibido vacunas o sustancia activa desde seis paises: Bélgica, Argentina, China, India, Rusia y Estados Unidos'
                                ],style={'textAlign': 'left'}),
                        width={'size': 10,  "offset":1 },
                       )],justify="align"),
@@ -671,12 +688,14 @@ body = html.Div([
            ]),
     
     
-  html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
     html.Br(),
     html.Br(),
     
      dbc.Row([
-        dbc.Col(html.H3('Dosis a envasar',
+        dbc.Col(html.H3('¿Cuántas dosis se han recibido en sustancia activa?',
                         className='card-title',style={'textAlign': 'start'} ),
                 style={"color": "#91210C", },
                 width={ "offset":1 },),
@@ -684,6 +703,13 @@ body = html.Div([
                 
                 
     ]),
+      dbc.Row(
+           [
+           dbc.Col(html.H5(['En substancia activa se han recibido únicamente de dos laboratorios: AztraZéneca y CanSino Biologics'
+                               ],style={'textAlign': 'left'}),
+                       width={'size': 10,  "offset":1 },
+                      )],justify="align"),
+    
      dbc.Row(
         [
             dbc.Col(dbc.Table(table_headerDOSISe + table_bodyDOSISe, 
@@ -696,8 +722,8 @@ body = html.Div([
                               #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
                               style={
             'margin-top': '9px',
-            'margin-left': '60px',
-            'width': '409px',
+            'margin-left': '40px',
+            'width': '309px',
             'height': '46px',
              "font-size": "large"                      
             #'backgroundColor': 'rgba(0,0,0,0)',
@@ -716,68 +742,39 @@ body = html.Div([
     html.Br(),
 
     dbc.Row([
-        dbc.Col(html.H3('¿Cuando se habrán recibido las dosis necesarias?',
+        dbc.Col(html.H3('Numeralia general',
                         className='card-title',style={'textAlign': 'start'} ),
                 style={"color": "#91210C", },
                 width={ "offset":1 },),
             ]),
     
-    html.Br(),
-    html.Br(),
-        
-    dbc.Row([
-        dbc.Col(html.H4("En 100 días se han recibido 30 millones (dosis y sustancia activa) aproximadamente. Así, si se aplica un crecimiento de 20% en ese monto, el día 200 tendríamos 63 millones de dosis, el día 300 tendríamos 98.6 millones, el día 400 tendríamos 133 millones", 
-                        className='card-title',style={'textAlign': 'start'} ),
-                style={"color": "#91210C", },
-                width={ "offset":1 },),
-            ]),
+       
+#    dbc.Row([
+#        dbc.Col(html.H4("En 100 días se han recibido 30 millones (dosis y sustancia activa) aproximadamente. Así, si se aplica un crecimiento de 20% en ese monto, el día 200 tendríamos 63 millones de dosis, el día 300 tendríamos 98.6 millones, el día 400 tendríamos 133 millones", 
+#                        className='card-title',style={'textAlign': 'start'} ),
+#                style={"color": "#91210C", },
+#                width={ "offset":1 },),
+#            ]),
+#
 
     
-#    dbc.Row(
-#           [
-#           dbc.Col(html.H3("Promedio diario de dosis "), 
-#                             style={'textAlign': 'left'},
-#                       width={'size': 4,  "offset":1 }),
-#                    
-#           dbc.Col(html.H3(str(vacunas_prom_day),  className='card-title'),
-#                             style={'textAlign': 'left'},
-#                       width={'size': 2,  "offset":0 }),
-#           
-#           ],justify="start"),
-    
-    #  dbc.Row(
-#           [dbc.Col(html.H6(["Desde el día de importación del primer lote de vacunas contra el COVID-19 han trascurrido ",days_passed," días"]
-#                            ,style={'textAlign': 'left'}),
-#                       width={'size': 10,  "offset":1 },
-#                      )],justify="center"),
-    
     html.Br(),
     html.Br(),
     
-#    dbc.Row(
-#           [
-#           dbc.Col(html.H3("Desde el día de importación del primer lote de vacunas contra el COVID-19 han trascurrido "), 
-#                             style={'textAlign': 'left'},
-#                       width={'size': 4,  "offset":1 }),
-#                    
-#           dbc.Col(html.H3([days_passed," días"],  className='card-title'),
-#                             style={'textAlign': 'left'},
-#                       width={'size': 2,  "offset":0 }),
-#           
-#           ],justify="start"),
+
     
     # ###################### Cintillo estadística básica
 # Row 1
      dbc.Row(
-           [dbc.Col(html.H5("Días transcurridos")),
+           [dbc.Col(html.H6("Días transcurridos")),
                   # width={'size' : "auto", "offset":1}),
-            dbc.Col(html.H5("Promedio diario de dosis")),
+            dbc.Col(html.H6("Promedio diario")),
                   # width={'size' : "auto", "offset":1}),
-            dbc.Col(html.H5("Día con más arribos ")),
+            dbc.Col(html.H6("Día con más arribos")),
            #       # width={'size' : "auto","offset":1}),
-            dbc.Col(html.H5("Laboratorio con más envíos")),
+            dbc.Col(html.H6("Laboratorio con más envíos")),
                   # width={'size' : "auto","offset":1}),
-            dbc.Col(html.H5("Ciudad con más arribos")),
+            dbc.Col(html.H6("Ciudad con más arribos")),
                   # width={'size' : "auto","offset":1}),
           
 
@@ -797,7 +794,7 @@ body = html.Div([
                dbc.Col(html.H3(city1)),
                       #width={'size' : "auto", "offset":1}),
                
-            ],justify= "around"),
+            ],justify= "end"),
     
     
     
@@ -833,4 +830,4 @@ from settings import config
 
 if __name__ == "__main__":
     app.run_server()
-
+    
