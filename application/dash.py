@@ -1,3 +1,4 @@
+
 import dash
 import matplotlib.pyplot as plt 
 import dash_bootstrap_components as dbc
@@ -340,9 +341,12 @@ row2 = html.Tr([html.Td([str(f"{sumdic_v:,d}")]), html.Td([str(f"{sumene_v:,d}")
 table_bodymeses = [html.Tbody([row1, row2])]
 
 
-######################################################### Dias transcurridos
+######################################################### Promedio diario
 
-
+vacunas_prom_day=vacunas.groupby('Fecha')['Cantidad'].mean()
+pd.DataFrame(vacunas_prom_day).to_csv('0000proceso.csv')
+vacunas_prom = pd.read_csv('0000proceso.csv')
+vacunas_prom_day = f"{int(((vacunas_prom.Cantidad.mean()).round(0))):,}"
 
 
 #########################################################
@@ -459,7 +463,7 @@ body = html.Div([
 # ###################### SECCION . DIAS TRANSCURRIDOS
   
   dbc.Row(
-           [dbc.Col(html.H6(["Desde el día de importación del primer lote de vacunas contra el COVID-19 han trascurrido ",days_passed," días"]
+           [dbc.Col(html.H6(["Desde el día de importación del primer lote de vacunas contra el COVID-19 han trascurrido ",days_pass," días"]
                             ,style={'textAlign': 'left'}),
                        width={'size': 10,  "offset":1 },
                       )],justify="center"),
@@ -689,7 +693,24 @@ body = html.Div([
                 style={"color": "#91210C", },
                 width={ "offset":1 },),
             ]),
-        
+
+    
+    dbc.Row(
+           [
+           dbc.Col(html.H3("Promedio diario de dosis "), 
+                             style={'textAlign': 'left'},
+                       width={'size': 4,  "offset":1 }),
+                    
+           dbc.Col(html.H3(str(vacunas_prom_day),  className='card-title'),
+                             style={'textAlign': 'left'},
+                       width={'size': 2,  "offset":0 }),
+           
+           ],justify="start"),
+            
+            
+
+    
+    
 #    dbc.Row(
 #           [dbc.Col(html.H4([query
 #                            ],style={'textAlign': 'left'}),
