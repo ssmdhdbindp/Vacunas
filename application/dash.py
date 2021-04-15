@@ -724,7 +724,7 @@ body = html.Div([
                               style={
             'margin-top': '9px',
             'margin-left': '40px',
-            'width': '509px',
+            'width': '309px',
             'height': '36px',
              "font-size": "medium"                      
             #'backgroundColor': 'rgba(0,0,0,0)',
@@ -832,4 +832,3 @@ from settings import config
 if __name__ == "__main__":
     app.run_server()
     
-
