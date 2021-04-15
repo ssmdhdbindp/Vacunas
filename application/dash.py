@@ -1,3 +1,4 @@
+
 import dash
 import matplotlib.pyplot as plt 
 import dash_bootstrap_components as dbc
@@ -705,7 +706,7 @@ body = html.Div([
     ]),
       dbc.Row(
            [
-           dbc.Col(html.H5(['En substancia activa se han recibido únicamente de dos laboratorios: AztraZéneca y CanSino Biologics'
+           dbc.Col(html.H5(['En substancia activa se han recibido únicamente de dos laboratorios: AstraZéneca y CanSino Biologics'
                                ],style={'textAlign': 'left'}),
                        width={'size': 10,  "offset":1 },
                       )],justify="align"),
@@ -725,7 +726,7 @@ body = html.Div([
             'margin-left': '40px',
             'width': '109px',
             'height': '36px',
-             "font-size": "large"                      
+             "font-size": "small"                      
             #'backgroundColor': 'rgba(0,0,0,0)',
             }
                                      )),
