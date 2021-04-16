@@ -724,8 +724,8 @@ body = html.Div([
                               style={
             'margin-top': '9px',
             'margin-left': '40px',
-            'margin-right': '0px',
-            'width': '109px',
+            'margin-right': '-120px',
+            'width': '30px',
             'height': '36px',
              "font-size": "small"                      
             #'backgroundColor': 'rgba(0,0,0,0)',
