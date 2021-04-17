@@ -486,17 +486,39 @@ body = html.Div([
     html.Br(),
 
     dbc.Row(
-        [dbc.Col(html.H1(['¿Cuántas vacunas han llegado a México?    ', 
-                         dbc.Badge(f"{int(tot_vac):,}", color="danger", className="mr-1")]),
+        [dbc.Col(html.H1(['¿Cuántas vacunas han llegado a México?  ']),
                 style={"color": "red", 'text-transform': "uppercase", 
                        "font-weight": 'bolder', "font-stretch": "condensed",
                       "font-size": "x-large" },
                 width={ "offset":2 }),
     ]),
+    html.Br(),
+    # vacunas listas
+    dbc.Row([
+        dbc.Col(html.H3([ 
+                         dbc.Badge(f"{int(tot_vac):,}", color="danger", className="mr-1"),
+                         "   (vacunas listas) "]),
+                style={'text-transform': "uppercase", 
+                       "font-weight": 'bolder', "font-stretch": "condensed",
+                      "font-size": "x-large" },
+                width={'size': 6, "offset":4}),
+        ],justify="start"),
     
+    #dosis
+    dbc.Row([
+        dbc.Col(html.H3([ 
+                         dbc.Badge(f"{int(dosis_tot_a):,}", color="info", className="mr-1"),
+                         "   (en substancia activa)"]),
+                style={'text-transform': "uppercase", 
+                       "font-weight": 'bolder', "font-stretch": "condensed",
+                      "font-size": "x-large" },
+                width={'size': 6, "offset":4}),
+        ],justify="start"),
     
+   
     
-    
+    html.Br(),
+    html.Br(),
   
 # ###################### SECCION . MESES
     
@@ -590,7 +612,7 @@ body = html.Div([
                               style={
             'margin-top': '9px',
             'margin-left': '130px',
-            'margin-right': '0px',
+            'margin-right': '-120px',
             'width': '509px',
             'height': '46px',
             "font-size": "large" }
@@ -639,6 +661,7 @@ body = html.Div([
                               style={
             'margin-top': '9px',
             'margin-left': '130px',
+            'margin-right': '-120px',
             'width': '509px',
             'height': '46px',
              "font-size": "large"                      
@@ -723,12 +746,11 @@ body = html.Div([
                               #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
                               style={
             'margin-top': '9px',
-            'margin-left': '40px',
-            'margin-right': '-120px',
+            'margin-left': '130px',
+            'margin-right': '-220px',
             'width': '30px',
             'height': '36px',
              "font-size": "small"                      
-            #'backgroundColor': 'rgba(0,0,0,0)',
             }
                                      )),
             dbc.Col(dcc.Graph(figure=figvacdosis),
@@ -832,4 +854,3 @@ from settings import config
 
 if __name__ == "__main__":
     app.run_server()
-    
