@@ -1,4 +1,3 @@
-
 import dash
 import matplotlib.pyplot as plt 
 import dash_bootstrap_components as dbc
@@ -463,7 +462,8 @@ figvacdosis.update_traces(pull=[0.05, 0.05, 0.05, 0.05, 0.1],
 server = flask.Flask(__name__)
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes. LUX], server=server)
 
-body = html.Div([ 
+body = html.Div([
+  
       
     html.Br(),
     
@@ -546,12 +546,32 @@ body = html.Div([
 #    
 #    html.Br(),
     html.Br(),
+    
+##  dbc.Card(
+ #       dbc.CardBody([
+ #           dbc.Row([
+ #               dbc.Col([
+ #                   drawText()
+ #               ], width=3),
+ #               dbc.Col([
+ #                   drawText()
+ #               ], width=3),
+ #               dbc.Col([
+ #                   drawText()
+ #               ], width=3),
+ #               dbc.Col([
+ #                   drawText()
+ #               ], width=3),
+ #           ], align='center'), 
+ #           html.Br(),)
   
 # ###################### SECCION . MESES
 
-     dbc.Row(
-           [dbc.Col(html.H5("Diciembre")),
-                  # width={'size' : "auto", "offset":1}),
+   
+            dbc.Row([
+            dbc.Col(html.H5("Diciembre"),
+                   # width= 3, 
+                    width= { "size": 2, "offset":1}),
             dbc.Col(html.H5("Enero")),
                   # width={'size' : "auto","offset":1}),
             dbc.Col(html.H5("Febrero")),
@@ -561,13 +581,16 @@ body = html.Div([
             dbc.Col(html.H5("Abril")),
                   # width={'size' : "auto", "offset":1}),
 
-           ], justify="around"),
+           ], align='center'),
+    
+               
+            
     
 #Cintillo 1
     dbc.Row(
            [
-               dbc.Col(html.H1(str(f'{sumdic_v:,d}'))),
-                    #   width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H1(str(f'{sumdic_v:,d}')),
+                       width={'size' : 2, "offset":1}),
                dbc.Col(html.H1(str(f'{sumene_v:,d}'))),
                      #  width={'size' : "auto", "offset":1}),
                dbc.Col(html.H1(str(f'{sumfeb_v:,d}'))),
@@ -576,7 +599,7 @@ body = html.Div([
                       #width={'size' : "auto", "offset":1}),
                dbc.Col(html.H1(str(f'{sumabr_v:,d}'))),
                       #width={'size' : "auto", "offset":1}),
-            ],justify= "around"),
+            ], align='center'),
     
     
     
@@ -790,8 +813,8 @@ body = html.Div([
     # ###################### Cintillo estadística básica
 # Row 1
      dbc.Row(
-           [dbc.Col(html.H6("Días transcurridos")),
-                  # width={'size' : "auto", "offset":1}),
+           [dbc.Col(html.H6("Días transcurridos"),
+                   width={'size' : 2, "offset":1}),
             dbc.Col(html.H6("Promedio diario")),
                   # width={'size' : "auto", "offset":1}),
             dbc.Col(html.H6("Día con más arribos")),
@@ -802,13 +825,13 @@ body = html.Div([
                   # width={'size' : "auto","offset":1}),
           
 
-           ], justify="around"),
+           ], align='center'),
     
 #Row 2
     dbc.Row(
            [
-               dbc.Col(html.H3(days_passed)),
-                    #   width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H3(days_passed),
+                      width={'size' : 2, "offset":1}),
                dbc.Col(html.H3(vacunas_prom_day)),
                       #width={'size' : "auto", "offset":1}),
                dbc.Col(html.H3([vac_max_dia.strftime('%d-%m-%Y'), " (", vac_max_valor, ")"])),
@@ -818,7 +841,7 @@ body = html.Div([
                dbc.Col(html.H3(city1)),
                       #width={'size' : "auto", "offset":1}),
                
-            ],justify= "end"),
+            ], align='center'),
     
     
     
@@ -845,6 +868,7 @@ body = html.Div([
     html.Br(),
     
 ])
+
     
     
 app.layout = html.Div([body])
@@ -853,4 +877,6 @@ from application.dash import app
 from settings import config
 
 if __name__ == "__main__":
-    app.run_server()
+    app.run_server(use_reloader = False)
+    
+    
