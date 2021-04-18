@@ -770,7 +770,7 @@ body = html.Div([
                               style={
             'margin-top': '9px',
             'margin-left': '130px',
-            'margin-right': '-220px',
+            'margin-right': '-420px',
             'width': '30px',
             'height': '36px',
              "font-size": "small"                      
@@ -873,11 +873,10 @@ body = html.Div([
     
 app.layout = html.Div([body])
 
-#from application.dash import app
-#from settings import config
+from application.dash import app
+from settings import config
 
 if __name__ == "__main__":
     app.run_server(use_reloader = False)
     
     
-  
