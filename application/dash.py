@@ -644,7 +644,7 @@ body = html.Div([
             
 ####################### GRAFICA 1
             dbc.Col(dcc.Graph(figure=figvac0),
-                    width={'size' : "auto", "offset":0}), ]),
+                    width={'size' : 7, "offset":0}), ]),
     
 #       dbc.Row(
 #           [dbc.Col(html.H6(["Hasta el 15 de abril, nuestro país ha recibido o envasado  ", 
@@ -694,7 +694,7 @@ body = html.Div([
            
 ####################### GRAFICA 2
            dbc.Col(dcc.Graph(figure=figvac), #config= "autosize"), 
-                    width={'size' : "auto", "offset":0}),
+                    width={'size' : 7, "offset":0}),
                ]),#,justify="center"),
     
     html.Br(),
@@ -777,7 +777,7 @@ body = html.Div([
             }
                                      )),
             dbc.Col(dcc.Graph(figure=figvacdosis),
-                     width={'size' : "auto", "offset":0}),
+                     width={'size' : 7, "offset":0}),
             
         ]),
       
@@ -873,10 +873,11 @@ body = html.Div([
     
 app.layout = html.Div([body])
 
-from application.dash import app
-from settings import config
+#from application.dash import app
+#from settings import config
 
 if __name__ == "__main__":
     app.run_server(use_reloader = False)
     
     
+  
