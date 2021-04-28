@@ -18,6 +18,7 @@ from datetime import date
 import geopandas as gpd
 import flask
 import os
+from numpy.core.defchararray import add
 
 yesterday = datetime.now() - timedelta(1)
 yea = datetime.strftime(yesterday, '%Y%m%d')
@@ -36,7 +37,10 @@ vacunas.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
                                    errors='ignore')
 
    
-
+vuelos = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Tablavuelos.csv", encoding= "Latin-1")
+vuelos.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
+                                   errors='ignore')
+tabla2 = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/tabla2%20detalle%20vacunas.csv" , encoding= "Latin-1")
 dosis_a = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Dosis%20promedio%20a%20envasar.csv", encoding= "Latin-1")
 dosis_a.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
                                    errors='ignore')
@@ -274,27 +278,65 @@ query= date_126M.strftime("Se estima que tendríamos 126 millones de dosis el d�
 ######################################################### Para la APP 
 #-------------------------------------Tratamiento de tabla farmaceutica TABLA1
 
-table_header = [
-    html.Thead(html.Tr([html.Th(), html.Th()]))] 
+#table_header = [
+#    html.Thead(html.Tr([html.Th(), html.Th()]))] 
+#
+#row1 = html.Tr([html.Td(farm_tot1), html.Td([str(f"{cant_tot1:,d}")])])
+#row2 = html.Tr([html.Td(farm_tot2), html.Td([str(f"{cant_tot2:,d}")])])
+#row3 = html.Tr([html.Td(farm_tot3), html.Td([str(f"{cant_tot3:,d}")])])
+#row4 = html.Tr([html.Td(farm_tot4), html.Td([str(f"{cant_tot4:,d}")])])
+#row5 = html.Tr([html.Td(farm_tot5), html.Td([str(f"{cant_tot5:,d}")])])
+##row6 = html.Tr([html.Td(farm_tot6), html.Td([str(f"{cant_tot6:,d}")])])
+#row7 = html.Tr([html.Td("Total"), html.Td([str(f"{tot_vac:,d}")])])
+#                    
+#row7 = html.Tr([html.Th("Total", style={"offset": 3, "color": "black",
+#                                                 'fontWeight': 'bold',
+#                                                 'fontSize':20,}),
+#                html.Th([str(f"{tot_vac:,d}")], 
+#                                          style={"color": "red",
+#                                                 'fontWeight': 'bold',
+#                                                 'fontSize':20,})])
+#
+#table_body = [html.Tbody([row1, row2, row3, row4, row5,# row6,
+#                          row7])]
 
-row1 = html.Tr([html.Td(farm_tot1), html.Td([str(f"{cant_tot1:,d}")])])
-row2 = html.Tr([html.Td(farm_tot2), html.Td([str(f"{cant_tot2:,d}")])])
-row3 = html.Tr([html.Td(farm_tot3), html.Td([str(f"{cant_tot3:,d}")])])
-row4 = html.Tr([html.Td(farm_tot4), html.Td([str(f"{cant_tot4:,d}")])])
-row5 = html.Tr([html.Td(farm_tot5), html.Td([str(f"{cant_tot5:,d}")])])
-#row6 = html.Tr([html.Td(farm_tot6), html.Td([str(f"{cant_tot6:,d}")])])
-row7 = html.Tr([html.Td("Total"), html.Td([str(f"{tot_vac:,d}")])])
-                    
-row7 = html.Tr([html.Th("Total", style={"offset": 3, "color": "black",
-                                                 'fontWeight': 'bold',
-                                                 'fontSize':20,}),
-                html.Th([str(f"{tot_vac:,d}")], 
-                                          style={"color": "red",
-                                                 'fontWeight': 'bold',
-                                                 'fontSize':20,})])
 
-table_body = [html.Tbody([row1, row2, row3, row4, row5,# row6,
-                          row7])]
+
+######################################################### Para la APP (modificado)
+#-------------------------------------Tratamiento de tabla farmaceutica TABLA1 (modificado)
+
+vacunas_flyies=vacunas
+
+#rename
+vacunas_flyies.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,errors='ignore')
+vacunas_flyies.Arribo.replace('Ciudad de MÃ©xico', 'Farmacéutica' ,inplace=True)
+vacunas_flyies.Arribo.replace('QuerÃ©taro', 'Farmacéutica' ,inplace=True)
+
+# drop mes_y
+vacunas_flyies.drop('Mes_y', inplace=True, errors='ignore')
+
+# create column serial ID
+vacunas_flyies1 = vacunas_flyies.assign(Arribo=add('', np.arange(1, len(vacunas_flyies) + 1).astype(str)))
+
+# create column 'Tipo' (número de dosis), 
+vacunas_flyies1.loc[vacunas_flyies1.Farmacéutica=='CanSino Biologics','Tipo'] = 'Única dosis'
+vacunas_flyies1.loc[vacunas_flyies1.Farmacéutica!='CanSino Biologics','Tipo'] = 'Doble dosis'
+
+# create column nombre comun vacuna
+vacunas_flyies1.loc[vacunas_flyies1.Farmacéutica=='Pfizer-BioNTech','Vacuna'] = 'Pfizer'
+vacunas_flyies1.loc[vacunas_flyies1.Farmacéutica=='CanSino Biologics','Vacuna'] = 'CanSino'
+vacunas_flyies1.loc[vacunas_flyies1.Farmacéutica=='AstraZeneca','Vacuna'] = 'AstraZeneca'
+vacunas_flyies1.loc[vacunas_flyies1.Farmacéutica=='Sinovac','Vacuna'] = 'Sinovac'
+vacunas_flyies1.loc[vacunas_flyies1.Farmacéutica=='Sputnik V','Vacuna'] = 'Sputnik V'
+
+# Seleccion de columnas
+vacunas_flyies1_bien=vacunas_flyies1[['Arribo','Fecha','Vacuna','Farmacéutica','Cantidad']]
+# Add thousan separator a columna 'Cantidad'
+vacunas_flyies1_bien.Cantidad=vacunas_flyies1_bien.Cantidad.apply(lambda x : "{:,}".format(x))
+#chnage datatime column format
+vacunas_flyies1_bien["Fecha"] = vacunas_flyies1_bien["Fecha"].dt.strftime("%d/%m/%Y")
+
+
 
 
 ######################################################### Para la APP 
@@ -382,21 +424,25 @@ fech_1_d = dosis_a_.iloc[0]['Fecha']
 fech_2_d = dosis_a_.iloc[1]['Fecha']
 fech_3_d = dosis_a_.iloc[2]['Fecha']
 fech_4_d = dosis_a_.iloc[3]['Fecha']
+fech_5_d = dosis_a_.iloc[4]['Fecha']
 #
 lug_1_d = dosis_a_.iloc[0]['Arribo']
 lug_2_d = dosis_a_.iloc[1]['Arribo']
 lug_3_d = dosis_a_.iloc[2]['Arribo']
 lug_4_d = dosis_a_.iloc[3]['Arribo']
+lug_5_d = dosis_a_.iloc[4]['Arribo']
 #
 denv_1_d = dosis_a_.iloc[0]['Dosis promedio a envasar']
 denv_2_d = dosis_a_.iloc[1]['Dosis promedio a envasar']
 denv_3_d = dosis_a_.iloc[2]['Dosis promedio a envasar']
 denv_4_d = dosis_a_.iloc[3]['Dosis promedio a envasar']
+denv_5_d = dosis_a_.iloc[4]['Dosis promedio a envasar']
 #
 farm_1_d = dosis_a_.iloc[0]['Farmacéutica']
 farm_2_d = dosis_a_.iloc[1]['Farmacéutica']
 farm_3_d = dosis_a_.iloc[2]['Farmacéutica']
 farm_4_d = dosis_a_.iloc[3]['Farmacéutica']
+farm_5_d = dosis_a_.iloc[4]['Farmacéutica']
 
 table_headerDOSISe = [
     html.Thead(html.Tr([html.Td(), html.Td(), 
@@ -410,6 +456,7 @@ row1de = html.Tr([html.Td(fech_1_d.strftime('%d-%m-%Y')),
                   html.Td(fech_2_d.strftime('%d-%m-%Y')), 
                   html.Td(fech_3_d.strftime('%d-%m-%Y')), 
                   html.Td(fech_4_d.strftime('%d-%m-%Y')),
+                  html.Td(fech_5_d.strftime('%d-%m-%Y')),
                   html.Td(" Total ", style={"offset": 3, "color": "black",
                                                  'fontWeight': 'bold',
                                                  'fontSize':16,})])
@@ -417,6 +464,7 @@ row2de = html.Tr([html.Td(f"{int(denv_1_d):,}"),
                   html.Td(f"{int(denv_2_d):,}"), 
                   html.Td(f"{int(denv_3_d):,}"), 
                   html.Td(f"{int(denv_4_d):,}"),
+                  html.Td(f"{int(denv_5_d):,}"),
                   html.Td([str(f"{dosis_tot_a:,d}")], 
                                           style={"color": "red",
                                                  'fontWeight': 'bold',
@@ -425,6 +473,7 @@ row3de = html.Tr([html.Td(farm_1_d),
                   html.Td(farm_2_d), 
                   html.Td(farm_3_d), 
                   html.Td(farm_4_d),
+                  html.Td(farm_5_d),
                   html.Td(" ")])
 #row4de = html.Tr([html.Td(lug_3_d), html.Td(lug_4_d), html.Td(denv_4_d), html.Td(farm_4_d)])
 #row5de = html.Tr([html.Td(lug_4_d), html.Td("Total"), html.Td(dosis_tot_a), html.Td(" ")])
@@ -441,7 +490,7 @@ figvacdosis.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   plot_bgcolor='rgba(0,0,0,0)',
                   uniformtext_minsize=22,
                   uniformtext_mode='hide',
-                  autosize=True,
+                  autosize=True, 
                   #width= 650,
                   #height=650,
                   title_font_size = 22,
@@ -495,30 +544,28 @@ body = html.Div([
     html.Br(),
     # vacunas listas
     dbc.Row([
-        dbc.Col(html.H3([ 
+        dbc.Col(html.H5([ 
                          dbc.Badge(f"{int(tot_vac):,}", color="danger", className="mr-1"),
-                         "   (vacunas listas) "]),
+                         "   vacunas listas "], style={"color": "gray"}),
                 style={'text-transform': "uppercase", 
                        "font-weight": 'bolder', "font-stretch": "condensed",
-                      "font-size": "x-large" },
-                width={'size': 6, "offset":4}),
+                      "font-size": "medium" },
+                width={'size': 6, "offset":3}),
         ],justify="start"),
     
     #dosis
     dbc.Row([
-        dbc.Col(html.H3([ 
+        dbc.Col(html.H5([ 
                          dbc.Badge(f"{int(dosis_tot_a):,}", color="info", className="mr-1"),
-                         "   (en substancia activa)"]),
+                         "   vacunas para envasar en el país"], style={"color": "gray", }),
                 style={'text-transform': "uppercase", 
                        "font-weight": 'bolder', "font-stretch": "condensed",
-                      "font-size": "x-large" },
-                width={'size': 6, "offset":4}),
+                       "color" : "#91210C",
+                      "font-size": "medium" },
+                width={'size': 8, "offset":3}),
         ],justify="start"),
     
-   
-    
-    html.Br(),
-    html.Br(),
+#style={"color": "#91210C", },    
   
 # ###################### SECCION . MESES
     
@@ -602,49 +649,58 @@ body = html.Div([
             ], align='center'),
     
     
-    
-        
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    
+
     
 # ###################### SECCION 1. FARMACEUTICAS
         
-    dbc.Row(
-        [dbc.Col(html.H2('¿De qué farmacéutica provienen?',className='card-title',
-                         style={'textAlign': 'start', "color": "#91210C",}),
-                 width={ "offset":1 }),
-
-            ]),
+#    dbc.Row(
+#        [dbc.Col(html.H2('¿De qué farmacéutica provienen?',className='card-title',
+#                         style={'textAlign': 'start', "color": "#91210C",}),
+#                 width={ "offset":1 }),
+#
+#            ]),
     
-    
-####################### TABLA 1
-    dbc.Row(
-        [dbc.Col(dbc.Table(table_header + table_body, 
-                              bordered=False, 
-                              dark=False,
-                              hover=True,
-                              #responsive=True,
-                              striped=True,
-                              #size="sm",
-                              #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
-                              style={
-            'margin-top': '9px',
-            'margin-left': '130px',
-            'margin-right': '-120px',
-            'width': '509px',
-            'height': '46px',
-            "font-size": "large" }
-                                     )),
+#    
+#    
+######################## TABLA 1
+#    dbc.Row(
+#        [dbc.Col(dbc.Table(table_header + table_body, 
+#                              bordered=False, 
+#                              dark=False,
+#                              hover=True,
+#                              #responsive=True,
+#                              striped=True,
+#                              #size="sm",
+#                              #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
+#                              style={
+#            'margin-top': '9px',
+#            'margin-left': '130px',
+#            'margin-right': '-120px',
+#            'width': '509px',
+#            'height': '46px',
+#            "font-size": "large" }
+#                                     )),
 
             
 ####################### GRAFICA 1
-            dbc.Col(dcc.Graph(figure=figvac0),
-                    width={'size' : 7, "offset":0}), ]),
+#            dbc.Col(dcc.Graph(figure=figvac0),
+#                    width={'size' : 7, "offset":0}), ]),
+    
+#       dbc.Row(
+#           [dbc.Col(html.H6(["Hasta el 15 de abril, nuestro país ha recibido o envasado  ", 
+#                                str(f"{tot_vac:,d} dosis de vacunas contra COVID-19 listas para aplicarse "),
+#                               ],style={'textAlign': 'left'}),
+#                       width={'size': 10,  "offset":1 },
+#                      )],justify="align"),
+#    
+
+    
+    
+
+                                          
+####################### GRAFICA 1
+#    dbc.Col(dcc.Graph(figure=figvac0),
+#                    width={'size' : 7, "offset":0}),
     
 #       dbc.Row(
 #           [dbc.Col(html.H6(["Hasta el 15 de abril, nuestro país ha recibido o envasado  ", 
@@ -659,101 +715,69 @@ body = html.Div([
     html.Br(),
     html.Br(),
     html.Br(),
+
     
 # ###################### SECCION 2. CIUDADES
-        
-    dbc.Row(
-        [dbc.Col(html.H2('¿A qué ciudad arriban las vacunas?',
-                        className='card-title',style={'textAlign': 'left',"color": "#91210C"}),
-                 width={ "offset":1 }),
-    ]),
+#        
+#    dbc.Row(
+#        [dbc.Col(html.H2('¿A qué ciudad arriban las vacunas?',
+#                        className='card-title',style={'textAlign': 'left',"color": "#91210C"}),
+#                 width={ "offset":1 }),
+#    ]),
 
 
 
     
 ####################### TABLA 2
-       dbc.Row([
-           dbc.Col(dbc.Table(table_headerciti + table_bodyciti, 
-                              bordered=False, 
-                              dark=False,
-                              hover=True,
-                              #responsive=True,
-                              striped=True,
-                              #size="sm",
-                              #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
-                              style={
-            'margin-top': '9px',
-            'margin-left': '130px',
-            'margin-right': '-120px',
-            'width': '509px',
-            'height': '46px',
-             "font-size": "large"                      
-            #'backgroundColor': 'rgba(0,0,0,0)',
-            })),
+ #      dbc.Row([
+ #          dbc.Col(dbc.Table(table_headerciti + table_bodyciti, 
+ #                             bordered=False, 
+ #                             dark=False,
+ #                             hover=True,
+ #                             #responsive=True,
+ #                             striped=True,
+ #                             #size="sm",
+ #                             #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
+ #                             style={
+ #           'margin-top': '9px',
+ #           'margin-left': '130px',
+ #           'margin-right': '-120px',
+ #           'width': '509px',
+ #           'height': '46px',
+ #            "font-size": "large"                      
+ #           #'backgroundColor': 'rgba(0,0,0,0)',
+ #           })),
            
            
 ####################### GRAFICA 2
-           dbc.Col(dcc.Graph(figure=figvac), #config= "autosize"), 
-                    width={'size' : 7, "offset":0}),
-               ]),#,justify="center"),
+#           dbc.Col(dcc.Graph(figure=figvac), #config= "autosize"), 
+#                    width={'size' : 7, "offset":0}),
+#               ]),#,justify="center"),
     
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
+#    html.Br(),
+#    html.Br(),
+#    html.Br(),
+#    html.Br(),
+#    html.Br(),
+#    html.Br(),
+#    html.Br(),
     
-# ###################### SECCION 3. MAPA
+    
 
-    dbc.Row([
-          dbc.Col(html.H2('¿De qué paises provienen las dosis?',
-                        className='card-title',style={'textAlign': 'left',"color": "#91210C"}),
-               
-                width={ "offset":1 }),
-    ]),
-
-      dbc.Row(
-           [
-           dbc.Col(html.H5(['Hemos recibido vacunas o sustancia activa desde seis paises: Bélgica, Argentina, China, India, Rusia y Estados Unidos'
-                               ],style={'textAlign': 'left'}),
-                       width={'size': 10,  "offset":1 },
-                      )],justify="align"),
-   # # dbc.Row([dbc.Col(dcc.Graph(figure=aa), 
-   #                   style={'width': '100%', 'display': 'inline-block',
-   #                         'align': 'center'}),
-   #            ]),#,justify="center"),
-   
-   
-    
-     dbc.Row([                          #https://github.com/fdealbam/Vacunas/blob/main/application/static/mapa.JPG
-               dbc.Col(dbc.CardImg(src=" https://github.com/fdealbam/Vacunas/blob/main/imagenmundi.jpg?raw=true"),
-                       #https://github.com/fdealbam/Vacunas/blob/main/imagenmundi.jpg
-                      lg={'size': "autosize",  "offset": 1, }),
-            
-           ]),
-    
-    
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
+# ###################### SECCION 2. SUSTANCIA ACTIVA
     
      dbc.Row([
-        dbc.Col(html.H3('¿Cuántas dosis se han recibido en sustancia activa?',
+        dbc.Col(html.H3('¿Cuántas dosis a granel para envasarse en el país hemos recibido?',
                         className='card-title',style={'textAlign': 'start'} ),
                 style={"color": "#91210C", },
                 width={ "offset":1 },),
-
-                
-                
-    ]),
-      dbc.Row(
+     ]),
+      
+    dbc.Row(
            [
            dbc.Col(html.H5(['En substancia activa se han recibido únicamente de dos laboratorios: AstraZéneca y CanSino Biologics'
-                               ],style={'textAlign': 'left'}),
+                               ],style={'textAlign': 'left',
+                                        "color": "gray"}),
                        width={'size': 10,  "offset":1 },
                       )],justify="align"),
     
@@ -769,24 +793,106 @@ body = html.Div([
                               #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
                               style={
             'margin-top': '9px',
-            'margin-left': '130px',
-            'margin-right': '-420px',
+            'margin-left': '100px',
+            'margin-right': '-320px',
             'width': '30px',
             'height': '36px',
-             "font-size": "small"                      
-            }
-                                     )),
-            dbc.Col(dcc.Graph(figure=figvacdosis),
-                     width={'size' : 7, "offset":0}),
+             "font-size": "small"}
+                             )),
             
+            dbc.Col(dcc.Graph(figure=figvacdosis),
+                     width={'size' : 4, "offset":0}),
         ]),
       
+
+    
+# ###################### SECCION 3. MAPA
+
+    dbc.Row([
+          dbc.Col(html.H2('¿De qué paises provienen las dosis?',
+                        className='card-title',style={'textAlign': 'left',"color": "#91210C"}),
+                  width={ "offset":1 }),
+            ]),
+
+    dbc.Row([
+          dbc.Col(html.H5(['Hemos recibido vacunas o sustancia activa desde seis paises: Bélgica, Argentina, China, India, Rusia y Estados Unidos'
+                               ],style={'textAlign': 'left'}),
+                       width={'size': 10,  "offset":1 },
+                      )],justify="align"),
+
+    
+    dbc.Row([                          #https://github.com/fdealbam/Vacunas/blob/main/application/static/mapa.JPG
+         dbc.Col(dbc.CardImg(src=" https://github.com/fdealbam/Vacunas/blob/main/imagenmundi.png?raw=true"),
+                       #https://github.com/fdealbam/Vacunas/blob/main/imagenmundi.jpg
+                      lg={'size': "9",  "offset": 1, }),
+    ]),
+    
+   
+    
+    
+    # ###################### SECCION 1. FARMACEUTICAS.2 (modificado)
+        
+    dbc.Row(
+        [dbc.Col(html.H2('¿De qué farmacéutica provienen?',className='card-title',
+                         style={'textAlign': 'start', "color": "#91210C",}),
+                 width={ "offset":1 }),
+        ]),
+    
+    
+#################################### Tabla vuelos
+
+        dbc.Row(
+                [dbc.Col(dash_table.DataTable(
+                id='table',
+            columns=[{"name": i, "id": i} for i in vuelos.columns],
+            data=vuelos.to_dict('records'),
+                    fixed_rows={'headers': True},
+                    style_table={'height': '300px', 'overflowY': 'auto'},
+                    style_cell={'fontSize':16, 'font-family':'Nunito Sans'}, 
+                    style_header = {'fontWeight': 'bold'},
+                    style_data = {'border': 'none' },
+                ))] ,style={
+            'margin-top': '9px',
+            'margin-left': '100px',
+            'margin-right': '500px',
+            'width': '1000px',
+                },
+        ),
     
     html.Br(),
     html.Br(),
     html.Br(),
-    html.Br(),
-    html.Br(),
+  
+    # ###################### SECCION 1. FARMACEUTICAS.2 (modificado)
+        
+    dbc.Row(
+        [dbc.Col(html.H2('¿Cuántas dosis a granel para su envasado en México se han recibido?',className='card-title',
+                         style={'textAlign': 'start', "color": "#91210C",}),
+                 width={ "offset":1 }),
+        ]),
+    
+  
+ #    dbc.Row(
+ #               [dbc.Col(dash_table.DataTable(
+ #               id='table2',
+ #           columns=[{"name": i, "id": i} for i in tabla2.columns],
+ #           data=tabla2.to_dict('records'),
+ #                  # fixed_rows={'headers': True},
+ #                  # style_table={'height': '300px', #'overflowY': 'auto'
+ #                  #             },
+ #                   
+ #               ))] ,style={
+ #           'margin-top': '9px',
+ #           'margin-left': '100px',
+ #           'margin-right': '500px',
+ #           'width': '1000px', }),
+ #   
+ #   html.Br(),
+ #   html.Br(),
+ #   html.Br(),
+        
+    
+# ###################### SECCION . NUMERALIA
 
     dbc.Row([
         dbc.Col(html.H3('Numeralia general',
@@ -821,7 +927,7 @@ body = html.Div([
            #       # width={'size' : "auto","offset":1}),
             dbc.Col(html.H6("Laboratorio con más envíos")),
                   # width={'size' : "auto","offset":1}),
-            dbc.Col(html.H6("Ciudad con más arribos")),
+            #dbc.Col(html.H6("Ciudad con más arribos")),
                   # width={'size' : "auto","offset":1}),
           
 
@@ -838,7 +944,7 @@ body = html.Div([
                      #  width={'size' : "auto", "offset":1}),
                dbc.Col(html.H3(lab1)),
                       # width={'size' : "auto", "offset":1}),
-               dbc.Col(html.H3(city1)),
+               #dbc.Col(html.H3(city1)),
                       #width={'size' : "auto", "offset":1}),
                
             ], align='center'),
@@ -848,7 +954,14 @@ body = html.Div([
         
     html.Br(),
     html.Br(),
-            
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),            
             
 
     
@@ -860,7 +973,18 @@ body = html.Div([
 #                      )],justify="start"),                
 #    ]),
 #
-
+    
+    
+        dbc.Row(
+            [dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
+                        width={'size': 1,  "offset": 1 }),
+             dbc.Col(html.H6("Secretaría de Relaciones Exteriores, "
+                            "Subsecretaría para Asuntos Multilaterales y "
+                            "Derechos Humanos"),
+                        width={'size': 6, 'offset' : 0}), 
+        ],justify="center"),
+    
+    
     html.Br(),
     html.Br(),
     html.Br(),
@@ -878,5 +1002,4 @@ from settings import config
 
 if __name__ == "__main__":
     app.run_server(use_reloader = False)
-    
     
