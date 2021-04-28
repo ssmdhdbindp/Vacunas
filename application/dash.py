@@ -40,9 +40,11 @@ vacunas.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
 vuelos = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Tablavuelos.csv", encoding= "Latin-1")
 vuelos.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
                                    errors='ignore')
-tabla_detalle = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/tabla2%20detalle%20vacunas.csv" , encoding= "Latin-1")
-
+tabla_detalle = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/tabla2%20detalle%20vacunas.csv" )#, encoding= "Latin-1")
+tabla_detalle.rename(columns={'QuerÃ©taro': 'Querétaro' },inplace=True, errors='ignore')
+tabla_detalle.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,errors='ignore')
 tabla_detalle["Dosis envasadas"] = tabla_detalle["Dosis envasadas"].apply(lambda x : "{:,}".format(x))
+
 
 
 dosis_a = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Dosis%20promedio%20a%20envasar.csv", encoding= "Latin-1")
@@ -832,8 +834,8 @@ body = html.Div([
             data=vuelos.to_dict('records'),
                     fixed_rows={'headers': True,"striped": True,},
                     style_table={'height': '300px', 'overflowY': 'auto',"striped": True,},
-                    style_cell={'fontSize':16, 'font-family':'Nunito Sans',"striped": True,}, 
-                    style_header = {'border': 'none','fontWeight': 'bold'},
+                    style_cell={'fontSize':12, 'font-family':'Nunito Sans',"striped": True,}, 
+                    style_header = {'border': 'none','fontWeight': 'condensed'},
                     style_data = {'border': 'none', "striped": True, },
                     style_data_conditional=[{'if': {'row_index': 'odd'},
                                              'backgroundColor': 'rgb(248, 248, 248)'}],
