@@ -56,7 +56,10 @@ vacunas['Fecha'] = pd.to_datetime(vacunas['Fecha'], format=format)
 
 
 
-
+tabla1 = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/tabla1%20dosis%20a%20granel%20para%20envasarse.csv" , encoding= "Latin-1")
+tabla1.rename(columns={'FarmacÃ©utica': 'Farmacéutica', },inplace=True,
+                                   errors='ignore')
+tabla1.Arribo.replace("MÃ©xico", "México",inplace=True)
 ###############################
 # TRATAMIENTO
 ############################### 
@@ -782,30 +785,50 @@ body = html.Div([
                        width={'size': 10,  "offset":1 },
                       )],justify="align"),
     
-     dbc.Row(
-        [
-            dbc.Col(dbc.Table(table_headerDOSISe + table_bodyDOSISe, 
-                              bordered=False, 
-                              dark=False,
-                              hover=True,
-                              #responsive=True,
-                              striped=True,
-                              #size="sm",
-                              #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
-                              style={
-            'margin-top': '9px',
-            'margin-left': '100px',
-            'margin-right': '-320px',
-            'width': '30px',
-            'height': '36px',
-             "font-size": "small"}
-                             )),
-            
-            dbc.Col(dcc.Graph(figure=figvacdosis),
-                     width={'size' : 4, "offset":0}),
-        ]),
+#    dbc.Row(
+#       [
+#           dbc.Col(dbc.Table(table_headerDOSISe + table_bodyDOSISe, 
+#                             bordered=False, 
+#                             dark=False,
+#                             hover=True,
+#                             #responsive=True,
+#                             striped=True,
+#                             #size="sm",
+#                             #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
+#                             style={
+#           'margin-top': '9px',
+#           'margin-left': '100px',
+#           'margin-right': '-320px',
+#           'width': '30px',
+#           'height': '36px',
+#            "font-size": "small"}
+#                            )),
+#           
+#           dbc.Col(dcc.Graph(figure=figvacdosis),
+#                    width={'size' : 4, "offset":0}),
+#       ]),
       
 
+    dbc.Row(
+        [dbc.Col(dash_table.DataTable(
+                id='table0',
+            columns=[{"name": i, "id": i} for i in tabla1.columns],
+            data=tabla1.to_dict('records'),
+                
+                    style_table={'height': '300px', "striped": True,},
+                    style_cell={'fontSize':12, 'font-family':'Nunito Sans',"striped": True,}, 
+                    style_header = {'border': 'none','fontWeight': 'bold'},
+                    style_data = {'border': 'none', "striped": True, },
+                    style_data_conditional=[{'if': {'row_index': 'odd'},
+                                             'backgroundColor': 'rgb(248, 248, 248)'}],
+                ))] ,style={
+            'margin-top': '9px',
+            'margin-left': '100px',
+            'margin-right': '500px',
+            'width': '1000px',
+                   
+                },
+        ),
     
 # ###################### SECCION 3. MAPA
 
@@ -1011,5 +1034,4 @@ from settings import config
 
 if __name__ == "__main__":
     app.run_server(use_reloader = False)
-    
     
