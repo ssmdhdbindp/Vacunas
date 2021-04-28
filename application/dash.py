@@ -846,16 +846,19 @@ body = html.Div([
                 id='table',
             columns=[{"name": i, "id": i} for i in vuelos.columns],
             data=vuelos.to_dict('records'),
-                    fixed_rows={'headers': True},
-                    style_table={'height': '300px', 'overflowY': 'auto'},
-                    style_cell={'fontSize':16, 'font-family':'Nunito Sans'}, 
+                    fixed_rows={'headers': True,"striped": True,},
+                    style_table={'height': '300px', 'overflowY': 'auto',"striped": True,},
+                    style_cell={'fontSize':12, 'font-family':'Nunito Sans',"striped": True,}, 
                     style_header = {'fontWeight': 'bold'},
-                    style_data = {'border': 'none' },
+                    style_data = {'border': 'none', "striped": True, },
+                    style_data_conditional=[{'if': {'row_index': 'odd'},
+                                             'backgroundColor': 'rgb(248, 248, 248)'}],
                 ))] ,style={
             'margin-top': '9px',
             'margin-left': '100px',
             'margin-right': '500px',
             'width': '1000px',
+                   
                 },
         ),
     
@@ -875,8 +878,8 @@ body = html.Div([
  #    dbc.Row(
  #               [dbc.Col(dash_table.DataTable(
  #               id='table2',
- #           columns=[{"name": i, "id": i} for i in tabla2.columns],
- #           data=tabla2.to_dict('records'),
+ #           columns2=[{"name": i, "id": i} for i in tabla2.columns2],
+ #           data2=tabla2.to_dict('records'),
  #                  # fixed_rows={'headers': True},
  #                  # style_table={'height': '300px', #'overflowY': 'auto'
  #                  #             },
@@ -887,9 +890,9 @@ body = html.Div([
  #           'margin-right': '500px',
  #           'width': '1000px', }),
  #   
- #   html.Br(),
- #   html.Br(),
- #   html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
         
     
 # ###################### SECCION . NUMERALIA
