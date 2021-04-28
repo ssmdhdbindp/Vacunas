@@ -946,7 +946,7 @@ body = html.Div([
             ]),
     
     html.Br(),
-    dbc.Row([dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/mapalaboratorios.png?raw=true"),
+    dbc.Row([dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/afb2a8d002835050278a12660d795ce7bbdbfcf7/mapa_%20envasado-vacunas-02.png?raw=true"),
                       lg={ "offset": 1, "size": 9}, 
                      style= {"margin-top": "-50px"}),
    ]),
