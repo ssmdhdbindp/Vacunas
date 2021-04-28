@@ -750,8 +750,8 @@ body = html.Div([
 
                                           
 ####################### GRAFICA 1
-#    dbc.Col(dcc.Graph(figure=figvac0),
-#                    width={'size' : 7, "offset":0}),
+    #dbc.Col(dcc.Graph(figure=figvac0),
+    #                width={'size' : 7, "offset":0}),
     
 #       dbc.Row(
 #           [dbc.Col(html.H6(["Hasta el 15 de abril, nuestro país ha recibido o envasado  ", 
@@ -839,15 +839,19 @@ body = html.Div([
                     style_data = {'border': 'none', "striped": True, },
                     style_data_conditional=[{'if': {'row_index': 'odd'},
                                              'backgroundColor': 'rgb(248, 248, 248)'}],
-                ))] ,style={
+                ), style={
             'margin-top': '9px',
             'margin-left': '100px',
-            'margin-right': '500px',
-            'width': '1000px',
+            'margin-right': '0px',
+            'width': '600px',
                    
-                },
-        ),
-    
+                }),
+                 
+       dbc.Col(dcc.Graph(figure=figvac0),
+                    style={'size' : 3, "offset":0,
+                          "margin-top": "-50px"}),   
+                ]),        
+                 
     html.Br(),
     html.Br(),
     html.Br(),
@@ -875,65 +879,41 @@ body = html.Div([
                                ],style={'textAlign': 'left',
                                         "color": "gray"}),
                        width={'size': 10,  "offset":1 },
-                      )],justify="align"),
+                      ),
+        
+           ],justify="align"),
     
 
     html.Br(),
       
 
-#   dbc.Row(
-#       [dbc.Col(dash_table.DataTable(
-#               id='table0',
-#           columns=[{"name": i, "id": i} for i in tabla1.columns],
-#           data=tabla1.to_dict('records'),
-#                   style_table={'height': '200px', "striped": True, 'overflowY': 'scroll'},
-#                   style_cell={'fontSize':13, 'font-family':'Nunito Sans',"striped": True,}, 
-#                   style_header = {'border': 'none','fontWeight': 'bold'},
-#                   style_data = {'border': 'none', "striped": True, },
-#                   style_data_conditional=[{'if': {'row_index': 'odd'},
-#                                            'backgroundColor': 'rgb(248, 248, 248)'}]),
-#           style={
-#           'margin-top': '9px',
-#           'margin-left': '100px',
-#           'margin-right': '0px',
-#           'width': '400px'},
-#       
-#       ),
-
-#      
-#        
-         
-#          dbc.Col(dcc.Graph(figure=figvac0),
-#                    style={'size' : 4, "offset":0,
-#                           'margin-top': '-100px',
-#}),
-       
-#        ]),     
-
     
 #############    
     dbc.Row(
-        [dbc.Col(dash_table.DataTable(
+        [
+
+            
+            dbc.Col(dash_table.DataTable(
                 id='table2',
             columns=[{"name": i, "id": i} for i in tabla_detalle.columns],
             data=tabla_detalle.to_dict('records'),
                 
                     style_table={'height': '300px', "striped": True,},
                     style_cell={#"align-text": "left",
-                        'fontSize':16, 'font-family':'Nunito Sans',"striped": True,}, 
+                        'fontSize':12, 'font-family':'Nunito Sans',"striped": True,}, 
                     style_header = {'border': 'none','fontWeight': 'bold'},
                     style_data = {'border': 'none', "striped": True, },
                     style_data_conditional=[{'if': {'row_index': 'odd'},
                                              'backgroundColor': 'rgb(248, 248, 248)'}],
-                ))] ,style={
-            'margin-top': '9px',
-            'margin-left': '100px',
-            'margin-right': '500px',
-            'width': '1000px',
-                   
-                },
-        ),
-        
+                ) ,style={
+            'margin-top': '30px',
+            'margin-left': '80px',
+            'margin-right': '0px',
+            'margin-bottom': '0px',
+            'width': '250px'}),
+    
+
+        ]),
 
 ###############    
     
@@ -945,16 +925,15 @@ body = html.Div([
                   width={ "offset":1 }),
             ]),
     
-    html.Br(),
-    dbc.Row([dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/afb2a8d002835050278a12660d795ce7bbdbfcf7/mapa_%20envasado-vacunas-02.png?raw=true"),
-                      lg={ "offset": 1, "size": 9}, 
-                     style= {"margin-top": "-50px"}),
+    dbc.Row([
+        dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/afb2a8d002835050278a12660d795ce7bbdbfcf7/mapa_%20envasado-vacunas-02.png?raw=true"),
+                      lg={ "offset": 1, "size": 8}, 
+                     style= {"margin-top": "-100px"}),
+             
+              
+             
    ]),
     
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
     html.Br(),
     html.Br(),
     html.Br(),
@@ -966,7 +945,8 @@ body = html.Div([
     dbc.Row([
           dbc.Col(html.H3('¿De qué paises provienen las dosis?',
                         className='card-title',style={'textAlign': 'left',"color": "#91210C"}),
-                  width={ "offset":1 }),
+                  width={ "offset":1,
+                        "margin-top": "-100px"}),
             ]),
 
     dbc.Row([
