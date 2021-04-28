@@ -59,7 +59,7 @@ vacunas['Fecha'] = pd.to_datetime(vacunas['Fecha'], format=format)
 tabla1 = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/tabla1%20dosis%20a%20granel%20para%20envasarse.csv" , encoding= "Latin-1")
 tabla1.rename(columns={'FarmacÃ©utica': 'Farmacéutica', },inplace=True,
                                    errors='ignore')
-tabla1.Arribo.replace("MÃ©xico", "México",inplace=True)
+#tabla1.Arribo.replace("MÃ©xico", "México",inplace=True)
 ###############################
 # TRATAMIENTO
 ############################### 
