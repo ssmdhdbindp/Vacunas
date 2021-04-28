@@ -40,7 +40,8 @@ vacunas.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
 vuelos = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Tablavuelos.csv", encoding= "Latin-1")
 vuelos.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
                                    errors='ignore')
-tabla2 = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/tabla2%20detalle%20vacunas.csv" , encoding= "Latin-1")
+tabla_detalle = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/tabla2%20detalle%20vacunas.csv" , encoding= "Latin-1")
+
 dosis_a = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Dosis%20promedio%20a%20envasar.csv", encoding= "Latin-1")
 dosis_a.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
                                    errors='ignore')
@@ -849,7 +850,7 @@ body = html.Div([
                     fixed_rows={'headers': True,"striped": True,},
                     style_table={'height': '300px', 'overflowY': 'auto',"striped": True,},
                     style_cell={'fontSize':12, 'font-family':'Nunito Sans',"striped": True,}, 
-                    style_header = {'fontWeight': 'bold'},
+                    style_header = {'border': 'none','fontWeight': 'bold'},
                     style_data = {'border': 'none', "striped": True, },
                     style_data_conditional=[{'if': {'row_index': 'odd'},
                                              'backgroundColor': 'rgb(248, 248, 248)'}],
@@ -875,21 +876,26 @@ body = html.Div([
         ]),
     
   
- #    dbc.Row(
- #               [dbc.Col(dash_table.DataTable(
- #               id='table2',
- #           columns2=[{"name": i, "id": i} for i in tabla2.columns2],
- #           data2=tabla2.to_dict('records'),
- #                  # fixed_rows={'headers': True},
- #                  # style_table={'height': '300px', #'overflowY': 'auto'
- #                  #             },
- #                   
- #               ))] ,style={
- #           'margin-top': '9px',
- #           'margin-left': '100px',
- #           'margin-right': '500px',
- #           'width': '1000px', }),
- #   
+    dbc.Row(
+        [dbc.Col(dash_table.DataTable(
+                id='table2',
+            columns=[{"name": i, "id": i} for i in tabla_detalle.columns],
+            data=tabla_detalle.to_dict('records'),
+                
+                    style_table={'height': '300px', "striped": True,},
+                    style_cell={'fontSize':12, 'font-family':'Nunito Sans',"striped": True,}, 
+                    style_header = {'border': 'none','fontWeight': 'bold'},
+                    style_data = {'border': 'none', "striped": True, },
+                    style_data_conditional=[{'if': {'row_index': 'odd'},
+                                             'backgroundColor': 'rgb(248, 248, 248)'}],
+                ))] ,style={
+            'margin-top': '9px',
+            'margin-left': '100px',
+            'margin-right': '500px',
+            'width': '1000px',
+                   
+                },
+        ),
     html.Br(),
     html.Br(),
     html.Br(),
@@ -1005,4 +1011,5 @@ from settings import config
 
 if __name__ == "__main__":
     app.run_server(use_reloader = False)
+    
     
