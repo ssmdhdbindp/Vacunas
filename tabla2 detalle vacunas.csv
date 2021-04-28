@@ -1,5 +1,5 @@
-Número,Fecha de entrega de envasado,Lugar de envasado,Dosis envasadas,Vacuna,Farmaceútica
-1,22/03/2021,Querétaro,940470,Convidencia Ad5-nCoV,CanSinoBio
-2,07/04/2021,Querétaro,434830,Convidencia Ad5-nCoV,CanSinoBio
-3,15/04/2021,Querétaro,674740,Convidencia Ad5-nCoV,CanSinoBio
-4,23/04/2021,Querétaro,582120,Convidencia Ad5-nCoV,CanSinoBio
+NÃºmero,Fecha de entrega,Lugar,Dosis envasadas,Vacuna,FarmaceÃºtica
+1,22/03/2021,QuerÃ©taro,940470,Convidencia Ad5-nCoV,CanSinoBio
+2,07/04/2021,QuerÃ©taro,434830,Convidencia Ad5-nCoV,CanSinoBio
+3,15/04/2021,QuerÃ©taro,674740,Convidencia Ad5-nCoV,CanSinoBio
+4,23/04/2021,QuerÃ©taro,582120,Convidencia Ad5-nCoV,CanSinoBio
