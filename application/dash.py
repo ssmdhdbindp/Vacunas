@@ -126,12 +126,7 @@ filtrado = vuelve_a_abrir.sort_values('Fecha',ascending=False).head(5)
 tot_sem = filtrado.Cantidad.sum()
 #filtrado.Fecha = today.strftime("%d-%m-%Y")
 
-#Identificadores dias
-#dia_1 = filtrado.iloc[4]['dia']
-#dia_2 = filtrado.iloc[3]['dia']
-#dia_3 = filtrado.iloc[2]['dia']
-#dia_4 = filtrado.iloc[1]['dia']
-#dia_5 = filtrado.iloc[0]['dia']
+
 
 ##Identificadores Fechas
 Fecha_1 = filtrado.iloc[4]['Fecha']
@@ -251,51 +246,8 @@ figvac0.update_layout(paper_bgcolor='rgba(0,0,0,0)',
 figvac0.update_traces(pull=[0.05, 0.05, 0.05, 0.05, 0.1],
                     rotation=90)
 ###################################################################### 
-#-------------------------------------Tratamiento de tabla CIUDADES TABLA2
-
-#vacunas_citys=vacunas.groupby('Arribo')['Cantidad'].sum()
-#pd.DataFrame(vacunas_citys).to_csv('0000proceso.csv')
-#vacunas_citys=pd.read_csv('0000proceso.csv').sort_values('Cantidad', ascending=False)
-#vacunas_citys.Arribo.replace('Ciudad de MÃ©xico','Ciudad de México', inplace=True)
-#vacunas_citys.Arribo.replace('QuerÃ©taro','Querétaro', inplace=True)
-
-#Total by city
-#tot_vac_citys=vacunas_citys.Cantidad.sum()
-
-# Ciudad
-#city1=vacunas_citys.iloc[0]['Arribo']
-#city2=vacunas_citys.iloc[1]['Arribo']
-#city3=vacunas_citys.iloc[2]['Arribo']
-#city4=vacunas_citys.iloc[3]['Arribo']
-# Valores
-#city1_v=vacunas_citys.iloc[0]['Cantidad']
-#city2_v=vacunas_citys.iloc[1]['Cantidad']
-#city3_v=vacunas_citys.iloc[2]['Cantidad']
-#city4_v=vacunas_citys.iloc[3]['Cantidad']
 
 
-
-########################################################################## Para la APP 
-#-------------------------------------GRAFICA DE CIUDADES para TABLA2
-
-#figvac = px.pie(vacunas_citys, values='Cantidad', names='Arribo',
-#             color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
-
-#figvac.update_layout(paper_bgcolor='rgba(0,0,0,0)',
-#                  plot_bgcolor='rgba(0,0,0,0)',
-#                  uniformtext_minsize=22,
-#                  uniformtext_mode='hide',
-#                  autosize=True,
-#                  #width= 650,
-                  #height=650,
-#                  title_font_size = 22,
-#                  font_color="gray",
-#                  title_font_color="firebrick",
-#                  margin = dict(autoexpand= True)),
-                      #t=0, l=0, r=0, b=0)   
-                  #)
-#figvac.update_traces(pull=[0.05, 0.05, 0.05, 0.05, 0.1],
-#                   rotation=300)
 
 
 
@@ -303,12 +255,14 @@ figvac0.update_traces(pull=[0.05, 0.05, 0.05, 0.05, 0.1],
 ########################################################################## Para la APP 
 #-------------------------------------Calculo para completar 126millions
 
-day_min = vacunas.Fecha.min()
+today2 = vacunas.iloc[0]["Fecha"]
+
+#day_min = vacunas.Fecha.min()
 day_max = vacunas.Fecha.max()
-days_passed= (day_max-day_min).days
+days_passed= (day_max-today2).days
 
 
-days_passed= (day_max-day_min).days
+#days_passed= (day_max-day_min).days
 
 # Días, Meses y Años restantes para cubrir 126M vacunas
 days_rest=(((126000000-tot_vac)*days_passed)/tot_vac).round()
@@ -324,32 +278,6 @@ query= date_126M.strftime("Se estima que tendríamos 126 millones de dosis el d�
 #########################################################
 # A P P
 #########################################################
-
-
-######################################################### Para la APP 
-#-------------------------------------Tratamiento de tabla farmaceutica TABLA1
-
-#table_header = [
-#    html.Thead(html.Tr([html.Th(), html.Th()]))] 
-#
-#row1 = html.Tr([html.Td(farm_tot1), html.Td([str(f"{cant_tot1:,d}")])])
-#row2 = html.Tr([html.Td(farm_tot2), html.Td([str(f"{cant_tot2:,d}")])])
-#row3 = html.Tr([html.Td(farm_tot3), html.Td([str(f"{cant_tot3:,d}")])])
-#row4 = html.Tr([html.Td(farm_tot4), html.Td([str(f"{cant_tot4:,d}")])])
-#row5 = html.Tr([html.Td(farm_tot5), html.Td([str(f"{cant_tot5:,d}")])])
-##row6 = html.Tr([html.Td(farm_tot6), html.Td([str(f"{cant_tot6:,d}")])])
-#row7 = html.Tr([html.Td("Total"), html.Td([str(f"{tot_vac:,d}")])])
-#                    
-#row7 = html.Tr([html.Th("Total", style={"offset": 3, "color": "black",
-#                                                 'fontWeight': 'bold',
-#                                                 'fontSize':20,}),
-#                html.Th([str(f"{tot_vac:,d}")], 
-#                                          style={"color": "red",
-#                                                 'fontWeight': 'bold',
-#                                                 'fontSize':20,})])
-#
-#table_body = [html.Tbody([row1, row2, row3, row4, row5,# row6,
-#                          row7])]
 
 
 
@@ -391,31 +319,6 @@ vacunas_flyies1_bien["Fecha"] = vacunas_flyies1_bien["Fecha"].dt.strftime("%d/%m
 
 
 ######################################################### Para la APP 
-#-------------------------------------TABLA CIUDADES TABLA2
-
-#table_headerciti = [
-#    html.Thead(html.Tr([html.Th(), html.Th()]))] 
-#row1 = html.Tr([html.Td(city1), html.Td([str(f"{city1_v:,d}")])])
-#row2 = html.Tr([html.Td(city2), html.Td([str(f"{city2_v:,d}")])])
-#row3 = html.Tr([html.Td(city3), html.Td([str(f"{city3_v:,d}")])])
-#row4 = html.Tr([html.Td(city4), html.Td([str(f"{city4_v:,d}")])])
-#row7 = html.Tr([html.Td("Total"), html.Td([str(f"{tot_vac_citys:,d}")])])
-#row7 = html.Tr([html.Th("Total"), html.Td([str(f"{tot_vac_citys:,d}")]),
-
-
-#ow7 = html.Tr([html.Th("Total", style={"offset": 3, "color": "black",
-#                                                 'fontWeight': 'bold',
-#                                                 'fontSize':20,}),
-#                html.Th([str(f"{tot_vac_citys:,d}")], 
- #                                         style={"color": "red",
-  #                                               'fontWeight': 'bold',
-   #                                              'fontSize':20,})])
-
-
-
-
-#table_bodyciti = [html.Tbody([row1, row2, row3, row4, 
- #                         row7])]
 
 #-------------------------------------TABLAS MESES TABLA2
 table_sumameses = [
@@ -601,7 +504,7 @@ body = html.Div([
                 style={'text-transform': "uppercase", 
                        "font-weight": 'bolder', "font-stretch": "condensed",
                       "font-size": "medium" },
-                width={'size': 6, "offset":3}),
+                width={'size': 8, "offset":3}),
         ],justify="start"),
     
     #dosis
@@ -616,53 +519,18 @@ body = html.Div([
                 width={'size': 8, "offset":3}),
         ],justify="start"),
     
-#style={"color": "#91210C", },    
   
 # ###################### SECCION . MESES
-    
-#    dbc.Row(
-#        [dbc.Col(html.H2('¿Cuántas vacunas han llegado por mes?',className='card-title',
-#                         style={'textAlign': 'start', "color": "#91210C",}),
-#                 width={ "offset":1 }),
-#
-#            ]),
+
     
     html.Br(),
     
     
     
-#    html.Br(),
     html.Br(),
   
-# ###################### SECCION . DIAS TRANSCURRIDOS
-#  
-#  dbc.Row(
-#           [dbc.Col(html.H6(["Desde el día de importación del primer lote de vacunas contra el COVID-19 han trascurrido ",days_passed," días"]
-#                            ,style={'textAlign': 'left'}),
-#                       width={'size': 10,  "offset":1 },
-#                      )],justify="center"),
-#    
-#    html.Br(),
-    html.Br(),
-    
-##  dbc.Card(
- #       dbc.CardBody([
- #           dbc.Row([
- #               dbc.Col([
- #                   drawText()
- #               ], width=3),
- #               dbc.Col([
- #                   drawText()
- #               ], width=3),
- #               dbc.Col([
- #                   drawText()
- #               ], width=3),
- #               dbc.Col([
- #                   drawText()
- #               ], width=3),
- #           ], align='center'), 
- #           html.Br(),)
-  
+
+
 # ###################### SECCION . MESES
 
    
@@ -699,120 +567,13 @@ body = html.Div([
                       #width={'size' : "auto", "offset":1}),
             ], align='center'),
     
-    
 
-    
-# ###################### SECCION 1. FARMACEUTICAS
-        
-#    dbc.Row(
-#        [dbc.Col(html.H2('¿De qué farmacéutica provienen?',className='card-title',
-#                         style={'textAlign': 'start', "color": "#91210C",}),
-#                 width={ "offset":1 }),
-#
-#            ]),
-    
-#    
-#    
-######################## TABLA 1
-#    dbc.Row(
-#        [dbc.Col(dbc.Table(table_header + table_body, 
-#                              bordered=False, 
-#                              dark=False,
-#                              hover=True,
-#                              #responsive=True,
-#                              striped=True,
-#                              #size="sm",
-#                              #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
-#                              style={
-#            'margin-top': '9px',
-#            'margin-left': '130px',
-#            'margin-right': '-120px',
-#            'width': '509px',
-#            'height': '46px',
-#            "font-size": "large" }
-#                                     )),
-
-            
-####################### GRAFICA 1
-#            dbc.Col(dcc.Graph(figure=figvac0),
-#                    width={'size' : 7, "offset":0}), ]),
-    
-#       dbc.Row(
-#           [dbc.Col(html.H6(["Hasta el 15 de abril, nuestro país ha recibido o envasado  ", 
-#                                str(f"{tot_vac:,d} dosis de vacunas contra COVID-19 listas para aplicarse "),
-#                               ],style={'textAlign': 'left'}),
-#                       width={'size': 10,  "offset":1 },
-#                      )],justify="align"),
-#    
-
-    
-    
-
-                                          
-####################### GRAFICA 1
-    #dbc.Col(dcc.Graph(figure=figvac0),
-    #                width={'size' : 7, "offset":0}),
-    
-#       dbc.Row(
-#           [dbc.Col(html.H6(["Hasta el 15 de abril, nuestro país ha recibido o envasado  ", 
-#                                str(f"{tot_vac:,d} dosis de vacunas contra COVID-19 listas para aplicarse "),
-#                               ],style={'textAlign': 'left'}),
-#                       width={'size': 10,  "offset":1 },
-#                      )],justify="align"),
-#    
-        
     html.Br(),
     html.Br(),
     html.Br(),
     html.Br(),
     html.Br(),
 
-    
-# ###################### SECCION 2. CIUDADES
-#        
-#    dbc.Row(
-#        [dbc.Col(html.H2('¿A qué ciudad arriban las vacunas?',
-#                        className='card-title',style={'textAlign': 'left',"color": "#91210C"}),
-#                 width={ "offset":1 }),
-#    ]),
-
-
-
-    
-####################### TABLA 2
- #      dbc.Row([
- #          dbc.Col(dbc.Table(table_headerciti + table_bodyciti, 
- #                             bordered=False, 
- #                             dark=False,
- #                             hover=True,
- #                             #responsive=True,
- #                             striped=True,
- #                             #size="sm",
- #                             #style_header={'backgroundColor': 'rgb(30, 30, 30)'},
- #                             style={
- #           'margin-top': '9px',
- #           'margin-left': '130px',
- #           'margin-right': '-120px',
- #           'width': '509px',
- #           'height': '46px',
- #            "font-size": "large"                      
- #           #'backgroundColor': 'rgba(0,0,0,0)',
- #           })),
-           
-           
-####################### GRAFICA 2
-#           dbc.Col(dcc.Graph(figure=figvac), #config= "autosize"), 
-#                    width={'size' : 7, "offset":0}),
-#               ]),#,justify="center"),
-    
-#    html.Br(),
-#    html.Br(),
-#    html.Br(),
-#    html.Br(),
-#    html.Br(),
-#    html.Br(),
-#    html.Br(),
-    
     
 
         # ###################### SECCION 1. FARMACEUTICAS.2 (modificado)
@@ -843,7 +604,7 @@ body = html.Div([
             'margin-top': '9px',
             'margin-left': '100px',
             'margin-right': '0px',
-            'width': '600px',
+            'width': '800px',
                    
                 }),
                  
@@ -904,16 +665,15 @@ body = html.Div([
                     style_header = {'border': 'none','fontWeight': 'bold'},
                     style_data = {'border': 'none', "striped": True, },
                     style_data_conditional=[{'if': {'row_index': 'odd'},
-                                             'backgroundColor': 'rgb(248, 248, 248)'}],
-                ) ,style={
-            'margin-top': '30px',
-            'margin-left': '80px',
+                                             'backgroundColor': 'rgb(248, 248, 248)'},
+                ])),
+ 
+        ], style={'margin-top': '9px',
+            'margin-left': '100px',
             'margin-right': '0px',
-            'margin-bottom': '0px',
-            'width': '250px'}),
-    
+            'width': '600px' }),            
 
-        ]),
+        
 
 ###############    
     
@@ -950,7 +710,7 @@ body = html.Div([
             ]),
 
     dbc.Row([
-          dbc.Col(html.H5(['Hemos recibido vacunas o sustancia activa desde seis paises: Bélgica, Argentina, China, India, Rusia y Estados Unidos'
+          dbc.Col(html.H5(['Hemos recibido vacunas o sustancia activa desde seis paises: Bélgica, Argentina, China, India, Rusia, Estados Unidos, Reino Unido, Alemania y Corea'
                                ],style={'textAlign': 'left'}),
                        width={'size': 10,  "offset":1 },
                       )],justify="align"),
@@ -968,35 +728,7 @@ body = html.Div([
     
 
   
-#    # ###################### SECCION 1. FARMACEUTICAS.2 (modificado)
-#        
-#    dbc.Row(
-#        [dbc.Col(html.H2('¿Cuántas dosis a granel para su envasado en México se han recibido?',className='card-title',
-#                         style={'textAlign': 'start', "color": "#91210C",}),
-#                 width={ "offset":1 }),
-#        ]),
-#    
-#  
-#    dbc.Row(
-#        [dbc.Col(dash_table.DataTable(
-#                id='table2',
-#            columns=[{"name": i, "id": i} for i in tabla_detalle.columns],
-#            data=tabla_detalle.to_dict('records'),
-#                
-#                    style_table={'height': '300px', "striped": True,},
-#                    style_cell={'fontSize':12, 'font-family':'Nunito Sans',"striped": True,}, 
-#                    style_header = {'border': 'none','fontWeight': 'bold'},
-#                    style_data = {'border': 'none', "striped": True, },
-#                    style_data_conditional=[{'if': {'row_index': 'odd'},
-#                                             'backgroundColor': 'rgb(248, 248, 248)'}],
-#                ))] ,style={
-#            'margin-top': '9px',
-#            'margin-left': '100px',
-#            'margin-right': '500px',
-#            'width': '1000px',
-#                   
-#                },
-#        ),
+
 #        
     
 # ###################### SECCION . NUMERALIA
@@ -1009,14 +741,6 @@ body = html.Div([
             ]),
     
        
-#    dbc.Row([
-#        dbc.Col(html.H4("En 100 días se han recibido 30 millones (dosis y sustancia activa) aproximadamente. Así, si se aplica un crecimiento de 20% en ese monto, el día 200 tendríamos 63 millones de dosis, el día 300 tendríamos 98.6 millones, el día 400 tendríamos 133 millones", 
-#                        className='card-title',style={'textAlign': 'start'} ),
-#                style={"color": "#91210C", },
-#                width={ "offset":1 },),
-#            ]),
-#
-
     
     html.Br(),
     html.Br(),
@@ -1069,18 +793,7 @@ body = html.Div([
     html.Br(),
     html.Br(),
     html.Br(),            
-            
-
-    
-    
-#    dbc.Row(
-#           [dbc.Col(html.H4([query
-#                            ],style={'textAlign': 'left'}),
-#                       width={'size': 11,  "offset":1 },
-#                      )],justify="start"),                
-#    ]),
-#
-    
+ 
     
         dbc.Row(
             [dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
@@ -1100,7 +813,8 @@ body = html.Div([
     
 ])
 
-    
+
+
     
 app.layout = html.Div([body])
 
