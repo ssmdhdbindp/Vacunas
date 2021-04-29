@@ -219,9 +219,153 @@ sumfeb_v = vac_meses_g.iloc[2]['Cantidad']
 summar_v = vac_meses_g.iloc[3]['Cantidad']
 sumabr_v = vac_meses_g.iloc[0]['Cantidad']
 
+########################################################################## Para graficas mensuales
+
+vac_meses_g_pie = vac_meses_g
+
+vac_meses_g_pie['total_percen'] = tot_vac
+vac_meses_T = vac_meses_g_pie.T
+vac_meses_T.drop(['Mes_y'], inplace=True)
+vac_meses_T.to_csv('0000proceso.csv')
+vac_meses_T1=pd.read_csv('0000proceso.csv', names=['id','Abril2021','Enero2021','Febrero2021','Marzo2021','Diciembre2020'])
+vac_meses_T1.drop([0], inplace=True)
 
 
+#### mes Diciembre
+figvac_diciembre = px.pie(vac_meses_T1, values='Diciembre2020', names='id',
+                color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
 
+figvac_diciembre.update_layout(paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  uniformtext_minsize=6,
+                  uniformtext_mode='hide',
+                  autosize=True,
+                  #width= 650,
+                  #height=650,
+                  title_font_size = 6,
+                  #legend_orientation= "h",    
+                  font_color="white",
+                  title_font_color="white",
+                  margin = dict(autoexpand= True),
+                          showlegend=False),
+                      #t=0, l=0, r=0, b=0)  
+    
+colors = ['firebrick',#'white',
+         ]
+
+figvac_diciembre.update_traces(#pull=[0.05, 0.05, 0.05, 0.05, 0.1],
+    rotation=90,
+    marker=dict(colors=colors,# line=dict(color='#000000', width=.1
+                                        ))#)
+
+#### mes Enero
+figvac_enero = px.pie(vac_meses_T1, values='Enero2021', names='id',
+                color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
+
+figvac_enero.update_layout(paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  uniformtext_minsize=6,
+                  uniformtext_mode='hide',
+                  autosize=True,
+                  #width= 650,
+                  #height=650,
+                  title_font_size = 6,
+                  #legend_orientation= "h",    
+                  font_color="white",
+                  title_font_color="white",
+                  margin = dict(autoexpand= True),
+                          showlegend=False),
+                      #t=0, l=0, r=0, b=0)  
+    
+colors = ['firebrick',#'white',
+         ]
+
+figvac_enero.update_traces(#pull=[0.05, 0.05, 0.05, 0.05, 0.1],
+    rotation=90,
+    marker=dict(colors=colors,# line=dict(color='#000000', width=.1
+                                        ))#)
+
+
+#### mes Febrero
+figvac_febrero = px.pie(vac_meses_T1, values='Febrero2021', names='id',
+                color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
+
+figvac_febrero.update_layout(paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  uniformtext_minsize=6,
+                  uniformtext_mode='hide',
+                  autosize=True,
+                  #width= 650,
+                  #height=650,
+                  title_font_size = 6,
+                  #legend_orientation= "h",    
+                  font_color="white",
+                  title_font_color="white",
+                  margin = dict(autoexpand= True),
+                          showlegend=False),
+                      #t=0, l=0, r=0, b=0)  
+    
+colors = ['firebrick',#'white',
+         ]
+
+figvac_febrero.update_traces(#pull=[0.05, 0.05, 0.05, 0.05, 0.1],
+    rotation=90,
+    marker=dict(colors=colors,# line=dict(color='#000000', width=.1
+                                        ))#)
+
+#### mes marzo
+figvac_marzo = px.pie(vac_meses_T1, values='Marzo2021', names='id',
+                color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
+
+figvac_marzo.update_layout(paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  uniformtext_minsize=6,
+                  uniformtext_mode='hide',
+                  autosize=True,
+                  #width= 650,
+                  #height=650,
+                  title_font_size = 6,
+                  #legend_orientation= "h",    
+                  font_color="white",
+                  title_font_color="white",
+                  margin = dict(autoexpand= True),
+                          showlegend=False),
+                      #t=0, l=0, r=0, b=0)  
+    
+colors = ['firebrick',#'white',
+         ]
+
+figvac_marzo.update_traces(#pull=[0.05, 0.05, 0.05, 0.05, 0.1],
+    rotation=90,
+    marker=dict(colors=colors,# line=dict(color='#000000', width=.1
+                                        ))#)
+
+#### mes Abril
+figvac_abril = px.pie(vac_meses_T1, values='Abril2021', names='id',
+                color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
+
+figvac_abril.update_layout(paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  uniformtext_minsize=6,
+                  uniformtext_mode='hide',
+                  autosize=True,
+                  #width= 650,
+                  #height=650,
+                  title_font_size = 6,
+                  #legend_orientation= "h",    
+                  font_color="white",
+                  title_font_color="white",
+                  margin = dict(autoexpand= True),
+                          showlegend=False),
+                      #t=0, l=0, r=0, b=0)  
+    
+colors = ['firebrick',#'white',
+         ]
+
+figvac_abril.update_traces(#pull=[0.05, 0.05, 0.05, 0.05, 0.1],
+    rotation=90,
+    marker=dict(colors=colors,# line=dict(color='#000000', width=.1
+                                        ))#)
 
 ########################################################################## Para la APP 
 #-------------------------------------GRAFICA1 DE FARMACEUTICA para TABLA1
@@ -568,7 +712,31 @@ body = html.Div([
             ], align='center'),
     
 
-    html.Br(),
+    dbc.Row(
+           [
+           dbc.Col(dcc.Graph(figure=figvac_diciembre),
+                    style={'size' : 2, "offset":0,
+                           
+                          "margin-top": "-150px"
+                          }), 
+           dbc.Col(dcc.Graph(figure=figvac_enero),
+                    style={#'size' : 2, "offset":0,
+                          "margin-top": "-150px"
+                          }), 
+           dbc.Col(dcc.Graph(figure=figvac_febrero),
+                    style={#'size' : 2, "offset":0,
+                          "margin-top": "-150px"
+                          }), 
+           dbc.Col(dcc.Graph(figure=figvac_marzo),
+                    style={#'size' : 2, "offset":0,
+                          "margin-top": "-150px"
+                          }), 
+           dbc.Col(dcc.Graph(figure=figvac_abril),
+                    style={#'size' : 2, "offset":0,
+                          "margin-top": "-150px"
+                          }), 
+            ], align='end'),
+    
     html.Br(),
     html.Br(),
     html.Br(),
@@ -823,4 +991,4 @@ from settings import config
 
 if __name__ == "__main__":
     app.run_server(use_reloader = False)
-    
+   
