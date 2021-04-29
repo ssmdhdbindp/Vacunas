@@ -715,25 +715,25 @@ body = html.Div([
     dbc.Row(
            [
            dbc.Col(dcc.Graph(figure=figvac_diciembre),
-                    style={'size' : 2, "offset":0,
+                    style={'size' : 2,# "offset":0,
                            
-                          "margin-top": "-150px"
+                          "margin-top": "-90px"
                           }), 
            dbc.Col(dcc.Graph(figure=figvac_enero),
-                    style={#'size' : 2, "offset":0,
-                          "margin-top": "-150px"
+                    style={'size' : 2,# "offset":0,
+                          "margin-top": "-90px"
                           }), 
            dbc.Col(dcc.Graph(figure=figvac_febrero),
-                    style={#'size' : 2, "offset":0,
-                          "margin-top": "-150px"
+                    style={'size' : 2,# "offset":0,
+                          "margin-top": "-90px"
                           }), 
            dbc.Col(dcc.Graph(figure=figvac_marzo),
-                    style={#'size' : 2, "offset":0,
-                          "margin-top": "-150px"
+                    style={'size' : 2,# "offset":0,
+                          "margin-top": "-90px"
                           }), 
            dbc.Col(dcc.Graph(figure=figvac_abril),
-                    style={#'size' : 2, "offset":0,
-                          "margin-top": "-150px"
+                    style={'size' : 2,# "offset":0,
+                          "margin-top": "-90px"
                           }), 
             ], align='end'),
     
