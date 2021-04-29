@@ -250,7 +250,7 @@ figvac_diciembre.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                           showlegend=False),
                       #t=0, l=0, r=0, b=0)  
     
-colors = ['firebrick',#'white',
+colors = ['#9D2449',#'white',
          ]
 
 figvac_diciembre.update_traces(#pull=[0.05, 0.05, 0.05, 0.05, 0.1],
@@ -277,7 +277,7 @@ figvac_enero.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                           showlegend=False),
                       #t=0, l=0, r=0, b=0)  
     
-colors = ['firebrick',#'white',
+colors = ['#9D2449',#'white',
          ]
 
 figvac_enero.update_traces(#pull=[0.05, 0.05, 0.05, 0.05, 0.1],
@@ -305,7 +305,7 @@ figvac_febrero.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                           showlegend=False),
                       #t=0, l=0, r=0, b=0)  
     
-colors = ['firebrick',#'white',
+colors = ['#9D2449',#'white',
          ]
 
 figvac_febrero.update_traces(#pull=[0.05, 0.05, 0.05, 0.05, 0.1],
@@ -332,7 +332,7 @@ figvac_marzo.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                           showlegend=False),
                       #t=0, l=0, r=0, b=0)  
     
-colors = ['firebrick',#'white',
+colors = ['#9D2449',#'white',
          ]
 
 figvac_marzo.update_traces(#pull=[0.05, 0.05, 0.05, 0.05, 0.1],
@@ -359,7 +359,7 @@ figvac_abril.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                           showlegend=False),
                       #t=0, l=0, r=0, b=0)  
     
-colors = ['firebrick',#'white',
+colors = ['#9D2449',#'white',
          ]
 
 figvac_abril.update_traces(#pull=[0.05, 0.05, 0.05, 0.05, 0.1],
@@ -715,8 +715,7 @@ body = html.Div([
     dbc.Row(
            [
            dbc.Col(dcc.Graph(figure=figvac_diciembre),
-                    style={'size' : 2,# "offset":0,
-                           
+                    style={'size' : 2, #"offset":0,
                           "margin-top": "-90px"
                           }), 
            dbc.Col(dcc.Graph(figure=figvac_enero),
@@ -724,7 +723,7 @@ body = html.Div([
                           "margin-top": "-90px"
                           }), 
            dbc.Col(dcc.Graph(figure=figvac_febrero),
-                    style={'size' : 2,# "offset":0,
+                    style={'size' : 2, #"offset":0,
                           "margin-top": "-90px"
                           }), 
            dbc.Col(dcc.Graph(figure=figvac_marzo),
@@ -732,7 +731,7 @@ body = html.Div([
                           "margin-top": "-90px"
                           }), 
            dbc.Col(dcc.Graph(figure=figvac_abril),
-                    style={'size' : 2,# "offset":0,
+                    style={'size' : 2, #"offset":0,
                           "margin-top": "-90px"
                           }), 
             ], align='end'),
@@ -991,4 +990,4 @@ from settings import config
 
 if __name__ == "__main__":
     app.run_server(use_reloader = False)
-   
+    
