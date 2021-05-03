@@ -743,7 +743,7 @@ body = html.Div([
             'margin-top': '9px',
             'margin-left': '100px',
             'margin-right': '0px',
-            'width': '800px',
+            'width': '750px',
                    
                 }),
                  
@@ -827,12 +827,12 @@ body = html.Div([
     
         dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/laboratoriosvacunas.jpg?raw=true"),
                        #https://github.com/fdealbam/Vacunas/blob/main/imagenmundi.jpg
-                      lg={ "offset": 0, "size": 6}, 
+                      lg={ "offset": 7, "size": 5}, 
                       style= {"margin-top": "-160px",
                              }),
         dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/Mapa_labsW.png?raw=true"),
-                      lg={ "offset": 1, "size": 6}, 
-                      style= {"margin-top": "-420px",
+                      lg={ "offset": 3, "size": 4}, 
+                      style= {"margin-top": "-320px",
                              }),
             
 
