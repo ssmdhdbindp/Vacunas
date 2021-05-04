@@ -808,7 +808,7 @@ body = html.Div([
                                              'backgroundColor': 'rgb(248, 248, 248)'},
                 ])),
  
-        ], style={'margin-top': '9px',
+        ], style={'margin-top': '10px',
             'margin-left': '100px',
             'margin-right': '0px',
             "margin-bottom": "5px",      
@@ -847,6 +847,12 @@ body = html.Div([
                 
 
 #    html.Br(),
+    dbc.Row([
+        dbc.Col(html.H3('¿Cuántas dosis a granel se han envasado en el país?',
+                        className='card-title',style={'textAlign': 'start'} ),
+                style={"color": "#91210C", },
+                width={ "offset":1 },),
+     ]),
   
   
   
@@ -866,7 +872,7 @@ body = html.Div([
                                              'backgroundColor': 'rgb(248, 248, 248)'},
                 ])),
  
-        ], style={'margin-top': '0px',
+        ], style={'margin-top': '9px',
             'margin-left': '100px',
             'margin-right': '0px',
             "margin-bottom": "5px",      
@@ -998,7 +1004,7 @@ body = html.Div([
 app.layout = html.Div([body])
 
 from application.dash import app
-from settings import config
+from settings import configf
 
 if __name__ == "__main__":
     app.run_server(use_reloader = False)
