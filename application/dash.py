@@ -783,19 +783,12 @@ body = html.Div([
         
            ],justify="align"),
     
-
-    html.Br(),
-      
-
-    
-#############    
-    dbc.Row(
+  
+   dbc.Row(
         [
-
-            
-            dbc.Col(dash_table.DataTable(
+          dbc.Col(dash_table.DataTable(
                 id='table2',
-            columns=[{"name": i, "id": i} for i in tabla_detalle.columns],
+            columns=[{"name": i, "id": i} for i in tablapromedio.columns],
             data=tabla_detalle.to_dict('records'),
                 
                     style_table={'height': '300px', "striped": True,},
@@ -813,6 +806,12 @@ body = html.Div([
             "margin-bottom": "5px",      
             'width': '600px' }),            
 
+    html.Br(),
+      
+
+    
+#############    
+    
         
 
 ###############    
@@ -840,6 +839,33 @@ body = html.Div([
                 
 
     html.Br(),
+  
+  
+  
+  dbc.Row(
+        [
+          dbc.Col(dash_table.DataTable(
+                id='table2',
+            columns=[{"name": i, "id": i} for i in tabla_detalle.columns],
+            data=tabla_detalle.to_dict('records'),
+                
+                    style_table={'height': '300px', "striped": True,},
+                    style_cell={#"align-text": "left",
+                        'fontSize':12, 'font-family':'Nunito Sans',"striped": True,}, 
+                    style_header = {'border': 'none','fontWeight': 'bold'},
+                    style_data = {'border': 'none', "striped": True, },
+                    style_data_conditional=[{'if': {'row_index': 'odd'},
+                                             'backgroundColor': 'rgb(248, 248, 248)'},
+                ])),
+ 
+        ], style={'margin-top': '9px',
+            'margin-left': '100px',
+            'margin-right': '0px',
+            "margin-bottom": "5px",      
+            'width': '600px' }),            
+
+  
+  
     html.Br(),
     html.Br(),
     html.Br(),
