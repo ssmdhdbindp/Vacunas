@@ -51,8 +51,12 @@ dosis_a = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/D
 dosis_a.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
                                    errors='ignore')
 dosis_a.drop('Unnamed: 1',axis=1,inplace=True)
+dosis_tot_a = dosis_a["Dosis promedio a envasar"].sum()
 dosis_a["Dosis promedio a envasar"] = dosis_a["Dosis promedio a envasar"].apply(lambda x : "{:,}".format(x))
 dosis_a.Arribo.replace('Ciudad de MÃ©xico', 'Ciudad de México' ,inplace=True)
+formate = '%d/%m/%Y'
+dosis_a['Fecha'] = pd.to_datetime(dosis_a['Fecha'], format=formate)
+
 
 # Dtypes 
 vacunas['Cantidad']=vacunas['Cantidad'].astype(int)
@@ -487,73 +491,73 @@ city1=city_uno.iloc[0]['Arribo']
 #########################################################
 #------------------------------------------------------------------------DOSIS A ENVASAR
 
-format = '%d/%m/%Y'
-dosis_a['Fecha'] = pd.to_datetime(dosis_a['Fecha'], format=format)
+#format = '%d/%m/%Y'
+#dosis_a['Fecha'] = pd.to_datetime(dosis_a['Fecha'], format=format)
 
-dosis_a_ = dosis_a.sort_values('Fecha',ascending=True).head(5)
-#Suma semana
-dosis_tot_a = dosis_a_["Dosis promedio a envasar"].sum()
+#dosis_a_ = dosis_a.sort_values('Fecha',ascending=True).head(5)
+##Suma semana
+#dosis_tot_a = dosis_a["Dosis promedio a envasar"].sum()
+##
+#fech_1_d = dosis_a_.iloc[0]['Fecha']
+#fech_2_d = dosis_a_.iloc[1]['Fecha']
+#fech_3_d = dosis_a_.iloc[2]['Fecha']
+#fech_4_d = dosis_a_.iloc[3]['Fecha']
+#fech_5_d = dosis_a_.iloc[4]['Fecha']
+##
+#lug_1_d = dosis_a_.iloc[0]['Arribo']
+#lug_2_d = dosis_a_.iloc[1]['Arribo']
+#lug_3_d = dosis_a_.iloc[2]['Arribo']
+#lug_4_d = dosis_a_.iloc[3]['Arribo']
+#lug_5_d = dosis_a_.iloc[4]['Arribo']
+##
+#denv_1_d = dosis_a_.iloc[0]['Dosis promedio a envasar']
+#denv_2_d = dosis_a_.iloc[1]['Dosis promedio a envasar']
+#denv_3_d = dosis_a_.iloc[2]['Dosis promedio a envasar']
+#denv_4_d = dosis_a_.iloc[3]['Dosis promedio a envasar']
+#denv_5_d = dosis_a_.iloc[4]['Dosis promedio a envasar']
+##
+#farm_1_d = dosis_a_.iloc[0]['Farmacéutica']
+#farm_2_d = dosis_a_.iloc[1]['Farmacéutica']
+#farm_3_d = dosis_a_.iloc[2]['Farmacéutica']
+#farm_4_d = dosis_a_.iloc[3]['Farmacéutica']
+#farm_5_d = dosis_a_.iloc[4]['Farmacéutica']
 #
-fech_1_d = dosis_a_.iloc[0]['Fecha']
-fech_2_d = dosis_a_.iloc[1]['Fecha']
-fech_3_d = dosis_a_.iloc[2]['Fecha']
-fech_4_d = dosis_a_.iloc[3]['Fecha']
-fech_5_d = dosis_a_.iloc[4]['Fecha']
-#
-lug_1_d = dosis_a_.iloc[0]['Arribo']
-lug_2_d = dosis_a_.iloc[1]['Arribo']
-lug_3_d = dosis_a_.iloc[2]['Arribo']
-lug_4_d = dosis_a_.iloc[3]['Arribo']
-lug_5_d = dosis_a_.iloc[4]['Arribo']
-#
-denv_1_d = dosis_a_.iloc[0]['Dosis promedio a envasar']
-denv_2_d = dosis_a_.iloc[1]['Dosis promedio a envasar']
-denv_3_d = dosis_a_.iloc[2]['Dosis promedio a envasar']
-denv_4_d = dosis_a_.iloc[3]['Dosis promedio a envasar']
-denv_5_d = dosis_a_.iloc[4]['Dosis promedio a envasar']
-#
-farm_1_d = dosis_a_.iloc[0]['Farmacéutica']
-farm_2_d = dosis_a_.iloc[1]['Farmacéutica']
-farm_3_d = dosis_a_.iloc[2]['Farmacéutica']
-farm_4_d = dosis_a_.iloc[3]['Farmacéutica']
-farm_5_d = dosis_a_.iloc[4]['Farmacéutica']
-
-table_headerDOSISe = [
-    html.Thead(html.Tr([html.Td(), html.Td(), 
-                        html.Td(), html.Td()],
-                      # style={merge_duplicate_headers=True}
-                      ))] 
+#table_headerDOSISe = [
+#    html.Thead(html.Tr([html.Td(), html.Td(), 
+#                        html.Td(), html.Td()],
+#                      # style={merge_duplicate_headers=True}
+#                      ))] 
 
 #d2 = today.strftime("Fecha de actualización : %d-%m-%Y")
 
-row1de = html.Tr([html.Td(fech_1_d.strftime('%d-%m-%Y')), 
-                  html.Td(fech_2_d.strftime('%d-%m-%Y')), 
-                  html.Td(fech_3_d.strftime('%d-%m-%Y')), 
-                  html.Td(fech_4_d.strftime('%d-%m-%Y')),
-                  html.Td(fech_5_d.strftime('%d-%m-%Y')),
-                  html.Td(" Total ", style={"offset": 3, "color": "black",
-                                                 'fontWeight': 'bold',
-                                                 'fontSize':16,})])
-row2de = html.Tr([html.Td(f"{int(denv_1_d):,}"), 
-                  html.Td(f"{int(denv_2_d):,}"), 
-                  html.Td(f"{int(denv_3_d):,}"), 
-                  html.Td(f"{int(denv_4_d):,}"),
-                  html.Td(f"{int(denv_5_d):,}"),
-                  html.Td([str(f"{dosis_tot_a:,d}")], 
-                                          style={"color": "red",
-                                                 'fontWeight': 'bold',
-                                                 'fontSize':16,})])
-row3de = html.Tr([html.Td(farm_1_d), 
-                  html.Td(farm_2_d), 
-                  html.Td(farm_3_d), 
-                  html.Td(farm_4_d),
-                  html.Td(farm_5_d),
-                  html.Td(" ")])
+#row1de = html.Tr([html.Td(fech_1_d.strftime('%d-%m-%Y')), 
+#                  html.Td(fech_2_d.strftime('%d-%m-%Y')), 
+#                  html.Td(fech_3_d.strftime('%d-%m-%Y')), 
+#                  html.Td(fech_4_d.strftime('%d-%m-%Y')),
+#                  html.Td(fech_5_d.strftime('%d-%m-%Y')),
+#                  html.Td(" Total ", style={"offset": 3, "color": "black",
+#                                                 'fontWeight': 'bold',
+#                                                 'fontSize':16,})])
+#row2de = html.Tr([html.Td(f"{int(denv_1_d):,}"), 
+#                  html.Td(f"{int(denv_2_d):,}"), 
+#                  html.Td(f"{int(denv_3_d):,}"), 
+#                  html.Td(f"{int(denv_4_d):,}"),
+#                  html.Td(f"{int(denv_5_d):,}"),
+#                  html.Td([str(f"{dosis_tot_a:,d}")], 
+#                                          style={"color": "red",
+#                                                 'fontWeight': 'bold',
+#                                                 'fontSize':16,})])
+#row3de = html.Tr([html.Td(farm_1_d), 
+#                  html.Td(farm_2_d), 
+#                  html.Td(farm_3_d), 
+#                  html.Td(farm_4_d),
+#                  html.Td(farm_5_d),
+#                  html.Td(" ")])
 #row4de = html.Tr([html.Td(lug_3_d), html.Td(lug_4_d), html.Td(denv_4_d), html.Td(farm_4_d)])
 #row5de = html.Tr([html.Td(lug_4_d), html.Td("Total"), html.Td(dosis_tot_a), html.Td(" ")])
 
-table_bodyDOSISe = [html.Tbody([row1de, row2de, row3de, #row4de,row5de
-                               ])]
+#table_bodyDOSISe = [html.Tbody([row1de, row2de, row3de, #row4de,row5de
+#                               ])]
 
 
 #---------------------------------------------------------------------GRAFICA PIE DOSIS a ENVASAR
@@ -791,7 +795,7 @@ body = html.Div([
    dbc.Row(
         [
           dbc.Col(dash_table.DataTable(
-                id='table2',
+                id='table3',
             columns=[{"name": i, "id": i} for i in dosis_a.columns],
             data=dosis_a.to_dict('records'),
                 
@@ -808,7 +812,7 @@ body = html.Div([
             'margin-left': '100px',
             'margin-right': '0px',
             "margin-bottom": "5px",      
-            'width': '600px' }),            
+            'width': '750px' }),            
 
     html.Br(),
       
@@ -842,11 +846,11 @@ body = html.Div([
         ]),
                 
 
-    html.Br(),
+#    html.Br(),
   
   
   
-  dbc.Row(
+    dbc.Row(
         [
           dbc.Col(dash_table.DataTable(
                 id='table2',
@@ -862,11 +866,11 @@ body = html.Div([
                                              'backgroundColor': 'rgb(248, 248, 248)'},
                 ])),
  
-        ], style={'margin-top': '9px',
+        ], style={'margin-top': '0px',
             'margin-left': '100px',
             'margin-right': '0px',
             "margin-bottom": "5px",      
-            'width': '600px' }),            
+            'width': '750px' }),            
 
   
   
