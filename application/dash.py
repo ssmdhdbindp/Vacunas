@@ -50,12 +50,12 @@ tabla_detalle["Dosis envasadas"] = tabla_detalle["Dosis envasadas"].apply(lambda
 dosis_a = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Dosis%20promedio%20a%20envasar.csv", encoding= "Latin-1")
 dosis_a.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
                                    errors='ignore')
-dosis_a.drop('Unnamed: 1',axis=1,inplace=True)
+#dosis_a.drop('Unnamed: 1',axis=1,inplace=True)
 dosis_tot_a = dosis_a["Dosis promedio a envasar"].sum()
 dosis_a["Dosis promedio a envasar"] = dosis_a["Dosis promedio a envasar"].apply(lambda x : "{:,}".format(x))
 dosis_a.Arribo.replace('Ciudad de MÃ©xico', 'Ciudad de México' ,inplace=True)
-formate = '%d/%m/%Y'
-dosis_a['Fecha'] = pd.to_datetime(dosis_a['Fecha'], format=formate)
+#formate = '%d/%m/%Y'
+#dosis_a['Fecha'] = pd.to_datetime(dosis_a['Fecha'], format=formate)
 
 
 # Dtypes 
