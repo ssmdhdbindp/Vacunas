@@ -635,7 +635,7 @@ body = html.Div([
     dbc.Row([
         dbc.Col(html.H4([ 
                          dbc.Badge(f"{int(dosis_tot_a):,}", color="info", className="mr-1"),
-                         "   ¿cuántas dosis a granel han llegado a el país?"], style={"color": "gray", }),
+                         "   ¿cuántas dosis a granel han llegado al país?"], style={"color": "gray", }),
                 style={'text-transform': "uppercase", 
                        "font-weight": 'bolder', "font-stretch": "condensed",
                        "color" : "#91210C",
