@@ -50,6 +50,10 @@ tabla_detalle["Dosis envasadas"] = tabla_detalle["Dosis envasadas"].apply(lambda
 dosis_a = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Dosis%20promedio%20a%20envasar.csv", encoding= "Latin-1")
 dosis_a.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
                                    errors='ignore')
+dosis_a.drop('Unnamed: 1',axis=1,inplace=True)
+dosis_a["Dosis promedio a envasar"] = dosis_a["Dosis promedio a envasar"].apply(lambda x : "{:,}".format(x))
+dosis_a.Arribo.replace('Ciudad de MÃ©xico', 'Ciudad de México' ,inplace=True)
+
 # Dtypes 
 vacunas['Cantidad']=vacunas['Cantidad'].astype(int)
 #Total Cantidad
@@ -788,8 +792,8 @@ body = html.Div([
         [
           dbc.Col(dash_table.DataTable(
                 id='table2',
-            columns=[{"name": i, "id": i} for i in tablapromedio.columns],
-            data=tabla_detalle.to_dict('records'),
+            columns=[{"name": i, "id": i} for i in dosis_a.columns],
+            data=dosis_a.to_dict('records'),
                 
                     style_table={'height': '300px', "striped": True,},
                     style_cell={#"align-text": "left",
