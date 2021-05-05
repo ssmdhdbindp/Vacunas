@@ -631,17 +631,7 @@ body = html.Div([
                 width={'size': 8, "offset":3}),
         ],justify="start"),
     
-    #dosis
-    dbc.Row([
-        dbc.Col(html.H4([ 
-                         dbc.Badge(f"{int(dosis_tot_a):,}", color="info", className="mr-1"),
-                         "   ¿cuántas dosis a granel han llegado al país?"], style={"color": "gray", }),
-                style={'text-transform': "uppercase", 
-                       "font-weight": 'bolder', "font-stretch": "condensed",
-                       "color" : "#91210C",
-                      "font-size": "medium" },
-                width={'size': 8, "offset":3}),
-        ],justify="start"),
+    
     
   
 # ###################### SECCION . MESES
@@ -780,6 +770,19 @@ body = html.Div([
                 style={"color": "#91210C", },
                 width={ "offset":1 },),
      ]),
+    
+    #dosis
+    dbc.Row([
+        dbc.Col(html.H4([ 
+                         dbc.Badge(f"{int(dosis_tot_a):,}", color="info", className="mr-1"),
+                         "   ¿cuántas dosis a granel han llegado al país?"], style={"color": "gray", }),
+                style={'text-transform': "uppercase", 
+                       "font-weight": 'bolder', "font-stretch": "condensed",
+                       "color" : "#91210C",
+                      "font-size": "medium" },
+                width={'size': 8, "offset":1}),
+        ],justify="start"),
+    
       
     dbc.Row(
            [
@@ -791,7 +794,9 @@ body = html.Div([
         
            ],justify="align"),
     
-  
+    
+    html.Br(),
+    
    dbc.Row(
         [
           dbc.Col(dash_table.DataTable(
