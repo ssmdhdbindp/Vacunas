@@ -1009,7 +1009,7 @@ body = html.Div([
 app.layout = html.Div([body])
 
 from application.dash import app
-from settings import configf
+from settings import config
 
 if __name__ == "__main__":
     app.run_server(use_reloader = False)
