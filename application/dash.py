@@ -221,11 +221,13 @@ pd.DataFrame(vac_meses_g).to_csv('0000proceso.csv')
 vac_meses_g=pd.read_csv('0000proceso.csv')
 
 #Identificadores Cantidad
-sumdic_v = vac_meses_g.iloc[4]['Cantidad']
+sumdic_v = vac_meses_g.iloc[5]['Cantidad'] #al actualizar el mes, subir un punto
 sumene_v = vac_meses_g.iloc[1]['Cantidad']
 sumfeb_v = vac_meses_g.iloc[2]['Cantidad']
 summar_v = vac_meses_g.iloc[3]['Cantidad']
 sumabr_v = vac_meses_g.iloc[0]['Cantidad']
+summay_v = vac_meses_g.iloc[4]['Cantidad'] 
+# al actualizar el mes, utilizar el valor.iloc antiguo de sumdic_v
 
 ########################################################################## Para graficas mensuales
 
@@ -236,7 +238,7 @@ vac_meses_T = vac_meses_g_pie.T
 vac_meses_T.drop(['Mes_y'], inplace=True)
 vac_meses_T.to_csv('0000proceso.csv')
 
-vac_meses_T1=pd.read_csv('0000proceso.csv', names=['id','Abril2021','Enero2021','Febrero2021','Marzo2021','Diciembre2020'])
+vac_meses_T1=pd.read_csv('0000proceso.csv', names=['id','Abril2021','Enero2021','Febrero2021','Marzo2021','Mayo2021','Diciembre2020'])
 vac_meses_T1.drop([0], inplace=True,  errors='ignore')  #Ae errors='ignore'
 
 
@@ -345,6 +347,25 @@ colors = ['#9D2449']
 figvac_abril.update_traces(rotation=90,
                                marker=dict(colors=colors))
 
+#### mes Abril
+figvac_mayo = px.pie(vac_meses_T1, values='Mayo2021', names='id',
+                color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
+
+figvac_mayo.update_layout(paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  uniformtext_minsize=6,
+                  uniformtext_mode='hide',
+                  autosize=True,
+                  title_font_size = 6,
+                  font_color="white",
+                  title_font_color="white",
+                  margin = dict(autoexpand= False),
+                          showlegend=False),
+    
+colors = ['#9D2449']
+
+figvac_mayo.update_traces(rotation=90,
+                               marker=dict(colors=colors))
 
 
 ########################################################################## Para la APP 
@@ -660,8 +681,10 @@ body = html.Div([
                   # width={'size' : "auto","offset":1}),
             dbc.Col(html.H6("Abril")),
                   # width={'size' : "auto", "offset":1}),
+            dbc.Col(html.H6("Mayo")),
+                  # width={'size' : "auto", "offset":1}),
 
-           ], align='center'),
+           ], align='left'),
     
                
             
@@ -678,6 +701,8 @@ body = html.Div([
                dbc.Col(html.H3(str(f'{summar_v:,d}'))),
                       #width={'size' : "auto", "offset":1}),
                dbc.Col(html.H3(str(f'{sumabr_v:,d}'))),
+                      #width={'size' : "auto", "offset":1}),
+               dbc.Col(html.H3(str(f'{summay_v:,d}'))),
                       #width={'size' : "auto", "offset":1}),
             ], align='center'),
     
@@ -704,7 +729,11 @@ body = html.Div([
            dbc.Col(dcc.Graph(figure=figvac_abril),
                     style={#'size' : 2, #"offset":0,
                           "margin-top": "-90px"
-                          }), 
+                          }),
+           dbc.Col(dcc.Graph(figure=figvac_mayo),
+                    style={#'size' : 2, #"offset":0,
+                          "margin-top": "-90px"
+                          }),
             ], #align='start', 
         justify ="start"),
     
