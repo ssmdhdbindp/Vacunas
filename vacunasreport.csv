@@ -31,6 +31,7 @@ Fecha,Arribo,Cantidad,Farmacéutica
 16/03/2021,Ciudad de México,217425,Pfizer-BioNTech
 16/03/2021,Querétaro,225225,Pfizer-BioNTech
 18/03/2021,Ciudad de México,1000000,Sinovac
+22/03/2021,Querétaro,940470,CanSino Biologics
 23/03/2021,Ciudad de México,487500,Pfizer-BioNTech
 24/03/2021,Ciudad de México,170625,Pfizer-BioNTech
 25/03/2021,Ciudad de México,1000000,Sinovac
@@ -43,7 +44,6 @@ Fecha,Arribo,Cantidad,Farmacéutica
 05/04/2021,Ciudad de México,487500,Pfizer-BioNTech
 08/04/2021,Ciudad de México,487500,Pfizer-BioNTech
 09/04/2021,Ciudad de México,327600,Pfizer-BioNTech
-22/03/2021,Querétaro,940470,CanSino Biologics
 07/04/2021,Querétaro,434830,CanSino Biologics
 12/04/2021,Ciudad de México,487500,Pfizer-BioNTech
 15/04/2021,Ciudad de México,500000,Sinovac
@@ -60,8 +60,9 @@ Fecha,Arribo,Cantidad,Farmacéutica
 29/04/2021,Ciudad de México,585000,Pfizer-BioNTech
 29/04/2021,Ciudad de México,800000,Sputnik V
 30/04/2021,Ciudad de México,938340,Pfizer-BioNTech
-30/04/2021,Querétaro,505510,CanSino Biologics
+30/04/2021,Querétaro,502630,CanSino Biologics
 06/05/2021,Ciudad de México,1000000,Sinovac
+07/05/2021,Querétaro,669330,CanSino Biologics
 11/05/2021,Ciudad de México,585000,Pfizer-BioNTech
 12/05/2021,Ciudad de México,250380,Pfizer-BioNTech
 12/05/2021,Querétaro,209660,CanSino Biologics
