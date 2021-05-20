@@ -52,18 +52,6 @@ tabla_detalle.rename(columns={'QuerÃ©taro': 'Querétaro' },inplace=True, error
 tabla_detalle.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,errors='ignore')
 tabla_detalle["Dosis envasadas"] = tabla_detalle["Dosis envasadas"].apply(lambda x : "{:,}".format(x))
 
-###########################################################################################################################
-#4
-#Tabla3 Dosis promedio a envasar (no está actualizada en github) 15 days ago
-dosis_a = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Dosis%20promedio%20a%20envasar.csv", encoding= "Latin-1")
-dosis_a.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
-                                   errors='ignore')
-dosis_a.drop('Unnamed: 1',axis=1,inplace=True)
-dosis_tot_a = dosis_a["Dosis promedio a envasar"].sum()
-dosis_a["Dosis promedio a envasar"] = dosis_a["Dosis promedio a envasar"].apply(lambda x : "{:,}".format(x))
-dosis_a.Arribo.replace('Ciudad de MÃ©xico', 'Ciudad de México' ,inplace=True)
-#formate = '%d/%m/%Y'
-#dosis_a['Fecha'] = pd.to_datetime(dosis_a['Fecha'], format=formate)
 ##########################################################################################################################
 
 # Dtypes 
@@ -83,6 +71,7 @@ tabla1.rename(columns={'FarmacÃ©utica': 'Farmacéutica', },inplace=True,
                                    errors='ignore')
 
 tabla1.Arribo.replace("MÃ©xico", "México",inplace=True)
+dosis_tot_a = tabla1["Dosis promedio a envasar"].sum()
 tabla1["Dosis promedio a envasar"] =tabla1["Dosis promedio a envasar"].apply(lambda x : "{:,}".format(x))
 
 
@@ -529,7 +518,7 @@ city1=city_uno.iloc[0]['Arribo']
 
 
 #---------------------------------------------------------------------GRAFICA PIE DOSIS a ENVASAR
-figvacdosis = px.pie(dosis_a, values='Dosis promedio a envasar', names='Farmacéutica',
+figvacdosis = px.pie(tabla1, values='Dosis promedio a envasar', names='Farmacéutica',
              color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
 
 figvacdosis.update_layout(paper_bgcolor='rgba(0,0,0,0)',
@@ -777,8 +766,8 @@ body = html.Div([
         [
           dbc.Col(dash_table.DataTable(
                 id='table3',
-            columns=[{"name": i, "id": i} for i in dosis_a.columns],
-            data=dosis_a.to_dict('records'),
+            columns=[{"name": i, "id": i} for i in tabla1.columns],
+            data=tabla1.to_dict('records'),
                 
                     style_table={'height': '300px', "striped": True,},
                     style_cell={#"align-text": "left",
@@ -815,12 +804,12 @@ body = html.Div([
     
         dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/laboratoriosvacunas.jpg?raw=true"),
                        #https://github.com/fdealbam/Vacunas/blob/main/imagenmundi.jpg
-                      lg={ "offset": 7, "size": 5}, 
-                      style= {"margin-top": "-160px",
+                      lg={ "offset": 6, "size": 5}, 
+                      style= {"margin-top": "-60px",
                              }),
         dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/Mapa_labsW.png?raw=true"),
-                      lg={ "offset": 3, "size": 4}, 
-                      style= {"margin-top": "-320px",
+                      lg={ "offset": 2, "size": 4}, 
+                      style= {"margin-top": "-350px",
                              }),
             
 
