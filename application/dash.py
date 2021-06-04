@@ -34,20 +34,20 @@ d2 = today.strftime("Fecha de actualización : %d-%m-%Y")
 #1 
 
 #Base fuente si está en github 11 hours ago
-vacunas = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/vacunasreport.csv", encoding= "Latin-1")
+vacunas = pd.read_csv("https://raw.githubusercontent.com/ssmdhdbindp/Vacunas/main/vacunasreport.csv", encoding= "Latin-1")
 vacunas.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
                                    errors='ignore')
 
 ###############################################################################################
 #2 
 #Tabla1 de arribos   si está en github 11 hours ago
-vuelos = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/Tablavuelos.csv", encoding= "Latin-1")
+vuelos = pd.read_csv("https://raw.githubusercontent.com/ssmdhdbindp/Vacunas/main/Tablavuelos.csv", encoding= "Latin-1")
 vuelos.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,
                                    errors='ignore')
 ###################################################################################################################
 #3
 #Tabla2 detalle vacunas   si está en github 11 hours ago
-tabla_detalle = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/tabla2%20detalle%20vacunas.csv" )#, encoding= "Latin-1")
+tabla_detalle = pd.read_csv("https://raw.githubusercontent.com/ssmdhdbindp/Vacunas/main/tabla2%20detalle%20vacunas.csv" )#, encoding= "Latin-1")
 tabla_detalle.rename(columns={'QuerÃ©taro': 'Querétaro' },inplace=True, errors='ignore')
 tabla_detalle.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,errors='ignore')
 tabla_detalle["Dosis envasadas"] = tabla_detalle["Dosis envasadas"].apply(lambda x : "{:,}".format(x))
@@ -66,7 +66,7 @@ vacunas['Fecha'] = pd.to_datetime(vacunas['Fecha'], format=format)
 #5
 #Tabla dosis a granel para envasarse  si está en github 11 hours ago
 
-tabla1 = pd.read_csv("https://raw.githubusercontent.com/fdealbam/Vacunas/main/tabla1%20dosis%20a%20granel%20para%20envasarse.csv" , encoding= "Latin-1")
+tabla1 = pd.read_csv("https://raw.githubusercontent.com/ssmdhdbindp/Vacunas/main/tabla1%20dosis%20a%20granel%20para%20envasarse.csv" , encoding= "Latin-1")
 tabla1.rename(columns={'FarmacÃ©utica': 'Farmacéutica', },inplace=True,
                                    errors='ignore')
 
@@ -552,7 +552,7 @@ body = html.Div([
     html.Br(),
     
         dbc.Row(
-            [dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
+            [dbc.Col(dbc.CardImg(src="https://github.com/ssmdhdbindp/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
                         width={'size': 1,  "offset": 1 }),
              dbc.Col(html.H5("Secretaría de Relaciones Exteriores, "
                             "Subsecretaría para Asuntos Multilaterales y "
@@ -802,12 +802,12 @@ body = html.Div([
                   width={ "offset":1, #"size": 5 
                         "margin-right": "-120px"}),
     
-        dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/laboratoriosvacunas.jpg?raw=true"),
-                       #https://github.com/fdealbam/Vacunas/blob/main/imagenmundi.jpg
+        dbc.Col(dbc.CardImg(src="https://github.com/ssmdhdbindp/Vacunas/blob/main/laboratoriosvacunas.jpg?raw=true"),
+                       #https://github.com/ssmdhdbindp/Vacunas/blob/main/imagenmundi.jpg
                       lg={ "offset": 6, "size": 5}, 
                       style= {"margin-top": "-60px",
                              }),
-        dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/Mapa_labsW.png?raw=true"),
+        dbc.Col(dbc.CardImg(src="https://github.com/ssmdhdbindp/Vacunas/blob/main/Mapa_labsW.png?raw=true"),
                       lg={ "offset": 2, "size": 4}, 
                       style= {"margin-top": "-350px",
                              }),
@@ -871,9 +871,9 @@ body = html.Div([
                       )],justify="align"),
 
     
-    dbc.Row([                          #https://github.com/fdealbam/Vacunas/blob/main/application/static/mapa.JPG
-         dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/imagenmundi.png?raw=true"),
-                       #https://github.com/fdealbam/Vacunas/blob/main/imagenmundi.jpg
+    dbc.Row([                          #https://github.com/ssmdhdbindp/Vacunas/blob/main/application/static/mapa.JPG
+         dbc.Col(dbc.CardImg(src="https://github.com/ssmdhdbindp/Vacunas/blob/main/imagenmundi.png?raw=true"),
+                       #https://github.com/ssmdhdbindp/Vacunas/blob/main/imagenmundi.jpg
                       lg={ "offset": 1, "size": 9}, 
                       style= {"margin-top": "-50px"}),
     ]),
@@ -951,7 +951,7 @@ body = html.Div([
  
     
         dbc.Row(
-            [dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
+            [dbc.Col(dbc.CardImg(src="https://github.com/ssmdhdbindp/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
                         width={'size': 1,  "offset": 1 }),
              dbc.Col(html.H6("Secretaría de Relaciones Exteriores, "
                             "Subsecretaría para Asuntos Multilaterales y "
