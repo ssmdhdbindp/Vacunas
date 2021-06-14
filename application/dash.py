@@ -1,4 +1,4 @@
-import dash
+mport dash
 import matplotlib.pyplot as plt 
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -802,7 +802,7 @@ body = html.Div([
                   width={ "offset":1, #"size": 5 
                         "margin-right": "-120px"}),
     
-        dbc.Col(dbc.CardImg(src="https://github.com/ssmdhdbindp/Vacunas/blob/main/laboratoriosvacunas.jpg?raw=true"),
+        dbc.Col(dbc.CardImg(src="https://github.com/ssmdhdbindp/Vacunas/blob/man/laboratoriosvacunas.jpg?raw=true"),
                        #https://github.com/ssmdhdbindp/Vacunas/blob/main/imagenmundi.jpg
                       lg={ "offset": 6, "size": 5}, 
                       style= {"margin-top": "-60px",
@@ -951,7 +951,7 @@ body = html.Div([
  
     
         dbc.Row(
-            [dbc.Col(dbc.CardImg(src="https://github.com/ssmdhdbindp/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
+            [dbc.Col(dbc.CardImg(src="https://github.om/ssmdhdbindp/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
                         width={'size': 1,  "offset": 1 }),
              dbc.Col(html.H6("Secretaría de Relaciones Exteriores, "
                             "Subsecretaría para Asuntos Multilaterales y "
