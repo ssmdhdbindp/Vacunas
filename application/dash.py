@@ -74,7 +74,7 @@ vacunas['Fecha'] = pd.to_datetime(vacunas['Fecha'], format=format)
 #5
 #Tabla dosis a granel para envasarse  si está en github 11 hours ago
 
-tabla1 = pd.read_csv("https://raw.githubusercontent.com/ssmdhdbindp/Vacunas/main/tabla1%20dosis%20a%20granel%20para%20envasarse.csv" , encoding= "Latin-1")
+tabla1 = pd.read_csv("https://raw.githubusercontent.com/ssmdhdbindp/Vacunas/main/tabla1%20dosis%20a%20granel%20para%20envasarse.csv , encoding= "Latin-1")
 tabla1.rename(columns={'FarmacÃ©utica': 'Farmacéutica', },inplace=True,
                                    errors='ignore')
 
@@ -163,7 +163,7 @@ cantidad_5 = filtrado.iloc[0]['Cantidad']
 
 #Identificadores Farmaceutica s
 farmaceutica_1 = filtrado.iloc[4]['Farmacéutica']
-farmaceutica_2 = filtrado.iloc[3]['Farmacéutica']
+farmaceutica_2 = filtrado.iloc[3]'Farmacéutica']
 farmaceutica_3 = filtrado.iloc[2]['Farmacéutica']
 farmaceutica_4 = filtrado.iloc[1]['Farmacéutica']
 farmaceutica_5 = filtrado.iloc[0]['Farmacéutica']
@@ -212,7 +212,7 @@ vac_meses['Year']=vac_meses['Year'].astype(str)
 vac_meses['Mes'] = vac_meses['Fecha'].dt.month
 
 vac_meses['Mes'].replace(1.0,'Enero',inplace=True)
-vac_meses['Mes'].replace(2.0,'Febrero',inplace=True)
+vac_meses'Mes'].replace(2.0,'Febrero',inplace=True)
 vac_meses['Mes'].replace(3.0,'Marzo',inplace=True)
 vac_meses['Mes'].replace(4.0,'Abril',inplace=True)
 vac_meses['Mes'].replace(5.0,'Mayo',inplace=True)
@@ -278,7 +278,7 @@ figvac_diciembre.update_traces(rotation=43,
 
 
 #### mes Enero
-figvac_enero = px.pie(vac_meses_T1, values='Enero2021', names='id',
+figvac_enero = px.pie(vac_meses_T1, values'Enero2021', names='id',
                 color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
 
 figvac_enero.update_layout(paper_bgcolor='rgba(0,0,0,0)',
@@ -334,7 +334,7 @@ figvac_marzo.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   uniformtext_mode='hide',
                   autosize=True,
                   title_font_size = 6,
-                  font_color="white",
+                  font_color="white"
                   title_font_color="white",
                            width=300,
                   height=300,
