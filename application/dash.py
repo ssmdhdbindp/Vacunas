@@ -891,7 +891,7 @@ body = html.Div([
     
     
     dbc.Row([
-        dbc.Col(html.H3('¿A qué países se han enviado vacunas?',
+        dbc.Col(html.H3('¿A qué países se han donado vacunas?',
                         className='card-title',style={'textAlign': 'start'} ),
                 style={"color": "#91210C", },
                 width={ "offset":1 },),]),
