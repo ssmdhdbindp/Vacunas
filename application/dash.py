@@ -1,4 +1,4 @@
-mport dash
+import dash
 import matplotlib.pyplot as plt 
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -51,6 +51,14 @@ tabla_detalle = pd.read_csv("https://raw.githubusercontent.com/ssmdhdbindp/Vacun
 tabla_detalle.rename(columns={'QuerÃ©taro': 'Querétaro' },inplace=True, errors='ignore')
 tabla_detalle.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,errors='ignore')
 tabla_detalle["Dosis envasadas"] = tabla_detalle["Dosis envasadas"].apply(lambda x : "{:,}".format(x))
+
+###################################################################################################################
+#4
+#Tabla2 detalle vacunas   si está en github 11 hours ago
+tabla_envios = pd.read_csv("https://raw.githubusercontent.com/ssmdhdbindp/Vacunas/main/tabla%20donaciones%20vacunas.csv", encoding= "Latin-1")
+#tabla_envios.rename(columns={'QuerÃ©taro': 'Querétaro' },inplace=True, errors='ignore')
+#tabla_envios.rename(columns={'FarmacÃ©utica': 'Farmacéutica' },inplace=True,errors='ignore')
+tabla_envios["Dosis "] = tabla_envios["Dosis "].apply(lambda x : "{:,}".format(x))
 
 ##########################################################################################################################
 
@@ -230,6 +238,7 @@ sumfeb_v = vac_meses_g.iloc[2]['Cantidad']
 summar_v = vac_meses_g.iloc[3]['Cantidad']
 sumabr_v = vac_meses_g.iloc[0]['Cantidad']
 summay_v = vac_meses_g.iloc[4]['Cantidad'] 
+sumjun_v = vac_meses_g.iloc[3]['Cantidad']
 # al actualizar el mes, utilizar el valor.iloc antiguo de sumdic_v
 
 ########################################################################## Para graficas mensuales
@@ -241,7 +250,7 @@ vac_meses_T = vac_meses_g_pie.T
 vac_meses_T.drop(['Mes_y'], inplace=True)
 vac_meses_T.to_csv('0000proceso.csv')
 
-vac_meses_T1=pd.read_csv('0000proceso.csv', names=['id','Abril2021','Enero2021','Febrero2021','Marzo2021','Mayo2021','Diciembre2020'])
+vac_meses_T1=pd.read_csv('0000proceso.csv', names=['id','Abril2021','Enero2021','Febrero2021','Marzo2021','Mayo2021','Junio2021','Diciembre2020'])
 vac_meses_T1.drop([0], inplace=True,  errors='ignore')  #Ae errors='ignore'
 
 
@@ -257,12 +266,14 @@ figvac_diciembre.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title_font_size = 6,
                   font_color="white",
                   title_font_color="white",
+                               width=300,
+                  height=300,
                   margin = dict(autoexpand= False),
                           showlegend=False),
     
 colors = ['#9D2449']
 
-figvac_diciembre.update_traces(rotation=90,
+figvac_diciembre.update_traces(rotation=43,
                                marker=dict(colors=colors))
 
 
@@ -278,12 +289,14 @@ figvac_enero.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title_font_size = 6,
                   font_color="white",
                   title_font_color="white",
+                           width=300,
+                  height=300,
                   margin = dict(autoexpand= False),
                           showlegend=False),
     
 colors = ['#9D2449']
 
-figvac_enero.update_traces(rotation=90,
+figvac_enero.update_traces(rotation=43,
                                marker=dict(colors=colors))
 
 
@@ -300,12 +313,14 @@ figvac_febrero.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title_font_size = 6,
                   font_color="white",
                   title_font_color="white",
+                             width=300,
+                  height=300,
                   margin = dict(autoexpand= False),
                           showlegend=False),
     
 colors = ['#9D2449']
 
-figvac_febrero.update_traces(rotation=90,
+figvac_febrero.update_traces(rotation=43,
                                marker=dict(colors=colors))
 
 
@@ -321,12 +336,14 @@ figvac_marzo.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title_font_size = 6,
                   font_color="white",
                   title_font_color="white",
+                           width=300,
+                  height=300,
                   margin = dict(autoexpand= False),
                           showlegend=False),
     
 colors = ['#9D2449']
 
-figvac_marzo.update_traces(rotation=90,
+figvac_marzo.update_traces(rotation=43,
                                marker=dict(colors=colors))
 
 
@@ -342,12 +359,14 @@ figvac_abril.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title_font_size = 6,
                   font_color="white",
                   title_font_color="white",
+                           width=300,
+                  height=300,
                   margin = dict(autoexpand= False),
                           showlegend=False),
     
 colors = ['#9D2449']
 
-figvac_abril.update_traces(rotation=90,
+figvac_abril.update_traces(rotation=43,
                                marker=dict(colors=colors))
 
 #### mes Abril
@@ -362,12 +381,37 @@ figvac_mayo.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title_font_size = 6,
                   font_color="white",
                   title_font_color="white",
+                          width=300,
+                  height=300,
                   margin = dict(autoexpand= False),
                           showlegend=False),
     
 colors = ['#9D2449']
 
-figvac_mayo.update_traces(rotation=90,
+figvac_mayo.update_traces(rotation=43,
+                               marker=dict(colors=colors))
+
+
+#### mes junio
+figvac_junio = px.pie(vac_meses_T1, values='Junio2021', names='id',
+                color_discrete_sequence=px.colors.sequential.Oranges, hole=.5)
+
+figvac_junio.update_layout(paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  uniformtext_minsize=6,
+                  uniformtext_mode='hide',
+                  autosize=True,
+                  title_font_size = 6,
+                  font_color="white",
+                  title_font_color="white",
+                           width=300,
+                  height=300,
+                  margin = dict(autoexpand= False),
+                          showlegend=False),
+    
+colors = ['#9D2449']
+
+figvac_junio.update_traces(rotation=43,
                                marker=dict(colors=colors))
 
 
@@ -552,7 +596,7 @@ body = html.Div([
     html.Br(),
     
         dbc.Row(
-            [dbc.Col(dbc.CardImg(src="https://github.com/ssmdhdbindp/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
+            [dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
                         width={'size': 1,  "offset": 1 }),
              dbc.Col(html.H5("Secretaría de Relaciones Exteriores, "
                             "Subsecretaría para Asuntos Multilaterales y "
@@ -579,7 +623,7 @@ body = html.Div([
     html.Br(),
     # vacunas listas
     dbc.Row([
-        dbc.Col(html.H4([ 
+        dbc.Col(html.H2([ 
                          dbc.Badge(f"{int(tot_vac):,}", color="danger", className="mr-1"),
                          "   vacunas listas para aplicarse "], style={"color": "gray"}),
                 style={'text-transform': "uppercase", 
@@ -603,77 +647,40 @@ body = html.Div([
 
 
 # ###################### SECCION . MESES
-
-   
+                        
             dbc.Row([
-            dbc.Col(html.H6("Diciembre"),
-                   # width= 3, 
-                    width= { "size": 2, "offset":1}),
-            dbc.Col(html.H6("Enero")),
-                  # width={'size' : "auto","offset":1}),
-            dbc.Col(html.H6("Febrero")),
-                  # width={'size' : "auto","offset":1}),
-            dbc.Col(html.H6("Marzo")),
-                  # width={'size' : "auto","offset":1}),
-            dbc.Col(html.H6("Abril")),
-                  # width={'size' : "auto", "offset":1}),
-            dbc.Col(html.H6("Mayo")),
-                  # width={'size' : "auto", "offset":1}),
+            dbc.Col(dbc.Button(([html.H6("Diciembre"),html.H3([str(f'{sumdic_v:,d}')]),
+                                html.P(dcc.Graph(figure=figvac_diciembre,style={"width":210, "margin-left": "-80px"})),
+                                ]),style={"height":"350px",  "background-color":"white","box-shadow": "10px 20px 30px black", "margin-left":"40px"
+                                         }, disabled=True)),
+            dbc.Col(dbc.Button(([html.H6("Enero"),html.H3([str(f'{sumene_v:,d}')]), 
+                                html.P(dcc.Graph(figure=figvac_enero,style={"width":210, "margin-left": "-80px"})),
+                                ]),style={"height":"350px","background-color":"white","box-shadow": "10px 20px 30px black", "margin-left":"40px"},disabled=True)),
+            dbc.Col(dbc.Button(([html.H6("Febrero"),html.H3([str(f'{sumfeb_v:,d}')]), 
+                                html.P(dcc.Graph(figure=figvac_febrero,style={"width":190, "margin-left": "-80px"})),
+                                ]),style={"height":"350px","background-color":"white","box-shadow": "10px 20px 30px black", "margin-left":"40px"}, disabled=True)),
+            dbc.Col(dbc.Button(([html.H6("Marzo"),html.H3([str(f'{summar_v:,d}')]),
+                                  html.P(dcc.Graph(figure=figvac_marzo,style={"width":190, "margin-left": "-80px"})),
+                                ]),style={"height":"350px","background-color":"white","box-shadow": "10px 20px 30px black", "margin-left":"40px"},disabled=True)),
+            dbc.Col(dbc.Button(([html.H6("Abril"),html.H3([str(f'{sumabr_v:,d}')]),
+                                  html.P(dcc.Graph(figure=figvac_abril,style={"width":190, "margin-left": "-80px"})),
+                                ]),style={"height":"350px","background-color":"white","box-shadow": "10px 20px 30px black", "margin-left":"40px"}, disabled=True)),
+            dbc.Col(dbc.Button(([html.H6("Mayo"),html.H3([str(f'{summay_v:,d}')], style={"color":"red"}),
+                                  html.P(dcc.Graph(figure=figvac_mayo,style={"width":190, "margin-left": "-80px"})),
+                                ]),style={"height":"350px","background-color":"white","box-shadow": "10px 20px 30px black", "margin-left":"40px"},disabled=True)),
+            dbc.Col(dbc.Button(([html.H6("Junio"),html.H3([str(f'{sumjun_v:,d}')]),
+                                  html.P(dcc.Graph(figure=figvac_junio,style={"width":190, "margin-left": "-80px"})),
+                                ]),style={"height":"350px","background-color":"white","box-shadow": "10px 20px 30px black", "margin-left":"40px"}, disabled=True)),
 
-           ], align='left'),
+           ], align='center'),
     
                
             
     
-#Cintillo 1
-    dbc.Row(
-           [
-               dbc.Col(html.H3(str(f'{sumdic_v:,d}')),
-                       width={'size' : 2, "offset":1}),
-               dbc.Col(html.H3(str(f'{sumene_v:,d}'))),
-                     #  width={'size' : "auto", "offset":1}),
-               dbc.Col(html.H3(str(f'{sumfeb_v:,d}'))),
-                      # width={'size' : "auto", "offset":1}),
-               dbc.Col(html.H3(str(f'{summar_v:,d}'))),
-                      #width={'size' : "auto", "offset":1}),
-               dbc.Col(html.H3(str(f'{sumabr_v:,d}'))),
-                      #width={'size' : "auto", "offset":1}),
-               dbc.Col(html.H3(str(f'{summay_v:,d}'))),
-                      #width={'size' : "auto", "offset":1}),
-            ], align='center'),
-    
 
-    dbc.Row(
-           [
-           dbc.Col(dcc.Graph(figure=figvac_diciembre),
-                    style={#'size' : 2, #"offset":0,
-                          "margin-top": "-90px"
-                        
-                          }), 
-           dbc.Col(dcc.Graph(figure=figvac_enero),
-                    style={#'size' : 2,# "offset":0,
-                          "margin-top": "-90px"
-                          }), 
-           dbc.Col(dcc.Graph(figure=figvac_febrero),
-                    style={#'size' : 2, #"offset":0,
-                          "margin-top": "-90px"
-                          }), 
-           dbc.Col(dcc.Graph(figure=figvac_marzo),
-                    style={#'size' : 2,# "offset":0,
-                          "margin-top": "-90px"
-                          }), 
-           dbc.Col(dcc.Graph(figure=figvac_abril),
-                    style={#'size' : 2, #"offset":0,
-                          "margin-top": "-90px"
-                          }),
-           dbc.Col(dcc.Graph(figure=figvac_mayo),
-                    style={#'size' : 2, #"offset":0,
-                          "margin-top": "-90px"
-                          }),
-            ], #align='start', 
-        justify ="start"),
-    
    
+    html.Br(),
+    html.Br(),
     html.Br(),
 
     
@@ -802,11 +809,11 @@ body = html.Div([
                   width={ "offset":1, #"size": 5 
                         "margin-right": "-120px"}),
     
-        dbc.Col(dbc.CardImg(src="https://github.com/ssmdhdbindp/Vacunas/blob/man/laboratoriosvacunas.jpg?raw=true"),
-                       #https://github.com/ssmdhdbindp/Vacunas/blob/main/imagenmundi.jpg
-                      lg={ "offset": 6, "size": 5}, 
-                      style= {"margin-top": "-60px",
-                             }),
+#        dbc.Col(dbc.CardImg(src="https://github.com/ssmdhdbindp/Vacunas/blob/man/laboratoriosvacunas.jpg?raw=true"),
+#                       #https://github.com/ssmdhdbindp/Vacunas/blob/main/imagenmundi.jpg
+#                      lg={ "offset": 6, "size": 5}, 
+#                      style= {"margin-top": "-60px",
+#                             }),
         dbc.Col(dbc.CardImg(src="https://github.com/ssmdhdbindp/Vacunas/blob/main/Mapa_labsW.png?raw=true"),
                       lg={ "offset": 2, "size": 4}, 
                       style= {"margin-top": "-350px",
@@ -878,13 +885,42 @@ body = html.Div([
                       style= {"margin-top": "-50px"}),
     ]),
     
-   
+    html.Br(),
+    html.Br(),
     
     
+    
+    dbc.Row([
+        dbc.Col(html.H3('¿A qué países se han enviado vacunas?',
+                        className='card-title',style={'textAlign': 'start'} ),
+                style={"color": "#91210C", },
+                width={ "offset":1 },),]),
+    
+    
+    dbc.Row(
+        [
+          dbc.Col(dash_table.DataTable(
+                id='table6',
+            columns=[{"name": i, "id": i} for i in tabla_envios.columns],
+            data=tabla_envios.to_dict('records'),
+                
+                    style_table={'height': '300px', "striped": True,},
+                    style_cell={#"align-text": "left",
+                        'fontSize':12, 'font-family':'Nunito Sans',"striped": True,}, 
+                    style_header = {'border': 'none','fontWeight': 'bold'},
+                    style_data = {'border': 'none', "striped": True, },
+                    style_data_conditional=[{'if': {'row_index': 'odd'},
+                                             'backgroundColor': 'rgb(248, 248, 248)'},
+                ])),
+ 
+        ], style={'margin-top': '9px',
+            'margin-left': '100px',
+            'margin-right': '0px',
+            "margin-bottom": "5px",      
+            'width': '750px' }), 
+    
+       html.Br(),
 
-  
-
-#        
     
 # ###################### SECCION . NUMERALIA
 
@@ -951,12 +987,12 @@ body = html.Div([
  
     
         dbc.Row(
-            [dbc.Col(dbc.CardImg(src="https://github.om/ssmdhdbindp/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
-                        width={'size': 1,  "offset": 1 }),
+            [#dbc.Col(dbc.CardImg(src="https://github.om/ssmdhdbindp/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
+             #           width={'size': 1,  "offset": 1 }),
              dbc.Col(html.H6("Secretaría de Relaciones Exteriores, "
                             "Subsecretaría para Asuntos Multilaterales y "
                             "Derechos Humanos"),
-                        width={'size': 6, 'offset' : 0}), 
+                        width={'size': 6, 'offset' : 2}), 
         ],justify="center"),
     
     
